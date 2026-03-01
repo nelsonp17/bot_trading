@@ -3,3 +3,6 @@ pandas
 pymongo
 scikit-learn
 python-dotenv
+
+# models
+google-genai

@@ -4,6 +4,7 @@ import ccxt
 import pandas as pd
 from dotenv import load_dotenv
 from database import get_db_manager
+from predictor import GeminiPredictor
 
 # Cargar variables de entorno
 load_dotenv()
@@ -11,6 +12,7 @@ load_dotenv()
 class TradingBot:
     def __init__(self):
         self.db = get_db_manager()
+        self.predictor = GeminiPredictor()
         self.symbol = os.getenv("SYMBOL", "BTC/USDT")
         
         # Configuración de Binance Testnet
@@ -35,19 +37,28 @@ class TradingBot:
         return df
 
     def execute_logic(self):
-        """Ciclo principal de decisión."""
+        """Ciclo principal de decisión usando IA."""
         try:
-            print(f"[{pd.Timestamp.now()}] Analizando mercado...")
+            print(f"\n[{pd.Timestamp.now()}] --- Iniciando ciclo de análisis ---")
             df = self.fetch_data()
             
-            # TODO: Aquí integrarías tu modelo de scikit-learn
-            # Por ahora simulamos una señal alcista
-            last_price = df['close'].iloc[-1]
+            # Obtener predicción de Gemini
+            result = self.predictor.get_prediction(df)
             
-            # Guardar predicción en MongoDB
-            self.db.save_prediction(self.symbol, "BUY", 0.85)
+            signal = result.get("signal", "HOLD")
+            confidence = result.get("confidence", 0)
+            reason = result.get("reasoning", "No data")
+
+            # Guardar en Base de Datos (SQLite/Mongo según entorno)
+            self.db.save_prediction(self.symbol, signal, confidence)
             
-            print(f"[*] Último precio: {last_price} | Predicción guardada en Mongo.")
+            print(f"[*] Señal IA: {signal} ({confidence*100:.1f}%)")
+            print(f"[*] Razonamiento: {reason}")
+            
+            # Lógica simple de ejecución (opcional por ahora)
+            if signal == "BUY" and confidence > 0.7:
+                print("[!] OPORTUNIDAD DE COMPRA DETECTADA")
+                # Aquí iría self.exchange.create_order(...)
             
         except Exception as e:
             print(f"[!] Error en el ciclo: {e}")
