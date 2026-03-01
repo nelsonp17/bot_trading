@@ -33,7 +33,12 @@ pip install -r requirements.txt
 
 # Configurar .env (asegúrate que APP_ENV=development)
 cp .env.example .env
-python bot/main.py
+#Para usar Gemini (por defecto):
+python bot/main.py --provider gemini
+
+# Para usar DeepSeek:
+# python bot/main.py --provider deepseek
+
 ```
 *Los datos se guardarán en `trading_bot.db` automáticamente.*
 

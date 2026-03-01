@@ -6,3 +6,4 @@ python-dotenv
 
 # models
 google-genai
+openai
