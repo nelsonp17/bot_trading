@@ -1,0 +1,26 @@
+services:
+  mongodb:
+    image: mongo:latest
+    container_name: mongodb_trading
+    restart: always
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: securepassword
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+
+  bot:
+    build: .
+    container_name: trading_bot_service
+    restart: always
+    depends_on:
+      - mongodb
+    env_file:
+      - .env
+    volumes:
+      - .:/app
+
+volumes:
+  mongo_data:
