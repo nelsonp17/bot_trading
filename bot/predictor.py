@@ -27,13 +27,29 @@ class GeminiPredictor(BasePredictor):
                 contents=prompt,
                 config=types.GenerateContentConfig(response_mime_type="application/json")
             )
-            return response.parsed
+            data = response.parsed
+            # Asegurar que existan los campos de colchón
+            if "min_price" not in data: data["min_price"] = 0
+            if "max_price" not in data: data["max_price"] = float('inf')
+            return data
         except Exception as e:
             print(f"[!] Error Gemini: {e}")
-            return {"signal": "HOLD", "confidence": 0, "reasoning": str(e)}
+            return {"signal": "MANTENER", "confidence": 0, "reasoning": str(e), "min_price": 0, "max_price": float('inf')}
 
     def _get_prompt(self, data):
-        return f"Analiza estos datos de trading y responde en JSON {{'signal': 'BUY'|'SELL'|'HOLD', 'confidence': 0-1, 'reasoning': 'string'}}: {data}"
+        return f"""Actúa como un trader experto. Analiza estos datos OHLCV y responde en JSON.
+        Debes establecer un 'colchón' o rango de seguridad (min_price y max_price) fuera del cual no se debe operar para evitar pérdidas por volatilidad extrema o burbujas.
+        
+        Responde estrictamente en este formato JSON:
+        {{
+            'signal': 'COMPRA'|'VENTA'|'MANTENER',
+            'confidence': 0-1,
+            'reasoning': 'string detallado en español',
+            'min_price': valor_numerico_minimo_seguro,
+            'max_price': valor_numerico_maximo_seguro
+        }}
+        
+        Datos: {data}"""
 
 class DeepSeekPredictor(BasePredictor):
     def __init__(self):
@@ -44,7 +60,19 @@ class DeepSeekPredictor(BasePredictor):
 
     def get_prediction(self, df):
         recent_data = df.tail(20).to_string(index=False)
-        prompt = f"Actúa como un trader experto. Analiza estos datos OHLCV y responde únicamente en formato JSON con 'signal', 'confidence' y 'reasoning':\n{recent_data}"
+        prompt = f"""Actúa como un trader experto. Analiza estos datos OHLCV y responde únicamente en formato JSON.
+        Debes establecer un 'colchón' o rango de seguridad (min_price y max_price) fuera del cual no se debe operar para evitar pérdidas por volatilidad extrema o burbujas.
+        
+        JSON esperado:
+        {{
+            "signal": "COMPRA"|"VENTA"|"MANTENER",
+            "confidence": 0.0 a 1.0,
+            "reasoning": "explicación técnica en español",
+            "min_price": float,
+            "max_price": float
+        }}
+        
+        Datos:\n{recent_data}"""
         
         try:
             response = self.client.chat.completions.create(
@@ -53,10 +81,13 @@ class DeepSeekPredictor(BasePredictor):
                 response_format={ "type": "json_object" }
             )
             import json
-            return json.loads(response.choices[0].message.content)
+            data = json.loads(response.choices[0].message.content)
+            if "min_price" not in data: data["min_price"] = 0
+            if "max_price" not in data: data["max_price"] = float('inf')
+            return data
         except Exception as e:
             print(f"[!] Error DeepSeek: {e}")
-            return {"signal": "HOLD", "confidence": 0, "reasoning": str(e)}
+            return {"signal": "MANTENER", "confidence": 0, "reasoning": str(e), "min_price": 0, "max_price": float('inf')}
 
 def get_predictor(provider="gemini"):
     """Factory para obtener el predictor seleccionado."""

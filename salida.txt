@@ -1,0 +1,16 @@
+python bot/main.py --network demo --symbol SOL/USDT --amount 500 --provider deepseek
+[*] Usando DeepSeek como motor de IA
+[*] Configurando llaves para MODO DEMO (Testnet)
+[*] Llaves cargadas correctamente (Inician con: enDIrG...)
+[*] Sincronizando tiempo con el servidor de Binance...
+[*] Sincronización exitosa (Offset: -1202ms)
+[!] Error al obtener saldo (binance-python): APIError(code=-2015): Invalid API-key, IP, or permissions for action.
+[*] Bot inicializado para SOL/USDT
+[*] Red: DEMO
+
+[2026-03-01 15:42:47.026121] --- Ciclo de análisis ---
+[*] Precio actual SOL/USDT: 83.49 USDT
+[*] IA recomienda: MANTENER | Confianza: 55.0%
+[*] Rango Seguro Sugerido: Mín=82.5 | Máx=89.5
+[*] Motivo: El precio muestra alta volatilidad con un pico alcista temprano (hasta 88.81) seguido de una corrección significativa (mínimo 73.03 en hora 05:00, posible outlier o error de datos). El volumen es moderado con picos en movimientos fuertes. Patrón de consolidación entre 83.31-88.81, sin tendencia clara. La media móvil simple de 5 períodos (86.02) está cerca del último cierre (83.49), indicando presión bajista reciente pero dentro del rango. Se recomienda esperar confirmación de dirección.
+[*] Acción: MANTENER - Esperando mejores condiciones.
