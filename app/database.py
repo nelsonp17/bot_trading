@@ -54,6 +54,14 @@ class BaseDB(ABC):
     def update_plan_status(self, operation_id, status, entry_price=None, exit_price=None):
         pass
 
+    @abstractmethod
+    def save_heartbeat(self, bot_id):
+        pass
+
+    @abstractmethod
+    def get_last_heartbeat(self, bot_id):
+        pass
+
 
 class SQLiteManager(BaseDB):
     def __init__(self, db_path=None):
@@ -134,6 +142,14 @@ class SQLiteManager(BaseDB):
                     execution_plan_json TEXT,
                     metadata_json TEXT,
                     timestamp DATETIME
+                )
+            """)
+
+            # Tabla de estado del sistema (Heartbeat)
+            conn.execute("""
+                CREATE TABLE IF NOT EXISTS system_status (
+                    id TEXT PRIMARY KEY,
+                    last_heartbeat DATETIME
                 )
             """)
             
@@ -290,6 +306,23 @@ class SQLiteManager(BaseDB):
             else:
                 conn.execute("UPDATE execution_plans SET status = ? WHERE operation_id = ?", (status, operation_id))
 
+    def save_heartbeat(self, bot_id):
+        with self._get_connection() as conn:
+            conn.execute("""
+                INSERT OR REPLACE INTO system_status (id, last_heartbeat) 
+                VALUES (?, ?)
+            """, (bot_id, datetime.utcnow()))
+
+    def get_last_heartbeat(self, bot_id):
+        with self._get_connection() as conn:
+            conn.row_factory = sqlite3.Row
+            cursor = conn.execute("SELECT last_heartbeat FROM system_status WHERE id = ?", (bot_id,))
+            row = cursor.fetchone()
+            if row:
+                ts = row['last_heartbeat']
+                return datetime.strptime(ts.split('.')[0], '%Y-%m-%d %H:%M:%S') if isinstance(ts, str) else ts
+            return None
+
 
 class MongoManager(BaseDB):
     def __init__(self):
@@ -346,6 +379,13 @@ class MongoManager(BaseDB):
         if entry_price: update["$set"]["entry_price"] = entry_price
         if exit_price: update["$set"]["exit_price"] = exit_price
         self.db.execution_plans.update_one({"operation_id": operation_id}, update)
+
+    def save_heartbeat(self, bot_id):
+        self.db.system_status.replace_one({"id": bot_id}, {"id": bot_id, "last_heartbeat": datetime.utcnow()}, upsert=True)
+
+    def get_last_heartbeat(self, bot_id):
+        doc = self.db.system_status.find_one({"id": bot_id})
+        return doc["last_heartbeat"] if doc else None
 
 
 def get_db_manager():

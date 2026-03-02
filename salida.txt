@@ -1,11 +1,8 @@
 (venv) PS E:\Proyectos\python\bot_trading> python scripts/run_trading_bot.py --symbol NEAR/USDT:USDT --budget 500 --market_type future --provider deepseek --scan_id SCAN_20260302_175759 --network testnet
 [*] Bot inicializado para NEAR/USDT:USDT (future)
-[*] Presupuesto máximo gestionable por IA: 500.0 USDT
-[*] Red: testnet
-[*] ID de escaneo: SCAN_20260302_175759
+[*] Red: testnet | Presupuesto: 500.0 USDT
 
 [+] Obteniendo balance...
-
-[+] Obteniendo balance de futuros...
- USDT: Balance=5000.0000
-[!] Error compra: 'withdrawAvailable'
+ USDT: Balance=5002.1189
+[*] Bot en marcha. Monitoreando cada 60 segundos...
+[*] [ESPERANDO ENTRADA] NEAR/USDT:USDT: 1.333 | Objetivo: 1.315 (Distancia: +1.37%)

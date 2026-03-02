@@ -1,34 +1,40 @@
-# Trading Bot with AI - Project Overview
+# Trading Bot con IA - Resumen del Proyecto
 
-Este proyecto es un bot de trading automatizado que utiliza modelos de Inteligencia Artificial (Gemini y DeepSeek) para analizar datos del mercado de criptomonedas y generar señales de inversión.
+Este proyecto es un ecosistema de trading automatizado que combina análisis técnico tradicional con modelos de lenguaje de última generación (Gemini y DeepSeek) para operar en el mercado de criptomonedas (Binance) de forma inteligente.
 
-## 🚀 Propósito
-El bot descarga datos históricos (OHLCV) de exchanges (vía CCXT), los procesa con Pandas y los envía a un modelo de lenguaje (LLM) para obtener una recomendación de trading (`COMPRA`, `VENTA`, `MANTENER`) con un nivel de confianza y razonamiento técnico en español.
+## 🚀 Flujo de Operación
+1. **Escaneo de Mercado (`MarketScanner`)**: Filtra los activos con mayor volumen o volatilidad en Binance y solicita a la IA un ranking de rentabilidad.
+2. **Generación de Señales**: La IA analiza velas de 1h y devuelve una recomendación técnica detallada.
+3. **Plan Blindado (`TradingBot`)**: Antes de operar, el bot solicita a la IA un plan de ejecución que define el precio de entrada (trigger), niveles de Take Profit/Stop Loss y un "cojín de seguridad" (rangos de precio para abortar en caso de anomalías).
+4. **Ejecución y Monitoreo**: El bot ejecuta las órdenes vía API de Binance (Testnet/Mainnet) y persiste cada movimiento en la base de datos.
 
-## 🏗️ Arquitectura
-- **`bot/main.py`**: Punto de entrada principal. Gestiona el ciclo de vida del bot, la conexión con Binance (Testnet) y la ejecución de órdenes de mercado. Implementa una estrategia de "colchón" de seguridad basada en rangos de precio.
-- **`bot/predictor.py`**: Implementa el patrón Factory para manejar múltiples proveedores de IA (Gemini/DeepSeek) y generar predicciones en formato JSON.
-- **`bot/database.py`**: Gestiona la persistencia de las predicciones (incluyendo el razonamiento de la IA) y los trades realizados.
-    - **SQLite**: Utilizado por defecto en desarrollo.
-    - **MongoDB**: Configurado para entornos de producción.
+## 🏗️ Arquitectura y Componentes
+- **`app/bot/market_scanner_bot.py`**: El "radar" del sistema. Identifica oportunidades globales.
+- **`app/bot/trading_bot.py`**: El ejecutor. Gestiona el ciclo de vida de la posición, órdenes de mercado y seguridad.
+- **`app/bot/ia/predictor.py`**: Interfaz con los LLMs (Gemini/DeepSeek). Traduce datos técnicos a lenguaje natural y planes JSON.
+- **`app/database.py`**: Capa de persistencia (SQLite para local, MongoDB para producción).
+- **`app/api.py`**: Servidor FastAPI para exponer el estado del bot, trades y predicciones al frontend.
+- **`frontend/`**: Interfaz de usuario en React + Vite para visualizar el ranking y el historial de operaciones en tiempo real.
 
 ## 🛠️ Stack Tecnológico
-- **Lenguaje**: Python 3.x
-- **Bases de Datos**: SQLite (Dev) / MongoDB (Prod)
-- **Librerías Clave**:
-    - `ccxt`: Interacción con exchanges y ejecución de órdenes.
-    - `pandas`: Manipulación y análisis de datos.
-    - `google-genai` / `openai`: Integración con modelos de IA.
+- **Backend**: Python 3.x, FastAPI.
+- **Frontend**: React (JS), Tailwind CSS, Vite.
+- **Trading**: `ccxt` (Datos), `python-binance` (Ejecución).
+- **IA**: Google Generative AI SDK, OpenAI SDK (para DeepSeek).
+- **Datos**: Pandas (Análisis), SQLite/MongoDB (Persistencia).
 
-## ⚙️ Configuración y Uso
-El bot acepta los siguientes argumentos por línea de comandos:
-- `--provider`: `gemini` (por defecto) o `deepseek`.
-- `--symbol`: Par de trading, ej. `BTC/USDT`.
-- `--timeframe`: Intervalo de velas, ej. `1h`, `15m`.
-- `--amount`: Cantidad en USDT a invertir por operación.
-- `--min-price`: Precio mínimo por debajo del cual no se comprará (Colchón).
-- `--max-price`: Precio máximo por encima del cual no se comprará (Colchón).
-- `--network`: Red de operación (`sandbox`, `testnet` para pruebas, `mainnet` para real).
+## ⚙️ Configuración y Ejecución
+El sistema se lanza mediante scripts especializados en la carpeta `scripts/`:
+- `run_market_scanner_bot.py`: Inicia el escaneo global.
+- `run_trading_bot.py`: Activa el bot de ejecución para un par específico.
+- `run_api_server.py`: Levanta la API para el dashboard.
 
-## ⚠️ Nota de Seguridad
-El bot está configurado en modo **Sandbox (Testnet)** para evitar el uso de fondos reales. Nunca compartas tus API Keys reales.
+## ⚠️ Seguridad y Redes
+- **Sandbox (Testnet)**: Configuración por defecto para pruebas seguras sin fondos reales.
+- **Colchón IA**: Protección dinámica contra volatilidad extrema basada en el razonamiento de la IA.
+- **Variables de Entorno**: Las claves se gestionan vía `.env` (nunca se suben al repositorio).
+
+## 🤖 Mandatos para Agentes de IA
+- **Preservación de Logs**: NO eliminar los comandos `print`. Son fundamentales para el seguimiento del bot en tiempo real a través de la consola y logs.
+- **Documentación Crítica**: NO eliminar ni reducir los comentarios de documentación (`docstrings`) ni los comentarios explicativos en español dentro del código. Son esenciales para el mantenimiento del sistema.
+- **Integridad Técnica**: Cualquier modificación debe respetar los filtros de precisión de Binance y la lógica de sincronización de tiempo ya implementada.
