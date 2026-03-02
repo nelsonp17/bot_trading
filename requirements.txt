@@ -8,3 +8,6 @@ python-binance
 # models
 google-genai
 openai
+fastapi
+uvicorn
+binance
