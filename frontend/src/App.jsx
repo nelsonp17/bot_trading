@@ -4,7 +4,7 @@ import { Activity, TrendingUp, AlertTriangle } from 'lucide-react';
 import TradesTable from './components/TradesTable';
 import PredictionsTable from './components/PredictionsTable';
 
-const API_BASE = 'http://localhost:8000/api';
+const API_BASE = '/api';
 
 function App() {
   const [status, setStatus] = useState(null);

@@ -14,7 +14,7 @@ class BasePredictor(ABC):
         pass
 
     @abstractmethod
-    def get_market_rank(self, market_data, capital, quote):
+    def get_market_rank(self, market_data, capital, quote, market_type="spot"):
         pass
 
 
@@ -42,20 +42,23 @@ class GeminiPredictor(BasePredictor):
             return {"signal": "MANTENER", "confidence": 0, "reasoning": str(e), "min_price": 0,
                     "max_price": float('inf')}
 
-    def get_market_rank(self, market_data, capital, quote):
-        prompt = f"""Actúa como un Analista de Inteligencia de Mercado Cripto. 
+    def get_market_rank(self, market_data, capital, quote, market_type="spot"):
+        prompt = f"""Actúa como un Analista de Inteligencia de Mercado Cripto experto en {market_type.upper()}. 
         Tu tarea es evaluar una lista de criptomonedas y determinar cuáles son las más rentables para invertir {capital} {quote}.
+
+        MERCADO: {market_type.upper()}
+        (Nota: Evalúa los riesgos específicos. Por ejemplo, una estrategia Swing puede ser segura en SPOT pero muy riesgosa en FUTUROS debido al apalancamiento y liquidaciones).
 
         DATOS DE MERCADO:
         {market_data}
 
         Para cada moneda, analiza:
         1. **Rentabilidad Esperada:** % de ganancia estimada.
-        2. **Riesgo:** % de pérdida potencial (Stop Loss sugerido).
+        2. **Riesgo:** % de pérdida potencial (Stop Loss sugerido). Considera el tipo de mercado ({market_type}).
         3. **Volatilidad:** Clasifícala (Baja, Media, Alta, Extrema).
-        4. **Estrategia:** (ej. Breakout, Swing, Scalping).
+        4. **Estrategia:** (ej. Breakout, Swing, Scalping). Adapta la estrategia al mercado {market_type}.
         5. **Timeframe Recomendado:** (15m, 1h, 4h, 1d).
-        6. **Gas/Fees:** Estimación de comisiones de red.
+        6. **Gas/Fees:** Estimación de comisiones de red/exchange.
 
         Responde en una LISTA de objetos JSON ordenada por RANK (el más rentable primero):
         {{
@@ -69,7 +72,7 @@ class GeminiPredictor(BasePredictor):
                     "recommended_strategy": "string",
                     "recommended_timeframe": "1h",
                     "gas_fee_estimate": float,
-                    "reasoning": "Resumen de por qué es rentable en español"
+                    "reasoning": "Justificación técnica detallada en español considerando que es mercado {market_type}"
                 }},
                 ...
             ]
@@ -174,20 +177,23 @@ class DeepSeekPredictor(BasePredictor):
             return {"signal": "MANTENER", "confidence": 0, "required_threshold": 1.0, "reasoning": str(e),
                     "min_price": 0, "max_price": float('inf')}
 
-    def get_market_rank(self, market_data, capital, quote):
-        prompt = f"""Actúa como un Analista de Inteligencia de Mercado Cripto. 
+    def get_market_rank(self, market_data, capital, quote, market_type="spot"):
+        prompt = f"""Actúa como un Analista de Inteligencia de Mercado Cripto experto en {market_type.upper()}. 
         Tu tarea es evaluar una lista de criptomonedas y determinar cuáles son las más rentables para invertir {capital} {quote}.
+
+        MERCADO: {market_type.upper()}
+        (Nota: Evalúa los riesgos específicos de {market_type.upper()}. Por ejemplo, estrategias de alto apalancamiento en futuros son más riesgosas).
 
         DATOS DE MERCADO:
         {market_data}
 
         Para cada moneda, analiza:
         1. **Rentabilidad Esperada:** % de ganancia estimada.
-        2. **Riesgo:** % de pérdida potencial (Stop Loss sugerido).
+        2. **Riesgo:** % de pérdida potencial (Stop Loss sugerido). Considera el tipo de mercado ({market_type}).
         3. **Volatilidad:** Clasifícala (Baja, Media, Alta, Extrema).
-        4. **Estrategia:** (ej. Breakout, Swing, Scalping).
+        4. **Estrategia:** (ej. Breakout, Swing, Scalping). Adapta la estrategia al mercado {market_type}.
         5. **Timeframe Recomendado:** (15m, 1h, 4h, 1d).
-        6. **Gas/Fees:** Estimación de comisiones de red.
+        6. **Gas/Fees:** Estimación de comisiones de red/exchange.
 
         Responde ESTRICTAMENTE en JSON con una LISTA de objetos ordenada por RANK (el más rentable primero):
         {{
@@ -201,7 +207,7 @@ class DeepSeekPredictor(BasePredictor):
                     "recommended_strategy": "string",
                     "recommended_timeframe": "1h",
                     "gas_fee_estimate": float,
-                    "reasoning": "Resumen de por qué es rentable en español"
+                    "reasoning": "Justificación técnica detallada en español considerando que es mercado {market_type}"
                 }},
                 ...
             ]

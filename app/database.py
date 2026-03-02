@@ -7,6 +7,9 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
+# Ruta absoluta a la raíz del proyecto (un nivel arriba de /app)
+_PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
+
 
 class BaseDB(ABC):
     """Interfaz base para persistencia."""
@@ -30,8 +33,8 @@ class BaseDB(ABC):
 
 
 class SQLiteManager(BaseDB):
-    def __init__(self, db_path="trading_bot.db"):
-        self.db_path = db_path
+    def __init__(self, db_path=None):
+        self.db_path = db_path or os.path.join(_PROJECT_ROOT, "trading_bot.db")
         self._create_tables()
 
     def _get_connection(self):
@@ -88,18 +91,23 @@ class SQLiteManager(BaseDB):
                     reasoning TEXT
                 )
             """)
+            # Migración: Agregar market_type si no existe
+            try:
+                conn.execute("ALTER TABLE market_scans ADD COLUMN market_type TEXT DEFAULT 'spot'")
+            except sqlite3.OperationalError:
+                pass  # La columna ya existe
 
     def save_market_scan(self, scan_data):
         with self._get_connection() as conn:
             conn.execute("""
                 INSERT INTO market_scans (
-                    timestamp, symbol, rank, expected_profit_pct, expected_loss_pct, 
+                    timestamp, symbol, market_type, rank, expected_profit_pct, expected_loss_pct, 
                     volatility, recommended_strategy, recommended_timeframe, 
                     gas_fee_estimate, reasoning
-                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
             """, (
                 datetime.utcnow(),
-                scan_data['symbol'], scan_data['rank'],
+                scan_data['symbol'], scan_data.get('market_type', 'spot'), scan_data['rank'],
                 scan_data['expected_profit_pct'], scan_data['expected_loss_pct'],
                 scan_data['volatility'], scan_data['recommended_strategy'],
                 scan_data['recommended_timeframe'], scan_data['gas_fee_estimate'],

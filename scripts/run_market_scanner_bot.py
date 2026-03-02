@@ -14,6 +14,9 @@ if __name__ == "__main__":
     parser.add_argument("--quote", type=str, default="USDT", help="Par base (USDT, USDC, BTC)")
     parser.add_argument("--mode", type=str, default="volume", choices=["volume", "volatility"],
                         help="Modo de selección: volume o volatility")
+    parser.add_argument("--symbol", type=str, default=None, help="Símbolo específico a consultar (ej. BTC/USDT)")
+    parser.add_argument("--type", type=str, default="spot", choices=["spot", "future", "both"], help="Tipo de mercado (spot, future o both)")
+    parser.add_argument("--num_top", type=int, default=15, help="Número de activos a analizar")
 
     args = parser.parse_args()
 
@@ -21,6 +24,9 @@ if __name__ == "__main__":
         provider=args.provider,
         capital=args.capital,
         quote=args.quote,
-        mode=args.mode
+        mode=args.mode,
+        symbol=args.symbol,
+        market_type=args.type,
+        num_top=args.num_top
     )
     scanner.run_scan()

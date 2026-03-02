@@ -1,414 +1,87 @@
-python bot/main.py --symbol SOL/USDT --budget 100 --provider deepseek --network testnet
+(venv) PS E:\Proyectos\python\bot_trading> python scripts/run_market_scanner_bot.py --capital 500 --quote USDT --provider deepseek --mode volume --type both
 [*] Usando DeepSeek como motor de IA
-[*] Configurando llaves para TESTNET
-[*] Llaves cargadas correctamente (Inician con: S3H4Bz...)
-[*] Sincronizando tiempo con el servidor de Binance...
-[*] Filtros cargados para SOLUSDT: Min Notional=5.0
-[*] Sincronización exitosa.
-
-========================================
- SALDO ACTUAL (TESTNET)
-----------------------------------------
- USDT: Disponible=9937.41128000 | Bloqueado=0.00000000
- SOL: Disponible=5.79900000 | Bloqueado=0.00000000
-========================================
-
-[*] Bot inicializado para SOL/USDT
-[*] Presupuesto total asignado: 100.0 USDT
-
-[01/03/2026 17:48:16] --- Ciclo de análisis ---
-
-========================================
- SALDO ACTUAL (TESTNET)
-----------------------------------------
- USDT: Disponible=9937.41128000 | Bloqueado=0.00000000
- SOL: Disponible=5.79900000 | Bloqueado=0.00000000
-========================================
-
-[*] Precio actual SOL/USDT: 82.9 USDT
-[*] IA recomienda: MANTENER
-    - Presupuesto Restante: 0.00 USDT
-    - Confianza Actual: 65.0%
-    - Umbral Requerido: 2.0%
-[*] Motivo: El análisis técnico muestra una tendencia bajista clara en el último día, con precios cayendo desde ~88 a ~83, confirmada por volúmenes moderados. El balance indica que el presupuesto asignado ya está completamente gastado (budget_remaining_to_spend: 0), aunque hay USDT disponible en la cuenta real. Dada la tendencia bajista actual y la falta de señales claras de reversión (como un patrón de doble suelo o divergencia alcista), la posición más prudente es mantener las tenencias actuales y esperar una confirmación de cambio de tendencia. El monto de operación es 0 porque no hay presupuesto asignado disponible para nuevas inversiones.
-[*] Acción: MANTENER - Esperando mejores condiciones o monto 0.
-
-[01/03/2026 17:49:27] --- Ciclo de análisis ---
-
-========================================
- SALDO ACTUAL (TESTNET)
-----------------------------------------
- USDT: Disponible=9937.41128000 | Bloqueado=0.00000000
- SOL: Disponible=5.79900000 | Bloqueado=0.00000000
-========================================
-
-[*] Precio actual SOL/USDT: 82.94 USDT
-[*] IA recomienda: MANTENER
-    - Presupuesto Restante: 0.00 USDT
-    - Confianza Actual: 65.0%
-    - Umbral Requerido: 3.0%
-[*] Motivo: El balance indica que el presupuesto asignado ya se ha gastado completamente (budget_remaining_to_spend: 0), aunque hay USDT disponible en la cuenta real. El mercado muestra una tendencia bajista clara con máximos decrecientes desde ~88.81 hasta ~82.98 y mínimos descendiendo de ~86.66 a ~81.71, confirmada por el cierre más reciente en 82.94 tras una caída significativa. El volumen moderado en la última vela sugiere posible agotamiento del impulso bajista, pero no hay señales técnicas de reversión inmediata. Dado el presupuesto agotado y la tendencia bajista, la posición más prudente es mantener las tenencias actuales (5.799 activos) y esperar una confirmación de cambio de tendencia o una oportunidad de compra en niveles de soporte más definidos.
-[*] Acción: MANTENER - Esperando mejores condiciones o monto 0.
-
-[01/03/2026 17:50:37] --- Ciclo de análisis ---
-
-========================================
- SALDO ACTUAL (TESTNET)
-----------------------------------------
- USDT: Disponible=9937.41128000 | Bloqueado=0.00000000
- SOL: Disponible=5.79900000 | Bloqueado=0.00000000
-========================================
-
-[*] Precio actual SOL/USDT: 82.95 USDT
-[*] IA recomienda: MANTENER
-    - Presupuesto Restante: 0.00 USDT
-    - Confianza Actual: 65.0%
-    - Umbral Requerido: 3.0%
-[*] Motivo: El análisis técnico muestra una tendencia bajista clara en las últimas horas, con precios cayendo desde ~88.30 a ~82.95, confirmada por mínimos más bajos. El volumen ha sido inconsistente, con algunos picos en caídas (ej. 14649.978 a las 20:00). El RSI implícito estaría en zona de sobreventa, pero no hay confirmación de reversión aún. Con un presupuesto restante de 0 USDT y 5.799 activos en holdings, la posición actual ya está expuesta. Se recomienda mantener para evitar vender en mínimos, esperando un rebote técnico o confirmación de continuación bajista. El monto es 0 porque no hay presupuesto disponible para nuevas compras y vender ahora sería prematuro.
-[*] Acción: MANTENER - Esperando mejores condiciones o monto 0.
-
-[01/03/2026 17:51:47] --- Ciclo de análisis ---
-
-========================================
- SALDO ACTUAL (TESTNET)
-----------------------------------------
- USDT: Disponible=9937.41128000 | Bloqueado=0.00000000
- SOL: Disponible=5.79900000 | Bloqueado=0.00000000
-========================================
-
-[*] Precio actual SOL/USDT: 82.93 USDT
-[*] IA recomienda: MANTENER
-    - Presupuesto Restante: 0.00 USDT
-    - Confianza Actual: 65.0%
-    - Umbral Requerido: 250.0%
-[*] Motivo: El análisis técnico muestra una tendencia bajista clara en las últimas horas, con precios cayendo desde ~88 a ~83, rompiendo soportes clave. El volumen es moderado pero consistente en la baja. El RSI estaría en zona de sobreventa (~30-35), sugiriendo posible rebote técnico, pero la tendencia dominante sigue siendo bajista. No hay señales de reversión confirmada (como patrón de vela alcista con alto volumen o ruptura de resistencia). Con un balance asignado ya gastado y presupuesto restante cero, la posición actual de 5.799 activos debe mantenerse. Se espera un rebote hacia 84.50-85.00 antes de considerar venta, o una caída adicional por debajo de 81.70 para añadir más en promedio a la baja.
-[*] Acción: MANTENER - Esperando mejores condiciones o monto 0.
-
-[01/03/2026 17:52:57] --- Ciclo de análisis ---
-
-========================================
- SALDO ACTUAL (TESTNET)
-----------------------------------------
- USDT: Disponible=9937.41128000 | Bloqueado=0.00000000
- SOL: Disponible=5.79900000 | Bloqueado=0.00000000
-========================================
-
-[*] Precio actual SOL/USDT: 82.91 USDT
-[*] IA recomienda: VENTA
-    - Presupuesto Restante: 0.00 USDT
-    - Confianza Actual: 65.0%
-    - Umbral Requerido: 8550.0%
-[*] Motivo: Análisis técnico muestra tendencia bajista clara: precio bajó de 87.97 a 82.91 en 20 horas, con mínimos decrecientes y volumen significativo en caídas. El último cierre en 82.91 está por debajo del soporte psicológico de 83.00. RSI implícito estaría en zona de sobreventa pero sin reversión confirmada. Se recomienda vender las 5.799 unidades de holdings existentes para proteger capital, ya que el presupuesto asignado está agotado (budget_remaining_to_spend: 0) y la tendencia actual es desfavorable. El monto de venta corresponde al total de current_asset_holdings.
-[!] VENTA ignorada: Confianza insuficiente.
-
-[01/03/2026 17:54:06] --- Ciclo de análisis ---
-
-========================================
- SALDO ACTUAL (TESTNET)
-----------------------------------------
- USDT: Disponible=9937.41128000 | Bloqueado=0.00000000
- SOL: Disponible=5.79900000 | Bloqueado=0.00000000
-========================================
-
-[*] Precio actual SOL/USDT: 82.93 USDT
-[*] IA recomienda: MANTENER
-    - Presupuesto Restante: 0.00 USDT
-    - Confianza Actual: 65.0%
-    - Umbral Requerido: 3.0%
-[*] Motivo: El análisis técnico muestra una tendencia bajista clara en las últimas horas, con precios cayendo desde ~88 a ~83, confirmada por mínimos más bajos. El volumen ha sido moderado pero con picos en caídas significativas (ej. 14649.978 a 81.99), indicando presión vendedora. El RSI implícito estaría en zona de sobreventa, pero no hay señales claras de reversión aún. Dado el balance actual con presupuesto asignado agotado (budget_remaining_to_spend: 0) y holdings existentes (5.799 activos), la estrategia conservadora es mantener posiciones actuales y esperar confirmación de soporte o señal de compra con mayor confianza. El trade_amount es 0 porque no hay presupuesto disponible para nuevas inversiones.
-[*] Acción: MANTENER - Esperando mejores condiciones o monto 0.
-
-[01/03/2026 17:55:15] --- Ciclo de análisis ---
-
-========================================
- SALDO ACTUAL (TESTNET)
-----------------------------------------
- USDT: Disponible=9937.41128000 | Bloqueado=0.00000000
- SOL: Disponible=5.79900000 | Bloqueado=0.00000000
-========================================
-
-[*] Precio actual SOL/USDT: 82.9 USDT
-[*] IA recomienda: MANTENER
-    - Presupuesto Restante: 0.00 USDT
-    - Confianza Actual: 65.0%
-    - Umbral Requerido: 150.0%
-[*] Motivo: Análisis técnico muestra tendencia bajista clara con precios en descenso desde 87.97 a 82.91, rompiendo soportes clave. El volumen es moderado pero con picos en caídas significativas (ej. 17820.87 en 16:00). El RSI estaría en zona de sobreventa pero sin confirmación de reversión. Con budget_remaining_to_spend en 0 y current_asset_holdings de 5.799, no hay capital disponible para nuevas compras. Se recomienda mantener posición actual y esperar confirmación de soporte o señal de reversión antes de considerar venta o compra adicional.
-[*] Acción: MANTENER - Esperando mejores condiciones o monto 0.
-
-[01/03/2026 17:57:30] --- Ciclo de análisis ---
-
-========================================
- SALDO ACTUAL (TESTNET)
-----------------------------------------
- USDT: Disponible=9937.41128000 | Bloqueado=0.00000000
- SOL: Disponible=5.79900000 | Bloqueado=0.00000000
-========================================
-
-[*] Precio actual SOL/USDT: 82.98 USDT
-[*] IA recomienda: COMPRA
-    - Presupuesto Restante: 0.00 USDT
-    - Monto Sugerido: 993.74 USDT
-    - Confianza Actual: 65.0%
-    - Umbral Requerido: 8450.0%
-[*] Motivo: El precio ha mostrado una tendencia bajista desde 87.97 hasta 81.99, con un mínimo significativo en 81.71. La última vela (21:00) cerró en 82.98, mostrando un posible rebote desde los mínimos. El volumen en la vela bajista de las 20:00 fue alto (14649.978), lo que podría indicar capitulación. Dado que el balance muestra 9937.41 USDT disponibles, asigno el 10% (993.74 USDT) para una entrada cautelosa, buscando un rebote técnico hacia la resistencia de 84.5 (umbral requerido). El colchón de precios se establece entre 81.5 y 85.5 para gestionar la volatilidad.
-[!] COMPRA ignorada: Confianza insuficiente.
-
-[01/03/2026 17:58:38] --- Ciclo de análisis ---
-
-========================================
- SALDO ACTUAL (TESTNET)
-----------------------------------------
- USDT: Disponible=9937.41128000 | Bloqueado=0.00000000
- SOL: Disponible=5.79900000 | Bloqueado=0.00000000
-========================================
-
-[*] Precio actual SOL/USDT: 83.0 USDT
-[*] IA recomienda: MANTENER
-    - Presupuesto Restante: 0.00 USDT
-    - Confianza Actual: 65.0%
-    - Umbral Requerido: 250.0%
-[*] Motivo: El análisis técnico muestra una tendencia bajista clara en las últimas horas, con precios cayendo desde ~88 a ~83, confirmada por volúmenes moderados a altos en las velas bajistas. El balance indica que el presupuesto asignado ya está completamente gastado (budget_remaining_to_spend: 0), y aunque hay USDT disponible en la cuenta real, el objetivo es gestionar el presupuesto asignado, no los fondos generales. Dada la tendencia bajista actual y la falta de presupuesto asignado disponible, la posición más prudente es mantener las tenencias actuales y esperar una señal de reversión más clara o una nueva asignación de presupuesto. El umbral requerido se establece en 2.5% para filtrar ruido del mercado.
-[*] Acción: MANTENER - Esperando mejores condiciones o monto 0.
-
-[01/03/2026 17:59:47] --- Ciclo de análisis ---
-
-========================================
- SALDO ACTUAL (TESTNET)
-----------------------------------------
- USDT: Disponible=9937.41128000 | Bloqueado=0.00000000
- SOL: Disponible=5.79900000 | Bloqueado=0.00000000
-========================================
-
-[*] Precio actual SOL/USDT: 82.94 USDT
-[*] IA recomienda: MANTENER
-    - Presupuesto Restante: 0.00 USDT
-    - Confianza Actual: 65.0%
-    - Umbral Requerido: 150.0%
-[*] Motivo: Análisis técnico: El precio muestra una tendencia bajista clara desde 87.97 hasta 82.94, con mínimos decrecientes y volúmenes moderados. El RSI implícito estaría en zona de sobreventa, pero no hay señales de reversión confirmada. El balance indica presupuesto asignado agotado (budget_remaining_to_spend: 0) aunque hay USDT disponible en cuenta real, pero como gestor de fondos asignados, no puedo usar fondos no asignados. La posición actual de 5.799 activos debe mantenerse hasta que se identifique un punto de entrada claro con confirmación de volumen y ruptura de resistencia. El monto es 0 porque no hay presupuesto asignado disponible.
-[*] Acción: MANTENER - Esperando mejores condiciones o monto 0.
-
-[01/03/2026 18:02:02] --- Ciclo de análisis ---
-
-========================================
- SALDO ACTUAL (TESTNET)
-----------------------------------------
- USDT: Disponible=9937.41128000 | Bloqueado=0.00000000
- SOL: Disponible=5.79900000 | Bloqueado=0.00000000
-========================================
-
-[*] Precio actual SOL/USDT: 82.91 USDT
-[*] IA recomienda: MANTENER
-    - Presupuesto Restante: 0.00 USDT
-    - Confianza Actual: 65.0%
-    - Umbral Requerido: 150.0%
-[*] Motivo: El análisis técnico muestra una tendencia bajista clara con precios en descenso desde ~88 a ~83, confirmada por volúmenes moderados y falta de señales de reversión. El balance indica presupuesto asignado agotado (budget_remaining_to_spend: 0) y holdings existentes de 5.799 activos, por lo que no hay capital disponible para nuevas compras. Se recomienda mantener posiciones actuales y esperar una señal de compra más clara, como un rebote sostenido por encima de 85 con volumen creciente, antes de considerar nuevas entradas.
-[*] Acción: MANTENER - Esperando mejores condiciones o monto 0.
-
-[01/03/2026 18:03:09] --- Ciclo de análisis ---
-
-========================================
- SALDO ACTUAL (TESTNET)
-----------------------------------------
- USDT: Disponible=9937.41128000 | Bloqueado=0.00000000
- SOL: Disponible=5.79900000 | Bloqueado=0.00000000
-========================================
-
-[*] Precio actual SOL/USDT: 82.88 USDT
-[*] IA recomienda: MANTENER
-    - Presupuesto Restante: 0.00 USDT
-    - Confianza Actual: 65.0%
-    - Umbral Requerido: 250.0%
-[*] Motivo: El análisis técnico muestra una tendencia bajista clara con precios en descenso desde ~88.30 hasta ~82.88, formando mínimos más bajos. El volumen ha sido moderado con picos en caídas significativas (ej. 16:00). El RSI implícito estaría en zona de sobreventa, pero no hay señales de reversión confirmada. El balance indica presupuesto asignado agotado (budget_remaining_to_spend: 0) aunque hay USDT disponible en cuenta real, la estrategia conservadora sugiere esperar confirmación de soporte o patrón de reversión antes de asignar nuevo capital. Se mantienen las posiciones actuales (5.799 activos) para evitar pérdidas en tendencia bajista.
-[*] Acción: MANTENER - Esperando mejores condiciones o monto 0.
-
-[01/03/2026 18:04:18] --- Ciclo de análisis ---
-
-========================================
- SALDO ACTUAL (TESTNET)
-----------------------------------------
- USDT: Disponible=9937.41128000 | Bloqueado=0.00000000
- SOL: Disponible=5.79900000 | Bloqueado=0.00000000
-========================================
-
-[*] Precio actual SOL/USDT: 82.99 USDT
-[*] IA recomienda: MANTENER
-    - Presupuesto Restante: 0.00 USDT
-    - Confianza Actual: 65.0%
-    - Umbral Requerido: 250.0%
-[*] Motivo: El análisis técnico muestra una tendencia bajista clara en las últimas 24 horas, con precios cayendo desde ~88.30 a ~82.99. El volumen ha sido moderado pero con picos en las caídas significativas (ej. 14649.978 a las 20:00). El RSI implícito estaría en zona de sobreventa, pero no hay señales claras de reversión aún. El balance indica que ya se tiene una posición significativa (5.799 activos) y el presupuesto asignado está completamente gastado (budget_remaining_to_spend: 0). Con USDT real disponible (9937.41128) se podría considerar una compra, pero la tendencia bajista actual sugiere esperar confirmación de soporte o señal de reversión antes de comprometer capital adicional. Se mantiene la posición existente mientras se monitorea para mejores puntos de entrada.
-[*] Acción: MANTENER - Esperando mejores condiciones o monto 0.
-
-[01/03/2026 18:05:27] --- Ciclo de análisis ---
-
-========================================
- SALDO ACTUAL (TESTNET)
-----------------------------------------
- USDT: Disponible=9937.41128000 | Bloqueado=0.00000000
- SOL: Disponible=5.79900000 | Bloqueado=0.00000000
-========================================
-
-[*] Precio actual SOL/USDT: 82.98 USDT
-[*] IA recomienda: COMPRA
-    - Presupuesto Restante: 0.00 USDT
-    - Monto Sugerido: 496.87 USDT
-    - Confianza Actual: 65.0%
-    - Umbral Requerido: 1.5%
-[*] Motivo: Análisis técnico: El precio muestra una tendencia bajista clara desde 88.02 hasta 82.96, con múltiples mínimos más bajos. Sin embargo, en las últimas 4 velas se observa una posible consolidación entre 81.71 y 83.26, con la última vela cerrando en 82.96 después de tocar soporte en 82.82. El volumen ha disminuido significativamente en las últimas velas (196.189 vs 14,649.978 en la vela bajista fuerte), sugiriendo agotamiento del impulso vendedor. El RSI implícito estaría en zona de sobreventa. Se propone una entrada conservadora aprovechando la disponibilidad de USDT real (9,937.41) con un monto moderado (5% del capital disponible) para probar un posible rebote desde niveles de soporte. El umbral del 1.5% busca confirmación de reversión antes de comprometer más capital.
-[!] Monto 0.00 insuficiente para el mínimo de exchange.
-
-[01/03/2026 18:06:38] --- Ciclo de análisis ---
-
-========================================
- SALDO ACTUAL (TESTNET)
-----------------------------------------
- USDT: Disponible=9937.41128000 | Bloqueado=0.00000000
- SOL: Disponible=5.79900000 | Bloqueado=0.00000000
-========================================
-
-[*] Precio actual SOL/USDT: 82.91 USDT
-[*] IA recomienda: MANTENER
-    - Presupuesto Restante: 0.00 USDT
-    - Confianza Actual: 65.0%
-    - Umbral Requerido: 250.0%
-[*] Motivo: El análisis técnico muestra una tendencia bajista clara con precios en descenso desde ~88 a ~83, confirmada por volúmenes moderados a altos en caídas. El RSI implícito estaría en zona neutral-baja (~40-45), sin señales de sobreventa extrema. Con un balance asignado ya gastado (budget_remaining_to_spend=0) y holdings existentes de 5.799 activos, no hay presupuesto disponible para nuevas compras. La señal 'MANTENER' se justifica para evitar entrar en una tendencia bajista, esperando un rebote técnico o consolidación. El monto es 0 por falta de presupuesto, el umbral del 2.5% busca confirmación de reversión, y los precios de colchón (min_price=81.5, max_price=84.5) protegen contra volatilidad basada en soportes/resistencias recientes.
-[*] Acción: MANTENER - Esperando mejores condiciones o monto 0.
-
-[01/03/2026 18:08:55] --- Ciclo de análisis ---
-
-========================================
- SALDO ACTUAL (TESTNET)
-----------------------------------------
- USDT: Disponible=9937.41128000 | Bloqueado=0.00000000
- SOL: Disponible=5.79900000 | Bloqueado=0.00000000
-========================================
-
-[*] Precio actual SOL/USDT: 82.82 USDT
-[*] IA recomienda: MANTENER
-    - Presupuesto Restante: 0.00 USDT
-    - Confianza Actual: 65.0%
-    - Umbral Requerido: 250.0%
-[*] Motivo: El análisis técnico muestra una tendencia bajista clara con precios en descenso desde ~88.30 hasta ~82.82, confirmada por volúmenes moderados a altos en caídas (ej. 14649.978 a 81.99). Los indicadores clave (media móvil simple de 5 períodos ~85.16 vs precio actual ~82.82) y la falta de soporte técnico inmediato sugieren presión vendedora. Con un presupuesto restante de 0 USDT y holdings existentes de 5.799 activos, la estrategia óptima es mantener posiciones actuales para evitar pérdidas en un mercado volátil, esperando una señal de reversión (ej. cierre por encima de 85.00 con volumen creciente) antes de considerar compras adicionales. El monto de 0 USDT refleja la limitación presupuestaria y el riesgo actual.
-[*] Acción: MANTENER - Esperando mejores condiciones o monto 0.
-
-[01/03/2026 18:10:04] --- Ciclo de análisis ---
-
-========================================
- SALDO ACTUAL (TESTNET)
-----------------------------------------
- USDT: Disponible=9937.41128000 | Bloqueado=0.00000000
- SOL: Disponible=5.79900000 | Bloqueado=0.00000000
-========================================
-
-[*] Precio actual SOL/USDT: 82.8 USDT
-[*] IA recomienda: MANTENER
-    - Presupuesto Restante: 0.00 USDT
-    - Confianza Actual: 65.0%
-    - Umbral Requerido: 250.0%
-[*] Motivo: El análisis técnico muestra una tendencia bajista clara con precios en descenso desde ~88 a ~82.80, alta volatilidad (rango de ~15 puntos en una vela) y volumen decreciente. El balance indica presupuesto asignado agotado (budget_remaining_to_spend: 0) con holdings existentes de 5.799 activos. Se recomienda mantener posiciones actuales hasta que se supere un umbral de reversión del 2.5% desde mínimos recientes, evitando compras en caída libre sin confirmación de soporte.
-[*] Acción: MANTENER - Esperando mejores condiciones o monto 0.
-
-[01/03/2026 18:11:11] --- Ciclo de análisis ---
-
-========================================
- SALDO ACTUAL (TESTNET)
-----------------------------------------
- USDT: Disponible=9937.41128000 | Bloqueado=0.00000000
- SOL: Disponible=5.79900000 | Bloqueado=0.00000000
-========================================
-
-[*] Precio actual SOL/USDT: 82.85 USDT
-[*] IA recomienda: COMPRA
-    - Presupuesto Restante: 0.00 USDT
-    - Monto Sugerido: 1987.48 USDT
-    - Confianza Actual: 65.0%
-    - Umbral Requerido: 50.0%
-[*] Motivo: El análisis técnico muestra una tendencia bajista clara con precios cayendo desde 88.30 a 81.99, pero se observan signos de estabilización en los últimos períodos. El volumen disminuyó significativamente en las últimas horas (287.524 vs 17820.870 en el pico), sugiriendo posible agotamiento del impulso bajista. El precio actual de 82.85 está cerca del mínimo reciente de 81.71, presentando una oportunidad de compra con riesgo controlado. Se asigna el 20% del capital disponible (9937.41 USDT) para una entrada escalonada, manteniendo liquidez para ajustes. El umbral del 0.5% permite filtrar ruido del mercado mientras captura movimientos significativos.
-[!] Monto 0.00 insuficiente para el mínimo de exchange.
-
-[01/03/2026 18:12:20] --- Ciclo de análisis ---
-
-========================================
- SALDO ACTUAL (TESTNET)
-----------------------------------------
- USDT: Disponible=9937.41128000 | Bloqueado=0.00000000
- SOL: Disponible=5.79900000 | Bloqueado=0.00000000
-========================================
-
-[*] Precio actual SOL/USDT: 82.92 USDT
-[*] IA recomienda: MANTENER
-    - Presupuesto Restante: 0.00 USDT
-    - Confianza Actual: 65.0%
-    - Umbral Requerido: 250.0%
-[*] Motivo: El análisis técnico muestra una tendencia bajista clara con precios en descenso desde 88.30 hasta 81.99, formando mínimos más bajos. El volumen es moderado pero no muestra señales de acumulación significativa. El RSI estaría en zona de sobreventa, pero sin confirmación de reversión. El balance indica presupuesto asignado agotado (budget_remaining_to_spend: 0) y holdings actuales de 5.799 activos, por lo que no hay capital disponible para nuevas compras. Se recomienda mantener posiciones existentes y esperar confirmación de soporte o señal de reversión antes de considerar nuevas entradas.
-[*] Acción: MANTENER - Esperando mejores condiciones o monto 0.
-
-[01/03/2026 18:13:27] --- Ciclo de análisis ---
-
-========================================
- SALDO ACTUAL (TESTNET)
-----------------------------------------
- USDT: Disponible=9937.41128000 | Bloqueado=0.00000000
- SOL: Disponible=5.79900000 | Bloqueado=0.00000000
-========================================
-
-[*] Precio actual SOL/USDT: 83.75 USDT
-[*] IA recomienda: MANTENER
-    - Presupuesto Restante: 0.00 USDT
-    - Confianza Actual: 65.0%
-    - Umbral Requerido: 250.0%
-[*] Motivo: El análisis técnico muestra una tendencia bajista clara con precios en declive desde ~88.30 hasta ~81.99, confirmada por volumen moderado en caídas. El precio actual (83.76) se encuentra en una fase de consolidación lateral débil tras la caída, sin señales claras de reversión. El RSI implícito estaría en zona neutral-baja (~40-45), indicando posible continuación bajista. Con un presupuesto restante de 0 USDT y holdings existentes de 5.799 unidades, la posición actual debe mantenerse para evitar pérdidas en un mercado sin dirección definida. Se espera un rebote técnico hacia 85.50-86.00 antes de considerar ventas, o una ruptura por debajo de 81.70 para confirmar tendencia bajista.
-[*] Acción: MANTENER - Esperando mejores condiciones o monto 0.
-
-[01/03/2026 18:14:36] --- Ciclo de análisis ---
-
-========================================
- SALDO ACTUAL (TESTNET)
-----------------------------------------
- USDT: Disponible=9937.41128000 | Bloqueado=0.00000000
- SOL: Disponible=5.79900000 | Bloqueado=0.00000000
-========================================
-
-[*] Precio actual SOL/USDT: 83.6 USDT
-[*] IA recomienda: COMPRA
-    - Presupuesto Restante: 0.00 USDT
-    - Monto Sugerido: 500.0 USDT
-    - Confianza Actual: 65.0%
-    - Umbral Requerido: 8450.0%
-[*] Motivo: El precio ha mostrado una fuerte caída desde 88.30 hasta 81.71, con un rebote reciente a 83.60. El volumen aumentó significativamente durante la caída (14,649.978 a las 20:00), indicando posible capitulación. El RSI implícito estaría en niveles de sobreventa tras esta corrección. La media móvil simple de 5 períodos (85.28) está por encima del precio actual, sugiriendo potencial de recuperación. Se asigna 500 USDT (5% del capital disponible) para aprovechar un posible rebote técnico hacia la resistencia en 85.5-86.0, manteniendo exposición controlada.
-[!] COMPRA ignorada: Confianza insuficiente.
-
-[01/03/2026 18:15:43] --- Ciclo de análisis ---
-
-========================================
- SALDO ACTUAL (TESTNET)
-----------------------------------------
- USDT: Disponible=9937.41128000 | Bloqueado=0.00000000
- SOL: Disponible=5.79900000 | Bloqueado=0.00000000
-========================================
-
-[*] Precio actual SOL/USDT: 83.49 USDT
-[*] IA recomienda: COMPRA
-    - Presupuesto Restante: 0.00 USDT
-    - Monto Sugerido: 993.74 USDT
-    - Confianza Actual: 65.0%
-    - Umbral Requerido: 8450.0%
-[*] Motivo: El activo muestra una fuerte tendencia bajista desde 88.30 hasta 81.99, con un rebote reciente a 83.49. El volumen ha sido significativo durante la caída, indicando posible capitulación. El precio actual (83.49) está cerca del mínimo reciente (81.71), presentando una oportunidad de compra con riesgo controlado. Se observa un patrón de consolidación en las últimas velas con volumen decreciente, sugiriendo agotamiento del impulso bajista. El monto de 993.74 USDT representa aproximadamente el 10% del capital disponible para diversificar el riesgo mientras se aprovecha la posible reversión.
-[!] COMPRA ignorada: Confianza insuficiente.
-
-[01/03/2026 18:16:51] --- Ciclo de análisis ---
-
-========================================
- SALDO ACTUAL (TESTNET)
-----------------------------------------
- USDT: Disponible=9937.41128000 | Bloqueado=0.00000000
- SOL: Disponible=5.79900000 | Bloqueado=0.00000000
-========================================
-
-[*] Precio actual SOL/USDT: 83.36 USDT
-[*] IA recomienda: COMPRA
-    - Presupuesto Restante: 0.00 USDT
-    - Monto Sugerido: 993.74 USDT
-    - Confianza Actual: 65.0%
-    - Umbral Requerido: 8450.0%
-[*] Motivo: El análisis técnico muestra una tendencia bajista clara con precios descendiendo desde 88.02 a 83.36, acompañada de volúmenes significativos en caídas (ej. 17820.870 a 84.00). Sin embargo, se observan signos de posible agotamiento de la venta: el volumen disminuyó drásticamente en las últimas velas (656.496 a 83.36), y el precio ha formado un rango lateral entre 81.71 y 84.93 en las últimas horas, sugiriendo consolidación. El RSI implícito estaría en niveles de sobreventa. El trade_amount de 993.74 USDT representa el 10% del capital disponible (9937.41128 USDT), una posición conservadora dada la volatilidad. El required_threshold de 84.5 se establece como nivel de resistencia clave a superar para confirmar un rebote. Los precios min_price (81.0) y max_price (85.0) definen un colchón seguro basado en los mínimos recientes y la resistencia inmediata.
-[!] COMPRA ignorada: Confianza insuficiente.
+[*] Obteniendo mercados para USDT (Tipo: spot, Modo: volume)...
+    [+] BTC/USDT | Cambio: -0.99% | Vol: 1430516488
+    [+] ETH/USDT | Cambio: -2.83% | Vol: 932372495
+    [+] USDC/USDT | Cambio: 0.02% | Vol: 543751508
+    [+] SOL/USDT | Cambio: -3.63% | Vol: 331163691
+    [+] XRP/USDT | Cambio: -3.56% | Vol: 208119305
+    [+] PAXG/USDT | Cambio: 1.99% | Vol: 118667876
+    [+] BNB/USDT | Cambio: -0.75% | Vol: 97401267
+    [+] DOGE/USDT | Cambio: -3.35% | Vol: 79712134
+    [+] ZEC/USDT | Cambio: -4.93% | Vol: 44624218
+    [+] ADA/USDT | Cambio: -3.75% | Vol: 37780756
+    [+] LINK/USDT | Cambio: -2.75% | Vol: 26696286
+    [+] TRX/USDT | Cambio: -0.32% | Vol: 23634262
+    [+] EUR/USDT | Cambio: -0.11% | Vol: 18567614
+    [+] DOT/USDT | Cambio: -3.52% | Vol: 15750990
+    [+] LTC/USDT | Cambio: -1.63% | Vol: 15621501
+[*] Analizando 15 activos con IA (spot)...
+
+================================================================================
+ RANKING DE RENTABILIDAD (SPOT) - CAPITAL: 500.0 USDT
+================================================================================
+#1 | BTC/USDT | Estrategia: Swing Trading
+   - Rentabilidad: +3.5% | Riesgo: -2.0%
+   - Timeframe: 4h | Volatilidad: Media
+   - Gas Est.: 0.1 USDT
+   - Motivo: BTC muestra estabilidad relativa con cambio del -0.99% en 24h, volumen alto de $1.43B indica liquidez robusta en spot. Las velas recientes muestran consolidación entre $66-67k con volúmenes decrecientes, sugiriendo posible acumulación. En spot, el riesgo es limitado al capital invertido sin apalancamiento. Estrategia swing aprovecha movimientos de mediano plazo con stop loss conservador del 2%.
+--------------------------------------------------------------------------------
+#2 | ETH/USDT | Estrategia: Breakout Trading
+   - Rentabilidad: +5.0% | Riesgo: -3.0%
+   - Timeframe: 1h | Volatilidad: Alta
+   - Gas Est.: 0.5 USDT
+   - Motivo: ETH con corrección del -2.83% pero volumen sustancial de $932M. Precio cerca de soporte psicológico $1,950. En spot, alta volatilidad ofrece oportunidades de breakout. Velas muestran intentos de recuperación desde $1,939. Stop loss del 3% protege contra caídas bruscas. Estrategia breakout busca superar resistencia en $2,000.
+--------------------------------------------------------------------------------
+#3 | SOL/USDT | Estrategia: Momentum Trading
+   - Rentabilidad: +8.0% | Riesgo: -4.5%
+   - Timeframe: 15m | Volatilidad: Alta
+   - Gas Est.: 0.05 USDT
+   - Motivo: SOL con corrección del -3.63% pero volumen saludable de $331M. Precio en $84.91 tras movimiento lateral. Alta volatilidad típica de altcoins en spot. Velas muestran actividad entre $83-85. Estrategia momentum captura movimientos rápidos con stop loss del 4.5%. Timeframe corto para gestión activa sin apalancamiento.
+--------------------------------------------------------------------------------
+#4 | BNB/USDT | Estrategia: Range Trading
+   - Rentabilidad: +4.0% | Riesgo: -2.5%
+   - Timeframe: 1h | Volatilidad: Media
+   - Gas Est.: 0.1 USDT
+   - Motivo: BNB muestra relativa estabilidad (-0.75%) con volumen de $97M. Precio en $624.71 en rango lateral. En spot, bajo riesgo comparado con altcoins. Velas indican consolidación entre $617-625. Estrategia range trading compra en soportes y vende en resistencias. Stop loss del 2.5% adecuado para volatilidad media.
+--------------------------------------------------------------------------------
+#5 | PAXG/USDT | Estrategia: Hedging/Store of Value
+   - Rentabilidad: +2.5% | Riesgo: -1.5%
+   - Timeframe: 1d | Volatilidad: Baja
+   - Gas Est.: 0.2 USDT
+   - Motivo: PAXG (oro digital) con ganancia del +1.99%, baja volatilidad típica de activo refugio. Precio $5,403.9 con volumen moderado. En spot, funciona como cobertura contra volatilidad crypto. Estrategia conservadora de preservación de capital con stop loss mínimo del 1.5%. Baja rentabilidad pero alto factor seguridad.
+--------------------------------------------------------------------------------
+#6 | XRP/USDT | Estrategia: Swing Trading
+   - Rentabilidad: +6.0% | Riesgo: -4.0%
+   - Timeframe: 4h | Volatilidad: Alta
+   - Gas Est.: 0.02 USDT
+   - Motivo: XRP con corrección del -3.56% pero volumen de $208M. Precio $1.3744 mostrando volatilidad alta común en spot. Velas indican movimiento entre $1.35-1.37. Estrategia swing busca recuperación hacia $1.40+. Stop loss del 4% maneja volatilidad. Considerar riesgos regulatorios específicos de XRP.
+--------------------------------------------------------------------------------
+#7 | LINK/USDT | Estrategia: Breakout Trading
+   - Rentabilidad: +7.0% | Riesgo: -5.0%
+   - Timeframe: 1h | Volatilidad: Alta
+   - Gas Est.: 0.5 USDT
+   - Motivo: LINK con corrección del -2.75%, precio $8.84. Volumen moderado de $26.7M. Alta volatilidad característica de proyectos DeFi en spot. Velas muestran base alrededor de $8.70-8.80. Estrategia breakout busca superar $9.00. Stop loss del 5% necesario dada volatilidad.
+--------------------------------------------------------------------------------
+#8 | ADA/USDT | Estrategia: Momentum Trading
+   - Rentabilidad: +6.5% | Riesgo: -4.5%
+   - Timeframe: 15m | Volatilidad: Alta
+   - Gas Est.: 0.1 USDT
+   - Motivo: ADA con corrección del -3.75%, precio $0.2772. Volumen de $37.8M. Alta volatilidad típica de altcoins en spot. Velas muestran actividad entre $0.273-0.277. Estrategia momentum aprovecha movimientos rápidos. Stop loss del 4.5% adecuado para gestión de riesgo sin apalancamiento.
+--------------------------------------------------------------------------------
+#9 | DOGE/USDT | Estrategia: Scalping
+   - Rentabilidad: +9.0% | Riesgo: -6.0%
+   - Timeframe: 15m | Volatilidad: Extrema
+   - Gas Est.: 0.01 USDT
+   - Motivo: DOGE con corrección del -3.35%, precio $0.09334. Volumen de $79.7M. Volatilidad extrema característica de memecoins en spot. Velas muestran amplio rango $0.0919-0.0933. Solo para traders experimentados. Estrategia scalping con stop loss amplio del 6%. Alto riesgo/recompensa.
+--------------------------------------------------------------------------------
+#10 | ZEC/USDT | Estrategia: Swing Trading
+   - Rentabilidad: +8.5% | Riesgo: -6.0%
+   - Timeframe: 4h | Volatilidad: Extrema
+   - Gas Est.: 0.05 USDT
+   - Motivo: ZEC con mayor corrección del -4.93%, precio $219.12. Volumen moderado de $44.6M. Volatilidad extrema por baja liquidez en spot. Velas muestran amplio rango $213-219. Alto riesgo específico de privacidad-coins. Estrategia swing con stop loss del 6%. Solo para alta tolerancia al riesgo.
+--------------------------------------------------------------------------------
+[*] Obteniendo mercados para USDT (Tipo: future, Modo: volume)...
+[!] Error al cargar mercados (future): binance does not have market symbol TUSD/USDT
+[!] No se pudieron obtener datos para el mercado future.
+[*] Escaneo completado. Resultados guardados en la base de datos.

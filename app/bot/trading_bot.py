@@ -5,11 +5,9 @@ import ccxt
 import pandas as pd
 import importlib
 import argparse
-import json
 from binance.client import Client
 from dotenv import load_dotenv
 
-from app.config import BOT_TRADING_FILE
 from app.database import get_db_manager
 from app.bot.ia.predictor import get_predictor
 
@@ -93,23 +91,6 @@ class TradingBot:
         self.print_balance()
         print(f"[*] Bot inicializado para {self.symbol}")
         print(f"[*] Presupuesto total asignado: {self.total_budget} USDT")
-        self.save_status()
-
-    def save_status(self):
-        """Guarda el estado actual del bot en un archivo JSON para que la API lo lea."""
-        status_file = BOT_TRADING_FILE
-        try:
-            with open(status_file, 'w') as f:
-                json.dump({
-                    "status": "running" if getattr(self, 'is_running', False) else "stopped",
-                    "symbol": self.symbol,
-                    "network": self.network,
-                    "timeframe": self.timeframe,
-                    "budget": self.total_budget,
-                    "last_update": pd.Timestamp.now().isoformat()
-                }, f)
-        except Exception as e:
-            print(f"[!] Error al guardar status JSON: {e}")
 
     def _load_symbol_info(self):
         """Carga filtros como LOT_SIZE y MIN_NOTIONAL de Binance."""
@@ -410,16 +391,13 @@ class TradingBot:
 
     def run(self):
         self.is_running = True
-        self.save_status()
         try:
             while self.is_running:
                 self.execute_logic()
-                self.save_status()
                 for _ in range(60):
                     if not self.is_running:
                         break
                     time.sleep(1)
         finally:
             self.is_running = False
-            self.save_status()
 

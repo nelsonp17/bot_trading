@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { BrainCircuit, CheckCircle2, XCircle, MinusCircle } from 'lucide-react';
 
-const API_BASE = 'http://localhost:8000/api';
+const API_BASE = '/api';
 
 export default function PredictionsTable() {
     const [predictions, setPredictions] = useState([]);

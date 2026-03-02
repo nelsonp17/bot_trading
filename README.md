@@ -22,26 +22,26 @@ Ahora incluye una arquitectura moderna dividida en un backend con **FastAPI** y 
 
 ### 1. Configuración del Backend (Python)
 1. Crea tu entorno virtual:
-   ```bash
-   python -m venv venv
-   source venv/bin/activate  # En Windows: venv\Scripts\activate
-   ```
+```bash
+python -m venv venv
+source venv/bin/activate  # En Windows: venv\Scripts\activate
+```
 2. Instala las dependencias:
-   ```bash
-   pip install -r requirements.txt
-   ```
+```bash
+pip install -r requirements.txt
+```
 3. Configura el entorno:
-   ```bash
-   cp .env.example .env
-   # Edita .env con tus API Keys de Binance y de la IA (Gemini/DeepSeek)
-   ```
+```bash
+cp .env.example .env
+# Edita .env con tus API Keys de Binance y de la IA (Gemini/DeepSeek)
+```
 
 ### 2. Configuración del Frontend (React)
 1. Navega a la carpeta del frontend y descarga las dependencias:
-   ```bash
-   cd frontend
-   npm install
-   ```
+```bash
+cd frontend
+npm install
+```
 
 ## ⚙️ Uso y Modos de Ejecución
 
@@ -54,7 +54,8 @@ Para levantar el ecosistema completo con la interfaz visual, abre dos consolas t
 **Terminal 1 (Backend - FastAPI):**
 Desde la carpeta raíz del proyecto, inicializa la API:
 ```bash
-uvicorn app.api:app --reload
+#uvicorn app.api:app --reload
+python scripts/run_api_server.py
 ```
 
 **Terminal 2 (Frontend - React):**
@@ -74,11 +75,36 @@ Puedes seguir ejecutando el bot directamente por consola (gestiona el capital pa
 python scripts/run_trading_bot.py --symbol SOL/USDT --budget 500 --provider deepseek --network testnet
 ```
 
+### Argumentos Disponibles
+| Argumento | Descripción | Valor por Defecto |
+|-----------|-------------|-------------------|
+| `--provider` | Proveedor de IA (`gemini` o `deepseek`) | `gemini` |
+| `--symbol` | Par de trading (ej. `ETH/USDT`) | `BTC/USDT` |
+| `--timeframe` | Intervalo de velas (`15m`, `1h`, `4h`) | `1h` |
+| `--budget` | Presupuesto total asignado al bot | — |
+| `--min-price` | Precio mínimo (0 = Automático por IA) | `0.0` |
+| `--max-price` | Precio máximo (999999 = Automático por IA) | `999999.0` |
+| `--network` | Red: `sandbox`, `testnet`, `mainnet`, `demo` | `sandbox` |
+
 **2. Escáner Estratégico (Análisis de Mercado):**
-Rastrea Binance en busca de las mejores oportunidades del momento.
+Rastrea Binance en busca de las mejores oportunidades del momento en Spot, Futuros o ambos simultáneamente.
 ```bash
-python scripts/run_market_scanner_bot.py --capital 1000 --quote USDT --mode volume --provider deepseek
+# Ejemplo: Escanear ambos mercados (Spot y Futures) para un símbolo específico
+python scripts/run_market_scanner_bot.py --symbol BTC/USDT --type both --provider gemini
+
+# Ejemplo: Escanear top volumen en Futuros
+python scripts/run_market_scanner_bot.py --type future --mode volume --capital 500
 ```
+
+### Argumentos del Escáner
+| Argumento | Descripción | Valor por Defecto |
+|-----------|-------------|-------------------|
+| `--provider` | Proveedor de IA (`gemini` o `deepseek`) | `gemini` |
+| `--capital` | Capital ficticio para simular inversión | `100.0` |
+| `--quote` | Moneda base del mercado (ej. `USDT`, `BTC`) | `USDT` |
+| `--mode` | Filtro de búsqueda (`volume` o `volatility`) | `volume` |
+| `--symbol` | (Opcional) Símbolo específico a analizar | `None` |
+| `--type` | Mercado a analizar (`spot`, `future` o `both`) | `spot` |
 
 ## 📂 Estructura del Proyecto
 
