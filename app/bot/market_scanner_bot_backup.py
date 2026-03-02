@@ -98,10 +98,6 @@ class MarketScanner:
             return []
 
     def run_scan(self):
-        from datetime import datetime
-        scan_id = f"SCAN_{datetime.utcnow().strftime('%Y%m%d_%H%M%S')}"
-        print(f"[*] Iniciando Escaneo Global - ID: {scan_id}")
-
         for m_type in self.market_types:
             market_snapshot = self.fetch_market_snapshot(m_type)
             if not market_snapshot:
@@ -116,7 +112,7 @@ class MarketScanner:
                 continue
 
             print("\n" + "=" * 80)
-            print(f" RANKING DE RENTABILIDAD ({m_type.upper()}) - ID: {scan_id} - CAPITAL: {self.capital} {self.quote}")
+            print(f" RANKING DE RENTABILIDAD ({m_type.upper()}) - CAPITAL: {self.capital} {self.quote}")
             print("=" * 80)
 
             for item in rankings:
@@ -128,11 +124,9 @@ class MarketScanner:
                 item['change_24h_pct'] = original_data.get('change_24h_pct')
                 item['volume_24h'] = original_data.get('volume_24h')
                 item['market_type'] = m_type
-                item['scan_id'] = scan_id
 
                 # Imprimir en consola
                 print(f"#{item['rank']} | {item['symbol']} | Precio: {item['price']} | Cambio: {item['change_24h_pct']}%")
-                # ... (rest of prints)
                 print(f"   - Estrategia: {item['recommended_strategy']}")
                 print(f"   - Rentabilidad: +{item['expected_profit_pct']}% | Riesgo: -{item['expected_loss_pct']}%")
                 print(f"   - Timeframe: {item['recommended_timeframe']} | Volatilidad: {item['volatility']}")
@@ -142,6 +136,6 @@ class MarketScanner:
                 # Guardar en DB
                 self.db.save_market_scan(item)
 
-        print(f"[*] Escaneo {scan_id} completado. Resultados guardados en la base de datos.")
+        print(f"[*] Escaneo completado. Resultados guardados en la base de datos.")
 
 

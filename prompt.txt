@@ -1,0 +1,312 @@
+## Rol: Actúa como un Ingeniero de Software Senior experto en Trading de Criptomonedas y Sistemas de Ejecución Asíncrona.
+
+## Contexto del Sistema:
+Tengo un sistema de dos niveles. El Bot 1 proporciona señales (ranking de 15 monedas o las que le indique por flag, estrategia, timeframe, riesgo,...). El Bot 2 es el Agente de Razonamiento que debe gestionar el capital y las operaciones en Python con un script que se ejecuta cada minuto para tareas ligeras, pero el Agente de IA solo debe razonar en intervalos definidos por el Timeframe o por emergencias.
+
+Ejemplo de salida del Bot 1:
+```
+python scripts/run_market_scanner_bot.py --capital 500 --quote USDT --provider deepseek --mode volume --type both
+[*] Usando DeepSeek como motor de IA
+[*] Obteniendo mercados para USDT (Tipo: spot, Modo: volume)...
+    [+] BTC/USDT | Cambio: -0.95% | Vol: 1426048968
+    [+] ETH/USDT | Cambio: -2.39% | Vol: 922822335
+    [+] USDC/USDT | Cambio: 0.01% | Vol: 547798064
+    [+] SOL/USDT | Cambio: -3.65% | Vol: 325655217
+    [+] XRP/USDT | Cambio: -3.03% | Vol: 203710863
+    [+] PAXG/USDT | Cambio: 1.20% | Vol: 117554918
+    [+] BNB/USDT | Cambio: -0.82% | Vol: 96123546
+    [+] DOGE/USDT | Cambio: -3.36% | Vol: 77402222
+    [+] ZEC/USDT | Cambio: -5.40% | Vol: 43791707
+    [+] ADA/USDT | Cambio: -3.25% | Vol: 37436847
+    [+] LINK/USDT | Cambio: -2.43% | Vol: 26632298
+    [+] TRX/USDT | Cambio: -0.32% | Vol: 23274516
+    [+] EUR/USDT | Cambio: -0.19% | Vol: 18715681
+    [+] DOT/USDT | Cambio: -3.35% | Vol: 15515978
+    [+] LTC/USDT | Cambio: -1.33% | Vol: 15511608
+[*] Analizando 15 activos con IA (spot)...
+
+================================================================================
+ RANKING DE RENTABILIDAD (SPOT) - CAPITAL: 500.0 USDT
+================================================================================
+#1 | PAXG/USDT | Precio: 5400.85 | Cambio: 1.2%
+   - Estrategia: Swing Trading
+   - Rentabilidad: +2.5% | Riesgo: -1.0%
+   - Timeframe: 4h | Volatilidad: Baja
+   - Motivo: PAXG muestra la mejor performance en 24h (+1.2%) con baja volatilidad en velas recientes. Como stablecoin respaldada por oro físico, ofrece cobertura contra inflación y menor riesgo en spot. El volumen es sólido ($117M) y el precio se mantiene estable alrededor de $5,400. Estrategia swing aprovecha tendencia alcista con stop loss conservador.
+--------------------------------------------------------------------------------
+#2 | USDC/USDT | Precio: 1.0001 | Cambio: 0.01%
+   - Estrategia: Hold
+   - Rentabilidad: +0.02% | Riesgo: -0.01%
+   - Timeframe: 1d | Volatilidad: Baja
+   - Motivo: USDC es esencialmente estable con precio $1.0001 (+0.01%). En spot, representa el activo más seguro para preservar capital. Volumen alto ($547M) garantiza liquidez excelente. Estrategia de hold minimiza riesgos mientras se esperan oportunidades en otros activos. Comisiones mínimas.
+--------------------------------------------------------------------------------
+#3 | TRX/USDT | Precio: 0.2812 | Cambio: -0.32%
+   - Estrategia: Range Trading
+   - Rentabilidad: +1.8% | Riesgo: -1.5%
+   - Timeframe: 1h | Volatilidad: Baja
+   - Motivo: TRX muestra la menor caída (-0.32%) entre criptos volátiles. Precio estable alrededor de $0.2812 con volumen decente ($23M). Patrón de consolidación en velas recientes sugiere oportunidad de range trading en spot. Baja volatilidad relativa reduce riesgo de pérdidas abruptas.
+--------------------------------------------------------------------------------
+#4 | EUR/USDT | Precio: 1.1785 | Cambio: -0.19%
+   - Estrategia: Scalping
+   - Rentabilidad: +0.5% | Riesgo: -0.3%
+   - Timeframe: 15m | Volatilidad: Baja
+   - Motivo: Par forex con mínima variación (-0.19%). Precio $1.1785 muestra alta estabilidad. En spot, permite scalping de pequeños movimientos con bajo riesgo. Volumen moderado ($18M) suficiente para ejecución. Estrategia conservadora para ganancias modestas pero consistentes.
+--------------------------------------------------------------------------------
+#5 | BTC/USDT | Precio: 66727.37 | Cambio: -0.95%
+   - Estrategia: Swing Trading
+   - Rentabilidad: +3.0% | Riesgo: -2.5%
+   - Timeframe: 4h | Volatilidad: Media
+   - Motivo: BTC lidera volumen ($1.4B) con corrección moderada (-0.95%). Precio $66,727 muestra soporte en $66,276. En spot, ofrece mejor relación riesgo/beneficio entre majors. Velas recientes indican consolidación antes de posible rebote. Stop loss amplio por volatilidad inherente.
+--------------------------------------------------------------------------------
+#6 | BNB/USDT | Precio: 623.67 | Cambio: -0.82%
+   - Estrategia: Swing Trading
+   - Rentabilidad: +2.2% | Riesgo: -2.0%
+   - Timeframe: 1h | Volatilidad: Media
+   - Motivo: BNB con caída limitada (-0.82%) a $623.67. Volumen saludable ($96M) y velas muestran recuperación desde $619.89. Como token de exchange con utilidad real, tiene fundamentos sólidos para spot. Estrategia swing aprovecha momentum positivo reciente con riesgo controlado.
+--------------------------------------------------------------------------------
+#7 | LTC/USDT | Precio: 54.07 | Cambio: -1.33%
+   - Estrategia: Breakout Trading
+   - Rentabilidad: +2.0% | Riesgo: -2.2%
+   - Timeframe: 1h | Volatilidad: Media
+   - Motivo: LTC corrige -1.33% a $54.07, mostrando relativa estabilidad. Volumen bajo ($15M) pero velas indican consolidación entre $53.78-$54.14. En spot, breakout por encima de $54.15 podría generar momentum. Stop loss ajustado por volatilidad moderada.
+--------------------------------------------------------------------------------
+#8 | ETH/USDT | Precio: 1971.15 | Cambio: -2.39%
+   - Estrategia: Swing Trading
+   - Rentabilidad: +3.5% | Riesgo: -3.0%
+   - Timeframe: 4h | Volatilidad: Alta
+   - Motivo: ETH con corrección significativa (-2.39%) a $1,971 pero volumen alto ($922M) sugiere interés institucional. Velas muestran recuperación desde $1,955. En spot, oversold temporal ofrece oportunidad, pero alta volatilidad requiere stop loss amplio. Gas fees más altos que promedio.
+--------------------------------------------------------------------------------
+#9 | LINK/USDT | Precio: 8.82 | Cambio: -2.43%
+   - Estrategia: Breakout Trading
+   - Rentabilidad: +4.0% | Riesgo: -3.5%
+   - Timeframe: 1h | Volatilidad: Alta
+   - Motivo: LINK corrige -2.43% a $8.82 pero muestra fuerza relativa. Volumen decente ($26M) y velas indican posible reversión desde $8.76. En spot, breakout por encima de $8.85 podría acelerar ganancias. Alta volatilidad oráculos requiere gestión de riesgo estricta.
+--------------------------------------------------------------------------------
+#10 | XRP/USDT | Precio: 1.3728 | Cambio: -3.03%
+   - Estrategia: Swing Trading
+   - Rentabilidad: +3.8% | Riesgo: -4.0%
+   - Timeframe: 4h | Volatilidad: Alta
+   - Motivo: XRP cae -3.03% a $1.3728 pero mantiene volumen alto ($203M). Velas muestran soporte en $1.3643. En spot, oversold técnico y fundamentos regulatorios positivos ofrecen oportunidad, pero alta volatilidad histórica justifica stop loss amplio.
+--------------------------------------------------------------------------------
+#11 | ADA/USDT | Precio: 0.277 | Cambio: -3.25%
+   - Estrategia: Swing Trading
+   - Rentabilidad: +4.2% | Riesgo: -4.5%
+   - Timeframe: 1h | Volatilidad: Alta
+   - Motivo: ADA corrige -3.25% a $0.277 con volumen moderado ($37M). Precio cerca de soporte técnico en $0.2758. En spot, posible rebote técnico pero alta volatilidad característica de ADA requiere cautela. Desarrollo de Cardano ofrece fundamento a largo plazo.
+--------------------------------------------------------------------------------
+#12 | DOGE/USDT | Precio: 0.09314 | Cambio: -3.36%
+   - Estrategia: Scalping
+   - Rentabilidad: +5.0% | Riesgo: -5.5%
+   - Timeframe: 15m | Volatilidad: Extrema
+   - Motivo: DOGE cae -3.36% a $0.09314 pero volumen alto ($77M) indica actividad. Velas muestran alta volatilidad intradía. En spot, solo recomendado para scalping agresivo por movimientos rápidos. Riesgo extremo por naturaleza meme coin - stop loss muy ajustado necesario.
+--------------------------------------------------------------------------------
+#13 | SOL/USDT | Precio: 84.54 | Cambio: -3.65%
+   - Estrategia: Breakout Trading
+   - Rentabilidad: +4.5% | Riesgo: -5.0%
+   - Timeframe: 1h | Volatilidad: Extrema
+   - Motivo: SOL con mayor caída (-3.65%) a $84.54 pero volumen sólido ($325M). Velas muestran alta volatilidad entre $84.15-$85.00. En spot, posible rebote técnico pero riesgo elevado por corrección reciente. Estrategia breakout solo para traders experimentados.
+--------------------------------------------------------------------------------
+#14 | DOT/USDT | Precio: 1.558 | Cambio: -3.35%
+   - Estrategia: Swing Trading
+   - Rentabilidad: +4.8% | Riesgo: -5.2%
+   - Timeframe: 4h | Volatilidad: Extrema
+   - Motivo: DOT cae -3.35% a $1.558 con volumen bajo ($15M). Velas muestran alta volatilidad intradía ($1.557-$1.584). En spot, corrección excesiva podría ofrecer rebote pero riesgo elevado por baja liquidez. Solo para traders que toleran alta volatilidad.
+--------------------------------------------------------------------------------
+#15 | ZEC/USDT | Precio: 217.46 | Cambio: -5.4%
+   - Estrategia: Swing Trading
+   - Rentabilidad: +6.0% | Riesgo: -7.0%
+   - Timeframe: 4h | Volatilidad: Extrema
+   - Motivo: ZEC muestra mayor caída (-5.4%) a $217.46 con volumen moderado ($43M). Alta volatilidad y corrección agresiva indican riesgo significativo. En spot, posible rebote técnico pero privacy coins enfrentan presión regulatoria. Último ranking por mayor riesgo/recompensa desfavorable para inversión conservadora.
+--------------------------------------------------------------------------------
+[*] Obteniendo mercados para USDT (Tipo: future, Modo: volume)...
+    [+] BTC/USDT:USDT | Cambio: -1.04% | Vol: 12800940048
+    [+] ETH/USDT:USDT | Cambio: -2.55% | Vol: 11913540590
+    [+] SOL/USDT:USDT | Cambio: -3.72% | Vol: 2601007909
+    [+] XRP/USDT:USDT | Cambio: -3.14% | Vol: 1052270567
+    [+] DOGE/USDT:USDT | Cambio: -3.52% | Vol: 582506036
+    [+] BNB/USDT:USDT | Cambio: -0.94% | Vol: 476411854
+    [+] ZEC/USDT:USDT | Cambio: -5.54% | Vol: 296422084
+    [+] ADA/USDT:USDT | Cambio: -3.35% | Vol: 209485636
+    [+] BCH/USDT:USDT | Cambio: -2.13% | Vol: 167864620
+    [+] DOT/USDT:USDT | Cambio: -3.41% | Vol: 166088441
+    [+] AVAX/USDT:USDT | Cambio: -1.47% | Vol: 154905715
+    [+] NEAR/USDT:USDT | Cambio: 4.44% | Vol: 149325580
+    [+] DENT/USDT:USDT | Cambio: -4.75% | Vol: 148919415
+    [+] LINK/USDT:USDT | Cambio: -2.57% | Vol: 145229507
+    [+] FIL/USDT:USDT | Cambio: -1.40% | Vol: 134666028
+[*] Analizando 15 activos con IA (future)...
+
+================================================================================
+ RANKING DE RENTABILIDAD (FUTURE) - CAPITAL: 500.0 USDT
+================================================================================
+#1 | NEAR/USDT:USDT | Precio: 1.199 | Cambio: 4.44%
+   - Estrategia: Swing alcista
+   - Rentabilidad: +8.0% | Riesgo: -6.0%
+   - Timeframe: 4h | Volatilidad: Alta
+   - Motivo: Único activo con cambio positivo (+4.44%) en 24h, mostrando fortaleza relativa en un mercado bajista. Volumen sólido ($149M) y velas recientes con cierres ascendentes indican momentum alcista. En futuros, permite apalancamiento controlado para capturar continuación de tendencia. Stop loss ajustado por volatilidad.
+--------------------------------------------------------------------------------
+#2 | BNB/USDT:USDT | Precio: 623.58 | Cambio: -0.94%
+   - Estrategia: Swing de rango
+   - Rentabilidad: +5.0% | Riesgo: -4.0%
+   - Timeframe: 1h | Volatilidad: Media
+   - Motivo: Menor caída (-0.94%) vs mercado, mostrando resiliencia. Volumen moderado ($476M) y precio estable alrededor de $623. En futuros, baja volatilidad relativa reduce riesgo de liquidación. Estrategia de swing aprovecha rangos definidos con stop loss conservador.
+--------------------------------------------------------------------------------
+#3 | BTC/USDT:USDT | Precio: 66666.1 | Cambio: -1.04%
+   - Estrategia: Scalping de reversión
+   - Rentabilidad: +6.0% | Riesgo: -8.0%
+   - Timeframe: 15m | Volatilidad: Media
+   - Motivo: Activo más líquido ($12.8B volumen) con caída moderada (-1.04%). En futuros, alta liquidez permite entradas/salidas rápidas. Velas recientes muestran consolidación alrededor de $66k. Scalping aprovecha micro-movimientos con tight stops. Riesgo controlado por liquidez pero volatilidad inherente.
+--------------------------------------------------------------------------------
+#4 | AVAX/USDT:USDT | Precio: 9.116 | Cambio: -1.47%
+   - Estrategia: Breakout de rango
+   - Rentabilidad: +7.0% | Riesgo: -9.0%
+   - Timeframe: 1h | Volatilidad: Alta
+   - Motivo: Caída limitada (-1.47%) con volumen decente ($155M). Precio oscila entre $9.0-$9.12 en velas recientes. En futuros, breakout de este rango podría generar movimiento significativo. Stop loss amplio por volatilidad pero ganancia potencial mayor.
+--------------------------------------------------------------------------------
+#5 | FIL/USDT:USDT | Precio: 0.985 | Cambio: -1.4%
+   - Estrategia: Swing técnico
+   - Rentabilidad: +6.0% | Riesgo: -8.0%
+   - Timeframe: 4h | Volatilidad: Media
+   - Motivo: Caída mínima (-1.4%) con soporte aparente en $0.977. Volumen moderado ($135M). En futuros, estructura de velas sugiere posible reversión. Swing trade con stop loss basado en soporte clave. Riesgo moderado por liquidez aceptable.
+--------------------------------------------------------------------------------
+#6 | ETH/USDT:USDT | Precio: 1968.7 | Cambio: -2.55%
+   - Estrategia: Scalping de volatilidad
+   - Rentabilidad: +5.0% | Riesgo: -10.0%
+   - Timeframe: 15m | Volatilidad: Alta
+   - Motivo: Alta liquidez ($11.9B volumen) pero caída significativa (-2.55%). En futuros, volatilidad ofrece oportunidades de scalping pero con mayor riesgo. Velas muestran alta actividad. Stop loss amplio necesario por movimientos bruscos.
+--------------------------------------------------------------------------------
+#7 | BCH/USDT:USDT | Precio: 448.63 | Cambio: -2.13%
+   - Estrategia: Swing agresivo
+   - Rentabilidad: +8.0% | Riesgo: -12.0%
+   - Timeframe: 1h | Volatilidad: Alta
+   - Motivo: Caída moderada (-2.13%) con volumen bajo ($168M). Precio entre $445-$450. En futuros, bajo volumen aumenta riesgo de slippage pero movimientos pueden ser pronunciados. Swing trade con stop loss amplio por posible volatilidad.
+--------------------------------------------------------------------------------
+#8 | LINK/USDT:USDT | Precio: 8.812 | Cambio: -2.57%
+   - Estrategia: Swing de continuidad
+   - Rentabilidad: +6.0% | Riesgo: -11.0%
+   - Timeframe: 4h | Volatilidad: Media
+   - Motivo: Caída -2.57% con volumen moderado ($145M). Precio consolidando alrededor de $8.8. En futuros, posible continuación bajista requiere stop loss ajustado. Riesgo moderado-alto por tendencia actual.
+--------------------------------------------------------------------------------
+#9 | SOL/USDT:USDT | Precio: 84.5 | Cambio: -3.72%
+   - Estrategia: Breakout bajista
+   - Rentabilidad: +7.0% | Riesgo: -15.0%
+   - Timeframe: 1h | Volatilidad: Alta
+   - Motivo: Fuerte caída (-3.72%) con alto volumen ($2.6B). En futuros, tendencia bajista clara con posible continuación. Estrategia de breakout aprovecha momentum negativo. Alto riesgo por volatilidad pero ganancia potencial si se mantiene tendencia.
+--------------------------------------------------------------------------------
+#10 | XRP/USDT:USDT | Precio: 1.3715 | Cambio: -3.14%
+   - Estrategia: Scalping de rango
+   - Rentabilidad: +5.0% | Riesgo: -14.0%
+   - Timeframe: 15m | Volatilidad: Media
+   - Motivo: Caída -3.14% con volumen decente ($1.05B). Precio oscila entre $1.36-$1.37. En futuros, scalping en rango definido pero riesgo de breakout. Stop loss amplio por posible movimiento brusco.
+--------------------------------------------------------------------------------
+#11 | DOGE/USDT:USDT | Precio: 0.09303 | Cambio: -3.52%
+   - Estrategia: Swing de alta volatilidad
+   - Rentabilidad: +8.0% | Riesgo: -18.0%
+   - Timeframe: 1h | Volatilidad: Extrema
+   - Motivo: Caída -3.52% con volumen moderado ($583M). Históricamente volátil. En futuros, riesgo extremo de liquidación por movimientos bruscos. Solo para traders experimentados con stop loss muy amplio.
+--------------------------------------------------------------------------------
+#12 | ADA/USDT:USDT | Precio: 0.2769 | Cambio: -3.35%
+   - Estrategia: Swing técnico
+   - Rentabilidad: +6.0% | Riesgo: -16.0%
+   - Timeframe: 4h | Volatilidad: Alta
+   - Motivo: Caída -3.35% con volumen bajo ($209M). Precio alrededor de $0.276. En futuros, baja liquidez aumenta riesgo. Swing trade solo si se identifica soporte claro. Alto riesgo por condiciones actuales.
+--------------------------------------------------------------------------------
+#13 | DOT/USDT:USDT | Precio: 1.556 | Cambio: -3.41%
+   - Estrategia: Breakout con cautela
+   - Rentabilidad: +7.0% | Riesgo: -17.0%
+   - Timeframe: 1h | Volatilidad: Alta
+   - Motivo: Caída -3.41% con volumen bajo ($166M). Precio en $1.556. En futuros, muy bajo volumen aumenta riesgo de manipulación y slippage. Solo operaciones pequeñas con stop loss amplio.
+--------------------------------------------------------------------------------
+#14 | ZEC/USDT:USDT | Precio: 217.19 | Cambio: -5.54%
+   - Estrategia: Swing solo para expertos
+   - Rentabilidad: +10.0% | Riesgo: -25.0%
+   - Timeframe: 4h | Volatilidad: Extrema
+   - Motivo: Mayor caída (-5.54%) del grupo con volumen moderado ($296M). En futuros, extrema volatilidad y riesgo de liquidación. Solo traders muy experimentados. Alto potencial pero riesgo extremo.
+--------------------------------------------------------------------------------
+#15 | DENT/USDT:USDT | Precio: 0.0003 | Cambio: -4.75%
+   - Estrategia: Evitar en futuros
+   - Rentabilidad: +15.0% | Riesgo: -30.0%
+   - Timeframe: N/A | Volatilidad: Extrema
+   - Motivo: Precio ultra bajo ($0.0003) con caída -4.75%. En futuros, riesgo extremo de liquidación por mínimos movimientos porcentuales. Volumen alto pero principalmente spot. NO RECOMENDADO para futuros con $500 USDT - riesgo inaceptablemente alto.
+```
+
+
+## Objetivo:
+Debes diseñar la lógica para que el Agente de IA genere un "Plan de Ejecución Blindado" que el script de Python pueda ejecutar de forma autónoma mientras la IA "duerme".
+
+## Instrucciones Detalladas para el Agente:
+
+1. Gestión de Estrategia por "Slots":
+* Operar con un solo bloque de capital. Actualmente el segundo bot opero con 500 USDT que invirtió en SOL y aunque el usuario lo detuvo y ejecuto nuevamente pasandole otro bloque de capital de 100 USDT este no lo invirtió hasta que recupere la primer inversión, ese pensamiento esta muy bien planteado, mantenlo.
+* Cada operación abierta debe quedar "sellada" con la estrategia inicial (ej. Swing) que el primer bot le recomendo. Si el Bot 1 cambia la tendencia general después, la operación abierta mantiene su plan original hasta su cierre o expiración por tiempo (ej. 2 meses).
+* Dicho lo anterior el segundo bot debe tener la capacidad de ver la estrategia recomendada por el primer bot y realizar un plan de ejecución y determinar el tiempo de ejecución 2 meses y asi, usando el capital proporcionado por el usuario, y hacer uso inteligente de ese capital para generar en el menor tiempo posible la mayor rentabilidad posible.
+
+2. Generación de Órdenes Condicionales (El Plan):
+Cada vez que el Agente razone, NO debe dar una opinión, debe devolver un objeto JSON con:
+
+* Punto de Entrada Ideal (Buy Limit): Si el precio actual es mayor, el script de Python espera a que baje a este punto para comprar sin preguntar.
+* Take Profit Dinámico (TP): Precio objetivo para vender.
+* Stop Loss de Emergencia (SL): Basado en el "colchón" (min/max) y la volatilidad.
+* Trailing Stop: Un porcentaje de retroceso desde el máximo alcanzado para proteger ganancias si el precio toca el TP y sigue subiendo.
+
+3. Lógica del Script de Python (El Músculo - 1 min):
+Define la lógica para que el script de Python monitoree cada minuto:
+
+* Estado: Esperando Compra. Si precio_actual <= Buy_Limit, ejecutar compra.
+* Estado: En Posición. Si precio_actual >= TP o precio_actual <= SL, ejecutar venta inmediata.
+* Trigger de Emergencia: Si el precio sale del "colchón" antes del timeframe, despertar al Agente de IA para una re-evaluación forzada.
+
+4. Uso de Timeframes:
+
+* El Agente solo se ejecuta al cierre de cada vela según el timeframe (1h, 4h, 1d) recomendado por el Bot 1.
+* Durante la ejecución, el Agente debe validar el balance histórico y actual para asegurar que no se exceda el "Capital Inteligente".
+
+5. Variables Críticas a Incluir:
+
+* Expiración de Operación: Tiempo máximo para mantener la posición.
+* Ratio Riesgo/Beneficio: Validar que la estrategia del Bot 1 sea lógica antes de entrar.
+
+## Resultado Esperado:
+Proporcióname el código en Python que implemente esta separación de niveles (Cerebro vs. Músculo) y el formato de respuesta (JSON) que el Agente de IA debe seguir para que el script nunca pierda una oportunidad de compra o venta por esperar al razonamiento.
+
+
+Para que el "Cerebro" (la IA) y el "Músculo" (tu script de Python) hablen el mismo idioma sin ambigüedades, el JSON debe ser imperativo. No debe contener opiniones, sino instrucciones de activación.
+
+Aquí tienes la estructura de JSON que el Agente de IA debe generar cada vez que analice una moneda. Este archivo lo guardaría el script de Python (en una base de datos o un archivo .json por cada operación) para consultarlo cada minuto.
+
+Estructura del JSON de Operación (El "Contrato"):
+```json
+{
+  "operation_id": "SOL_USDT_20231027_001",
+  "status": "WAITING_FOR_ENTRY", 
+  "pair": "SOL/USDT",
+  "strategy_type": "SWING",
+  "timeframe_ref": "4h",
+  "expiration_date": "2023-12-27T00:00:00Z",
+  "execution_plan": {
+    "entry_config": {
+      "trigger_price": 75.00,
+      "order_type": "LIMIT_BUY",
+      "allocated_capital_usdt": 150.0,
+      "smart_capital_mode": true
+    },
+    "exit_config": {
+      "take_profit": 90.00,
+      "stop_loss": 72.50,
+      "trailing_stop_activation_price": 88.00,
+      "trailing_stop_distance_percent": 2.5
+    },
+    "safety_cushion": {
+      "min_price_alert": 70.00,
+      "max_price_alert": 110.00,
+      "emergency_reasoning_trigger": "OUT_OF_RANGE"
+    }
+  },
+  "metadata": {
+    "reasoning_summary": "Fuerte soporte en 75. Tendencia alcista en 4h confirmada por Bot 1.",
+    "risk_score": 3,
+    "last_ai_update": "2023-10-27T10:00:00Z",
+    "next_ai_review": "2023-10-27T14:00:00Z"
+  }
+}
+```

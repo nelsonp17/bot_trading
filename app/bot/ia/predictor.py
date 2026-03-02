@@ -17,6 +17,10 @@ class BasePredictor(ABC):
     def get_market_rank(self, market_data, capital, quote, market_type="spot"):
         pass
 
+    @abstractmethod
+    def get_execution_plan(self, symbol, df, balance, recommendation, market_type="spot"):
+        pass
+
 
 class GeminiPredictor(BasePredictor):
     def __init__(self):
@@ -43,24 +47,26 @@ class GeminiPredictor(BasePredictor):
                     "max_price": float('inf')}
 
     def get_market_rank(self, market_data, capital, quote, market_type="spot"):
+        num_assets = len(market_data) if isinstance(market_data, list) else "todos los"
         prompt = f"""Actúa como un Analista de Inteligencia de Mercado Cripto experto en {market_type.upper()}. 
-        Tu tarea es evaluar una lista de criptomonedas y determinar cuáles son las más rentables para invertir {capital} {quote}.
+        Tu tarea es evaluar una lista de criptomonedas y determinar el ranking de rentabilidad para invertir {capital} {quote}.
 
         MERCADO: {market_type.upper()}
-        (Nota: Evalúa los riesgos específicos. Por ejemplo, una estrategia Swing puede ser segura en SPOT pero muy riesgosa en FUTUROS debido al apalancamiento y liquidaciones).
+        (Nota: Evalúa los riesgos específicos. En FUTUROS, sé estricto con el riesgo pero clasifica los activos del mejor al peor).
 
         DATOS DE MERCADO:
         {market_data}
 
+        Debes incluir en el ranking los {num_assets} activos proporcionados, ordenados de mayor a menor oportunidad.
         Para cada moneda, analiza:
         1. **Rentabilidad Esperada:** % de ganancia estimada.
-        2. **Riesgo:** % de pérdida potencial (Stop Loss sugerido). Considera el tipo de mercado ({market_type}).
+        2. **Riesgo:** % de pérdida potencial (Stop Loss sugerido).
         3. **Volatilidad:** Clasifícala (Baja, Media, Alta, Extrema).
-        4. **Estrategia:** (ej. Breakout, Swing, Scalping). Adapta la estrategia al mercado {market_type}.
+        4. **Estrategia:** (ej. Breakout, Swing, Scalping).
         5. **Timeframe Recomendado:** (15m, 1h, 4h, 1d).
-        6. **Gas/Fees:** Estimación de comisiones de red/exchange.
+        6. **Gas/Fees:** Estimación de comisiones.
 
-        Responde en una LISTA de objetos JSON ordenada por RANK (el más rentable primero):
+        Responde en una LISTA de objetos JSON:
         {{
             "rankings": [
                 {{
@@ -72,7 +78,7 @@ class GeminiPredictor(BasePredictor):
                     "recommended_strategy": "string",
                     "recommended_timeframe": "1h",
                     "gas_fee_estimate": float,
-                    "reasoning": "Justificación técnica detallada en español considerando que es mercado {market_type}"
+                    "reasoning": "Justificación técnica detallada en español para el mercado {market_type}"
                 }},
                 ...
             ]
@@ -88,6 +94,69 @@ class GeminiPredictor(BasePredictor):
         except Exception as e:
             print(f"[!] Error Gemini Scanner: {e}")
             return []
+
+    def get_execution_plan(self, symbol, df, balance, recommendation, market_type="spot"):
+        recent_data = df.tail(30).to_string(index=False)
+        prompt = f"""Actúa como un Ingeniero de Software Senior y Trader experto en {market_type.upper()}.
+        Tu tarea es generar un "Plan de Ejecución Blindado" (Contrato) para el activo {symbol}.
+
+        CONTEXTO TÉCNICO:
+        - MERCADO: {market_type.upper()} (Si es FUTURE, considera apalancamiento implícito y riesgos de liquidación. Si es SPOT, gestión de holdings).
+        - RECOMENDACIÓN INICIAL: {recommendation}
+        - LÍMITE DE PRESUPUESTO ASIGNADO: {balance['total_budget_assigned']} USDT (No sugieras invertir más de esto en total).
+        - BALANCE REAL DISPONIBLE EN EXCHANGE: {balance['real_account_usdt_available']} USDT.
+        - DATOS RECIENTES (OHLCV):
+        {recent_data}
+
+        TAREAS DE RAZONAMIENTO:
+        1. **Cojín de Seguridad IA:** Calcula el `min_price_alert` y `max_price_alert` basándote en soportes/resistencias y volatilidad actual. Si el precio sale de aquí, el bot pedirá re-evaluación.
+        2. **Estrategia de Entrada:** Define el precio gatillo ideal.
+        3. **Gestión de Salida:** Define Take Profit y Stop Loss lógicos para {market_type}.
+
+        INSTRUCCIONES:
+        Genera un JSON imperativo siguiendo ESTRICTAMENTE esta estructura:
+        {{
+          "operation_id": "string_unico",
+          "status": "WAITING_FOR_ENTRY",
+          "pair": "{symbol}",
+          "strategy_type": "string",
+          "timeframe_ref": "string",
+          "expiration_date": "ISO_DATE_STRING (max 2 meses)",
+          "execution_plan": {{
+            "entry_config": {{
+              "trigger_price": float,
+              "order_type": "LIMIT_BUY",
+              "allocated_capital_usdt": float (DENTRO DEL LÍMITE ASIGNADO),
+              "smart_capital_mode": true
+            }},
+            "exit_config": {{
+              "take_profit": float,
+              "stop_loss": float,
+              "trailing_stop_activation_price": float,
+              "trailing_stop_distance_percent": float
+            }},
+            "safety_cushion": {{
+              "min_price_alert": float (CALCULADO POR IA),
+              "max_price_alert": float (CALCULADO POR IA),
+              "emergency_reasoning_trigger": "OUT_OF_RANGE"
+            }}
+          }},
+          "metadata": {{
+            "reasoning_summary": "Justificación para {market_type}",
+            "risk_score": 1-5
+          }}
+        }}
+        """
+        try:
+            response = self.client.models.generate_content(
+                model=self.model_id,
+                contents=prompt,
+                config=types.GenerateContentConfig(response_mime_type="application/json")
+            )
+            return response.parsed
+        except Exception as e:
+            print(f"[!] Error Gemini Plan: {e}")
+            return None
 
     def _get_prompt(self, data, balance, history):
         balance_info = f"BALANCE ACTUAL: {balance}" if balance else "Balance no disponible"
@@ -178,22 +247,24 @@ class DeepSeekPredictor(BasePredictor):
                     "min_price": 0, "max_price": float('inf')}
 
     def get_market_rank(self, market_data, capital, quote, market_type="spot"):
+        num_assets = len(market_data) if isinstance(market_data, list) else "todos los"
         prompt = f"""Actúa como un Analista de Inteligencia de Mercado Cripto experto en {market_type.upper()}. 
-        Tu tarea es evaluar una lista de criptomonedas y determinar cuáles son las más rentables para invertir {capital} {quote}.
+        Tu tarea es evaluar una lista de criptomonedas y determinar el ranking de rentabilidad para invertir {capital} {quote}.
 
         MERCADO: {market_type.upper()}
-        (Nota: Evalúa los riesgos específicos de {market_type.upper()}. Por ejemplo, estrategias de alto apalancamiento en futuros son más riesgosas).
+        (Nota: Evalúa los riesgos específicos de {market_type.upper()}. En FUTUROS, sé estricto con el riesgo pero clasifica los activos del mejor al peor).
 
         DATOS DE MERCADO:
         {market_data}
 
+        Debes incluir en el ranking los {num_assets} activos proporcionados, ordenados de mayor a menor oportunidad.
         Para cada moneda, analiza:
         1. **Rentabilidad Esperada:** % de ganancia estimada.
-        2. **Riesgo:** % de pérdida potencial (Stop Loss sugerido). Considera el tipo de mercado ({market_type}).
+        2. **Riesgo:** % de pérdida potencial (Stop Loss sugerido).
         3. **Volatilidad:** Clasifícala (Baja, Media, Alta, Extrema).
         4. **Estrategia:** (ej. Breakout, Swing, Scalping). Adapta la estrategia al mercado {market_type}.
         5. **Timeframe Recomendado:** (15m, 1h, 4h, 1d).
-        6. **Gas/Fees:** Estimación de comisiones de red/exchange.
+        6. **Gas/Fees:** Estimación de comisiones.
 
         Responde ESTRICTAMENTE en JSON con una LISTA de objetos ordenada por RANK (el más rentable primero):
         {{
@@ -226,12 +297,47 @@ class DeepSeekPredictor(BasePredictor):
             print(f"[!] Error DeepSeek Scanner: {e}")
             return []
 
+    def get_execution_plan(self, symbol, df, balance, recommendation, market_type="spot"):
+        recent_data = df.tail(30).to_string(index=False)
+        prompt = f"""Actúa como un Ingeniero Senior y Trader de {market_type.upper()}.
+        Genera un "Plan de Ejecución Blindado" JSON para {symbol}.
+
+        MERCADO: {market_type.upper()}
+        PRESUPUESTO ASIGNADO: {balance['total_budget_assigned']} USDT
+        BALANCE REAL: {balance['real_account_usdt_available']} USDT
+        DATOS: {recent_data}
+
+        Define un Cojín de Seguridad IA (min/max price alert) y parámetros de entrada/salida.
+        Responde ESTRICTAMENTE en JSON:
+        {{
+          "operation_id": "string",
+          "status": "WAITING_FOR_ENTRY",
+          "pair": "{symbol}",
+          "strategy_type": "string",
+          "timeframe_ref": "string",
+          "expiration_date": "ISO_DATE",
+          "execution_plan": {{
+            "entry_config": {{ "trigger_price": float, "order_type": "LIMIT_BUY", "allocated_capital_usdt": float, "smart_capital_mode": true }},
+            "exit_config": {{ "take_profit": float, "stop_loss": float, "trailing_stop_activation_price": float, "trailing_stop_distance_percent": float }},
+            "safety_cushion": {{ "min_price_alert": float, "max_price_alert": float, "emergency_reasoning_trigger": "OUT_OF_RANGE" }}
+          }},
+          "metadata": {{ "reasoning_summary": "string", "risk_score": int }}
+        }}"""
+        try:
+            response = self.client.chat.completions.create(
+                model=self.model_id,
+                messages=[{"role": "user", "content": prompt}],
+                response_format={"type": "json_object"}
+            )
+            import json
+            return json.loads(response.choices[0].message.content)
+        except Exception as e:
+            print(f"[!] Error DeepSeek Plan: {e}")
+            return None
+
 
 def get_predictor(provider="gemini"):
-    """Factory para obtener el predictor seleccionado."""
     if provider.lower() == "deepseek":
-        print("[*] Usando DeepSeek como motor de IA")
         return DeepSeekPredictor()
     else:
-        print("[*] Usando Google Gemini como motor de IA")
         return GeminiPredictor()

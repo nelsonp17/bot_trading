@@ -1,87 +1,11 @@
-(venv) PS E:\Proyectos\python\bot_trading> python scripts/run_market_scanner_bot.py --capital 500 --quote USDT --provider deepseek --mode volume --type both
-[*] Usando DeepSeek como motor de IA
-[*] Obteniendo mercados para USDT (Tipo: spot, Modo: volume)...
-    [+] BTC/USDT | Cambio: -0.99% | Vol: 1430516488
-    [+] ETH/USDT | Cambio: -2.83% | Vol: 932372495
-    [+] USDC/USDT | Cambio: 0.02% | Vol: 543751508
-    [+] SOL/USDT | Cambio: -3.63% | Vol: 331163691
-    [+] XRP/USDT | Cambio: -3.56% | Vol: 208119305
-    [+] PAXG/USDT | Cambio: 1.99% | Vol: 118667876
-    [+] BNB/USDT | Cambio: -0.75% | Vol: 97401267
-    [+] DOGE/USDT | Cambio: -3.35% | Vol: 79712134
-    [+] ZEC/USDT | Cambio: -4.93% | Vol: 44624218
-    [+] ADA/USDT | Cambio: -3.75% | Vol: 37780756
-    [+] LINK/USDT | Cambio: -2.75% | Vol: 26696286
-    [+] TRX/USDT | Cambio: -0.32% | Vol: 23634262
-    [+] EUR/USDT | Cambio: -0.11% | Vol: 18567614
-    [+] DOT/USDT | Cambio: -3.52% | Vol: 15750990
-    [+] LTC/USDT | Cambio: -1.63% | Vol: 15621501
-[*] Analizando 15 activos con IA (spot)...
+(venv) PS E:\Proyectos\python\bot_trading> python scripts/run_trading_bot.py --symbol NEAR/USDT:USDT --budget 500 --market_type future --provider deepseek --scan_id SCAN_20260302_175759 --network testnet
+[*] Bot inicializado para NEAR/USDT:USDT (future)
+[*] Presupuesto máximo gestionable por IA: 500.0 USDT
+[*] Red: testnet
+[*] ID de escaneo: SCAN_20260302_175759
 
-================================================================================
- RANKING DE RENTABILIDAD (SPOT) - CAPITAL: 500.0 USDT
-================================================================================
-#1 | BTC/USDT | Estrategia: Swing Trading
-   - Rentabilidad: +3.5% | Riesgo: -2.0%
-   - Timeframe: 4h | Volatilidad: Media
-   - Gas Est.: 0.1 USDT
-   - Motivo: BTC muestra estabilidad relativa con cambio del -0.99% en 24h, volumen alto de $1.43B indica liquidez robusta en spot. Las velas recientes muestran consolidación entre $66-67k con volúmenes decrecientes, sugiriendo posible acumulación. En spot, el riesgo es limitado al capital invertido sin apalancamiento. Estrategia swing aprovecha movimientos de mediano plazo con stop loss conservador del 2%.
---------------------------------------------------------------------------------
-#2 | ETH/USDT | Estrategia: Breakout Trading
-   - Rentabilidad: +5.0% | Riesgo: -3.0%
-   - Timeframe: 1h | Volatilidad: Alta
-   - Gas Est.: 0.5 USDT
-   - Motivo: ETH con corrección del -2.83% pero volumen sustancial de $932M. Precio cerca de soporte psicológico $1,950. En spot, alta volatilidad ofrece oportunidades de breakout. Velas muestran intentos de recuperación desde $1,939. Stop loss del 3% protege contra caídas bruscas. Estrategia breakout busca superar resistencia en $2,000.
---------------------------------------------------------------------------------
-#3 | SOL/USDT | Estrategia: Momentum Trading
-   - Rentabilidad: +8.0% | Riesgo: -4.5%
-   - Timeframe: 15m | Volatilidad: Alta
-   - Gas Est.: 0.05 USDT
-   - Motivo: SOL con corrección del -3.63% pero volumen saludable de $331M. Precio en $84.91 tras movimiento lateral. Alta volatilidad típica de altcoins en spot. Velas muestran actividad entre $83-85. Estrategia momentum captura movimientos rápidos con stop loss del 4.5%. Timeframe corto para gestión activa sin apalancamiento.
---------------------------------------------------------------------------------
-#4 | BNB/USDT | Estrategia: Range Trading
-   - Rentabilidad: +4.0% | Riesgo: -2.5%
-   - Timeframe: 1h | Volatilidad: Media
-   - Gas Est.: 0.1 USDT
-   - Motivo: BNB muestra relativa estabilidad (-0.75%) con volumen de $97M. Precio en $624.71 en rango lateral. En spot, bajo riesgo comparado con altcoins. Velas indican consolidación entre $617-625. Estrategia range trading compra en soportes y vende en resistencias. Stop loss del 2.5% adecuado para volatilidad media.
---------------------------------------------------------------------------------
-#5 | PAXG/USDT | Estrategia: Hedging/Store of Value
-   - Rentabilidad: +2.5% | Riesgo: -1.5%
-   - Timeframe: 1d | Volatilidad: Baja
-   - Gas Est.: 0.2 USDT
-   - Motivo: PAXG (oro digital) con ganancia del +1.99%, baja volatilidad típica de activo refugio. Precio $5,403.9 con volumen moderado. En spot, funciona como cobertura contra volatilidad crypto. Estrategia conservadora de preservación de capital con stop loss mínimo del 1.5%. Baja rentabilidad pero alto factor seguridad.
---------------------------------------------------------------------------------
-#6 | XRP/USDT | Estrategia: Swing Trading
-   - Rentabilidad: +6.0% | Riesgo: -4.0%
-   - Timeframe: 4h | Volatilidad: Alta
-   - Gas Est.: 0.02 USDT
-   - Motivo: XRP con corrección del -3.56% pero volumen de $208M. Precio $1.3744 mostrando volatilidad alta común en spot. Velas indican movimiento entre $1.35-1.37. Estrategia swing busca recuperación hacia $1.40+. Stop loss del 4% maneja volatilidad. Considerar riesgos regulatorios específicos de XRP.
---------------------------------------------------------------------------------
-#7 | LINK/USDT | Estrategia: Breakout Trading
-   - Rentabilidad: +7.0% | Riesgo: -5.0%
-   - Timeframe: 1h | Volatilidad: Alta
-   - Gas Est.: 0.5 USDT
-   - Motivo: LINK con corrección del -2.75%, precio $8.84. Volumen moderado de $26.7M. Alta volatilidad característica de proyectos DeFi en spot. Velas muestran base alrededor de $8.70-8.80. Estrategia breakout busca superar $9.00. Stop loss del 5% necesario dada volatilidad.
---------------------------------------------------------------------------------
-#8 | ADA/USDT | Estrategia: Momentum Trading
-   - Rentabilidad: +6.5% | Riesgo: -4.5%
-   - Timeframe: 15m | Volatilidad: Alta
-   - Gas Est.: 0.1 USDT
-   - Motivo: ADA con corrección del -3.75%, precio $0.2772. Volumen de $37.8M. Alta volatilidad típica de altcoins en spot. Velas muestran actividad entre $0.273-0.277. Estrategia momentum aprovecha movimientos rápidos. Stop loss del 4.5% adecuado para gestión de riesgo sin apalancamiento.
---------------------------------------------------------------------------------
-#9 | DOGE/USDT | Estrategia: Scalping
-   - Rentabilidad: +9.0% | Riesgo: -6.0%
-   - Timeframe: 15m | Volatilidad: Extrema
-   - Gas Est.: 0.01 USDT
-   - Motivo: DOGE con corrección del -3.35%, precio $0.09334. Volumen de $79.7M. Volatilidad extrema característica de memecoins en spot. Velas muestran amplio rango $0.0919-0.0933. Solo para traders experimentados. Estrategia scalping con stop loss amplio del 6%. Alto riesgo/recompensa.
---------------------------------------------------------------------------------
-#10 | ZEC/USDT | Estrategia: Swing Trading
-   - Rentabilidad: +8.5% | Riesgo: -6.0%
-   - Timeframe: 4h | Volatilidad: Extrema
-   - Gas Est.: 0.05 USDT
-   - Motivo: ZEC con mayor corrección del -4.93%, precio $219.12. Volumen moderado de $44.6M. Volatilidad extrema por baja liquidez en spot. Velas muestran amplio rango $213-219. Alto riesgo específico de privacidad-coins. Estrategia swing con stop loss del 6%. Solo para alta tolerancia al riesgo.
---------------------------------------------------------------------------------
-[*] Obteniendo mercados para USDT (Tipo: future, Modo: volume)...
-[!] Error al cargar mercados (future): binance does not have market symbol TUSD/USDT
-[!] No se pudieron obtener datos para el mercado future.
-[*] Escaneo completado. Resultados guardados en la base de datos.
+[+] Obteniendo balance...
+
+[+] Obteniendo balance de futuros...
+ USDT: Balance=5000.0000
+[!] Error compra: 'withdrawAvailable'
