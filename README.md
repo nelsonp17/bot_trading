@@ -4,6 +4,7 @@ Este repositorio contiene un ecosistema de trading algorítmico avanzado que uti
 
 ## 🚀 Características Principales
 - **Razonamiento Autónomo (Brain vs Muscle):** La IA no solo da señales; genera un **Plan de Ejecución Blindado** (Contrato JSON) con puntos de entrada, salida, montos y cojines de seguridad técnicos.
+- **Sesiones de Ejecución (`run_script_id`):** Cada ejecución genera un ID único. Esto permite detener un bot y volverlo a ejecutar reanudando su estado financiero (ganancias, pérdidas e inversión actual) de forma independiente.
 - **Gestión Estricta de Capital:** Tú defines un presupuesto máximo (`--budget`) y la IA decide cuánto invertir en cada operación sin exceder nunca ese límite, independientemente de tu balance total.
 - **Cojín de Seguridad IA:** La IA calcula dinámicamente rangos de precio seguros. Si el mercado rompe estos límites, el bot ejecuta un cierre de emergencia automáticamente.
 - **Soporte Dual (Spot & Futuros):** Razonamiento diferenciado según el mercado. Estrategias de acumulación para Spot y gestión de riesgo/liquidación para Futuros.
@@ -29,13 +30,13 @@ python scripts/run_market_scanner_bot.py --capital 500 --provider deepseek --typ
 ```
 
 ### Paso 2: Ejecución Blindada (Táctica)
-El bot de trading puede seguir el último escaneo general o uno específico usando el `--scan_id`. Esto evita usar recomendaciones obsoletas si realizas múltiples escaneos con diferentes configuraciones.
+El bot de trading puede seguir el último escaneo general o uno específico usando el `--scan_id`. 
 ```bash
 # Ejecutar usando la última recomendación disponible para el símbolo
 python scripts/run_trading_bot.py --symbol SOL/USDT --budget 500 --market_type future
 
-# Ejecutar forzando un grupo de escaneo específico
-python scripts/run_trading_bot.py --symbol SOL/USDT --budget 500 --scan_id SCAN_20231027_100000
+# Reanudar una sesión previa usando su ID único
+python scripts/run_trading_bot.py --symbol SOL/USDT --budget 500 --run_script_id "ID_DE_SESION"
 ```
 
 ---
@@ -50,8 +51,9 @@ python scripts/run_trading_bot.py --symbol SOL/USDT --budget 500 --scan_id SCAN_
 | `--budget` | **[REQUERIDO]** Presupuesto máximo gestionable | — |
 | `--market_type`| Tipo de mercado (`spot` o `future`) | `spot` |
 | `--scan_id` | ID del grupo de escaneo a seguir (opcional) | `None` |
+| `--run_script_id` | ID de la sesión para reanudar estado (opcional) | `None` |
 | `--timeframe` | Intervalo de análisis para la IA | `1h` |
-| `--network` | Red: `sandbox`, `testnet`, `mainnet` | `sandbox` |
+| `--network` | Red: `sandbox`, `testnet`, `mainnet`, `demo` | `sandbox` |
 
 *Nota: Los precios de compra, venta, montos y Stop Loss son calculados automáticamente por la IA basándose en el análisis técnico real.*
 
@@ -62,11 +64,12 @@ python scripts/run_trading_bot.py --symbol SOL/USDT --budget 500 --scan_id SCAN_
 | `--quote` | Moneda base (ej. `USDT`) | `USDT` |
 | `--type` | Mercado a escanear (`spot`, `future`, `both`) | `spot` |
 | `--num-top` | Cantidad de activos a analizar | `15` |
+| `--run_script_id` | ID de la sesión de escaneo (opcional) | `None` |
 
 ## 📂 Estructura del Proyecto
-- **`app/bot/trading_bot.py`**: El Músculo. Ejecuta el plan de la IA minuto a minuto.
+- **`app/bot/trading_bot.py`**: El Músculo. Ejecuta el plan de la IA y gestiona el reporte financiero de la sesión.
 - **`app/bot/ia/predictor.py`**: El Cerebro. Genera planes blindados y rankings de mercado.
-- **`app/database.py`**: Persistencia de "Contratos" (Execution Plans) y Auditoría.
+- **`app/database.py`**: Persistencia de "Contratos", Auditoría y Sesiones (`run_scripts`).
 - **`scripts/reset_system.py`**: Utilidad para limpieza total del entorno.
 
 ## ⚠️ Notas de Seguridad

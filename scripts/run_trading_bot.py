@@ -17,6 +17,7 @@ if __name__ == "__main__":
                         help="Red de operación: sandbox, testnet, mainnet o demo")
     parser.add_argument("--market_type", type=str, default="spot", choices=["spot", "future"], help="Tipo de mercado (spot o future)")
     parser.add_argument("--scan_id", type=str, default=None, help="ID específico del escaneo a utilizar")
+    parser.add_argument("--run_script_id", type=str, default=None, help="ID específico del run script a utilizar")
 
     args = parser.parse_args()
 
@@ -29,6 +30,7 @@ if __name__ == "__main__":
         budget=args.budget,
         network=args.network,
         market_type=args.market_type,
-        scan_id=args.scan_id
+        scan_id=args.scan_id,
+        run_script_id=args.run_script_id
     )
     bot.run()

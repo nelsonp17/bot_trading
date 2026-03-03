@@ -9,10 +9,10 @@ Este proyecto es un ecosistema de trading automatizado que combina análisis té
 4. **Ejecución y Monitoreo**: El bot ejecuta las órdenes vía API de Binance (Testnet/Mainnet) y persiste cada movimiento en la base de datos.
 
 ## 🏗️ Arquitectura y Componentes
-- **`app/bot/market_scanner_bot.py`**: El "radar" del sistema. Identifica oportunidades globales.
-- **`app/bot/trading_bot.py`**: El ejecutor. Gestiona el ciclo de vida de la posición, órdenes de mercado y seguridad.
+- **`app/bot/market_scanner_bot.py`**: El "radar" del sistema. Identifica oportunidades globales. Soporta `run_script_id` para trazabilidad de escaneos.
+- **`app/bot/trading_bot.py`**: El ejecutor. Gestiona el ciclo de vida de la posición, órdenes de mercado y seguridad. Implementa sesiones de ejecución (`run_script_id`) para reportes financieros independientes (ganancias, inversión, capital actual).
 - **`app/bot/ia/predictor.py`**: Interfaz con los LLMs (Gemini/DeepSeek). Traduce datos técnicos a lenguaje natural y planes JSON.
-- **`app/database.py`**: Capa de persistencia (SQLite para local, MongoDB para producción).
+- **`app/database.py`**: Capa de persistencia (SQLite para local, MongoDB para producción). Almacena sesiones (`run_scripts`), trades, escaneos y planes de ejecución vinculados por ID de sesión.
 - **`app/api.py`**: Servidor FastAPI para exponer el estado del bot, trades y predicciones al frontend.
 - **`frontend/`**: Interfaz de usuario en React + Vite para visualizar el ranking y el historial de operaciones en tiempo real.
 

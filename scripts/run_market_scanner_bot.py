@@ -17,7 +17,7 @@ if __name__ == "__main__":
     parser.add_argument("--symbol", type=str, default=None, help="Símbolo específico a consultar (ej. BTC/USDT)")
     parser.add_argument("--type", type=str, default="spot", choices=["spot", "future", "both"], help="Tipo de mercado (spot, future o both)")
     parser.add_argument("--num_top", type=int, default=15, help="Número de activos a analizar")
-
+    parser.add_argument("--run_script_id", type=str, default=None, help="ID específico del run script a utilizar")
     args = parser.parse_args()
 
     scanner = MarketScanner(
@@ -27,6 +27,7 @@ if __name__ == "__main__":
         mode=args.mode,
         symbol=args.symbol,
         market_type=args.type,
-        num_top=args.num_top
+        num_top=args.num_top,
+        run_script_id=args.run_script_id
     )
     scanner.run_scan()

@@ -1,6 +1,8 @@
 import os
 import sys
 import time
+import uuid
+from datetime import datetime, timedelta
 import ccxt
 import pandas as pd
 import argparse
@@ -19,11 +21,12 @@ class TradingBot:
     basado en un análisis previo del MarketScanner.
     """
 
-    def __init__(self, provider="gemini", symbol="BTC/USDT", timeframe="1h", budget=100.0, network="sandbox", market_type="spot", scan_id=None):
+    def __init__(self, provider="gemini", symbol="BTC/USDT", timeframe="1h", budget=100.0, network="sandbox", market_type="spot", scan_id=None, run_script_id=None):
         """
         Inicializa el bot y configura la conexión con Binance.
         """
         self.db = get_db_manager()
+        self.provider = provider
         self.predictor = get_predictor(provider)
         self.symbol = symbol
         self.timeframe = timeframe
@@ -31,6 +34,7 @@ class TradingBot:
         self.network = network.lower()
         self.market_type = market_type.lower()
         self.scan_id = scan_id
+        self.run_script_id = run_script_id
         self.current_confidence = 0
         self.is_running = False
 
@@ -38,6 +42,8 @@ class TradingBot:
         self.lot_size_filter = {}
         self.min_notional_filter = 0.0
         self.binance_symbol = self.symbol.split(':')[0].replace("/", "")
+
+        self.create_if_not_exist_run_script()
 
         # Selección de credenciales (Testnet o Mainnet) y Cliente Oficial
         api_key, secret_key, use_testnet = self._setup_keys()
@@ -54,6 +60,41 @@ class TradingBot:
         print(f"[*] Red: {self.network} | Presupuesto: {self.total_budget} USDT")
         self._check_downtime()
         self.print_balance()
+        self.print_inversion()
+    
+    def create_if_not_exist_run_script(self):
+        """Si no existe el run script id lo registra en la base de datos"""
+        try:
+            if self.run_script_id is None:
+                self.run_script_id = str(uuid.uuid4())
+                self.db.save_run_script({
+                    "id": self.run_script_id,
+                    "start_time": datetime.utcnow(),
+                    "name_script": f"Bot Trading {self.symbol} ({self.market_type})",
+                    "initial_capital": self.total_budget,
+                    "params": {
+                        "timeframe": self.timeframe,
+                        "budget": self.total_budget,
+                        "network": self.network,
+                        "market_type": self.market_type,
+                        "scan_id": self.scan_id,
+                        "provider": self.provider,
+                        "symbol": self.symbol
+                    }
+                })
+            else:
+                run_script = self.db.get_run_script_by_id(self.run_script_id)
+                if not run_script:
+                    self.db.save_run_script({
+                        "id": self.run_script_id,
+                        "start_time": datetime.utcnow(),
+                        "name_script": f"Bot Trading {self.symbol} ({self.market_type})",
+                        "initial_capital": self.total_budget,
+                        "params": {"restored": True, "symbol": self.symbol}
+                    })
+        except Exception as e: 
+            print(f"[!] Error gestionando run script: {e}")
+
 
     def _check_downtime(self):
         """Calcula y reporta cuánto tiempo estuvo el bot fuera de línea."""
@@ -118,22 +159,69 @@ class TradingBot:
         factor = 10 ** precision
         return math.floor(quantity * factor) / factor
 
+    def print_inversion(self):
+        """Muestra el desglose financiero de la sesión actual."""
+        print("\n" + "="*50)
+        print(f"📊 RESUMEN DE INVERSIÓN (ID: {self.run_script_id})")
+        print("="*50)
+        try:
+            run_script = self.db.get_run_script_by_id(self.run_script_id)
+            initial_capital = run_script['initial_capital'] if run_script else self.total_budget
+            
+            trades = self.db.get_all_trades(self.run_script_id)
+            
+            inversion_total = sum(t['cost'] for t in trades if t['side'] == 'COMPRA')
+            capital_recuperado = sum(t['cost'] for t in trades if t['side'] == 'VENTA')
+            
+            # Cálculo de Inversión Actual (lo que no se ha vendido aún)
+            compras = [t for t in trades if t['side'] == 'COMPRA']
+            ventas = [t for t in trades if t['side'] == 'VENTA']
+            
+            total_comprado_qty = sum(t['amount'] for t in compras)
+            total_vendido_qty = sum(t['amount'] for t in ventas)
+            qty_actual = total_comprado_qty - total_vendido_qty
+            
+            # Estimamos el costo de la inversión actual basándonos en el precio promedio de compra
+            avg_buy_price = inversion_total / total_comprado_qty if total_comprado_qty > 0 else 0
+            inversion_actual = qty_actual * avg_buy_price
+            
+            # P&L Realizado
+            costo_de_lo_vendido = total_vendido_qty * avg_buy_price
+            pnl_realizado = capital_recuperado - costo_de_lo_vendido
+            
+            ganancias = pnl_realizado if pnl_realizado > 0 else 0
+            perdidas = abs(pnl_realizado) if pnl_realizado < 0 else 0
+            
+            capital_actual = initial_capital + capital_recuperado - inversion_total
+
+            print(f" [+] Capital Inicial:      {initial_capital:.2f} USDT")
+            print(f" [+] Inversión Total:      {inversion_total:.2f} USDT")
+            print(f" [+] Capital Recuperado:   {capital_recuperado:.2f} USDT")
+            print(f" [+] Inversión Actual:     {inversion_actual:.2f} USDT")
+            print(f" [+] Ganancias (Realiz.):  {ganancias:.2f} USDT")
+            print(f" [+] Pérdidas (Realiz.):   {perdidas:.2f} USDT")
+            print(f" [!] CAPITAL ACTUAL:       {capital_actual:.2f} USDT")
+            print("="*50 + "\n")
+
+        except Exception as e: 
+            print(f"[!] Error al calcular inversión: {e}")
+
     def print_balance(self):
         """Muestra el saldo disponible en la cuenta configurada."""
-        print("\n[+] Obteniendo balance...")
+        print("\n[+] Obteniendo balance en Binance...")
         try:
             base, quote = self.symbol.split('/')[0], self.symbol.split('/')[1]
             if self.market_type == "spot":
                 balances = self.binance_client.get_account()['balances']
                 for b in balances:
                     if b['asset'] in [base, quote]:
-                        print(f" {b['asset']}: Disponible={float(b['free']):.8f}")
+                        print(f" [*] TOTAL EN {b['asset']}: Disponible={float(b['free']):.8f}")
                 return balances
             else:
                 balances = self.binance_client.futures_account_balance()
                 for b in balances:
                     if b['asset'] in [base, quote, 'USDT']:
-                        print(f" {b['asset']}: Balance={float(b['balance']):.4f}")
+                        print(f" [*] TOTAL EN {b['asset']}: Balance={float(b['balance']):.4f}")
                 return balances
         except Exception as e: 
             print(f"[!] Error obteniendo balance: {e}")
@@ -191,7 +279,9 @@ class TradingBot:
                 "ia_confidence": self.current_confidence, 
                 "network": self.network, 
                 "order_id": order.get('orderId')
-            })
+            }, run_script_id=self.run_script_id)
+            
+            self.print_inversion()
             return order
         except Exception as e: print(f"[!] Error en ejecución de compra: {e}"); return None
 
@@ -225,7 +315,9 @@ class TradingBot:
                 "amount": executed_qty, "cost": cost, "fee": 0,
                 "balance_before": balance_before, "balance_after": 0,
                 "network": self.network, "order_id": order.get('orderId')
-            })
+            }, run_script_id=self.run_script_id)
+            
+            self.print_inversion()
             return order
         except Exception as e: print(f"[!] Error en ejecución de venta: {e}"); return None
 
@@ -238,9 +330,8 @@ class TradingBot:
         4. Seguir disparadores de entrada o salida.
         """
         try:
-            from datetime import datetime, timedelta
             current_price = self.get_current_price()
-            active_plan = self.db.get_active_plan(self.symbol)
+            active_plan = self.db.get_active_plan(self.symbol, self.run_script_id)
 
             # --- LÓGICA DE CADUCIDAD (TTL) ---
             if active_plan:
@@ -261,20 +352,19 @@ class TradingBot:
                 # 1. Si el plan es muy viejo (ej. > 24h) y no hemos entrado, se descarta
                 if status == "WAITING_FOR_ENTRY" and antiguedad > timedelta(hours=24):
                     print(f"\n[!] CADUCIDAD: El plan de entrada para {self.symbol} tiene {antiguedad.total_seconds()/3600:.1f}h. Es demasiado viejo. Expirando...")
-                    self.db.update_plan_status(op_id, "CANCELLED")
+                    self.db.update_plan_status(op_id, "CANCELLED", run_script_id=self.run_script_id)
                     return
 
                 # 2. Límite de ejecución de 1 hora (Mandato del usuario)
-                # Si estamos en posición por más de 1 hora, cerramos para evitar "trades fantasma"
                 if status == "IN_POSITION" and antiguedad > timedelta(hours=1):
                     print(f"\n[!] TIEMPO LÍMITE: La posición de {self.symbol} ha superado 1 hora de ejecución ({antiguedad.total_seconds()/60:.1f} min). Cerrando por caducidad técnica...")
                     if self.execute_sell(current_price):
-                        self.db.update_plan_status(op_id, "CLOSED", exit_price=current_price)
+                        self.db.update_plan_status(op_id, "CLOSED", exit_price=current_price, run_script_id=self.run_script_id)
                     return
 
             if not active_plan:
                 # Buscar recomendación del MarketScanner
-                recommendation = self.db.get_latest_market_recommendation(self.symbol, scan_id=self.scan_id)
+                recommendation = self.db.get_latest_market_recommendation(self.symbol, scan_id=self.scan_id, run_script_id=self.run_script_id)
                 if not recommendation: return
                 
                 print(f"[*] Generando nuevo Plan de Ejecución con IA para {self.symbol}...")
@@ -323,8 +413,8 @@ class TradingBot:
                     
                     print("="*60 + "\n")
                     
-                    self.db.save_execution_plan(new_plan)
-                    active_plan = self.db.get_active_plan(self.symbol)
+                    self.db.save_execution_plan(new_plan, run_script_id=self.run_script_id)
+                    active_plan = self.db.get_active_plan(self.symbol, self.run_script_id)
             
             if not active_plan: return
             
@@ -338,7 +428,7 @@ class TradingBot:
                 
                 if current_price <= trigger_price:
                     if self.execute_buy(current_price, plan['entry_config']['allocated_capital_usdt']):
-                        self.db.update_plan_status(op_id, "IN_POSITION", entry_price=current_price)
+                        self.db.update_plan_status(op_id, "IN_POSITION", entry_price=current_price, run_script_id=self.run_script_id)
 
             elif status == "IN_POSITION":
                 exit_cfg, safety = plan['exit_config'], plan['safety_cushion']
@@ -364,14 +454,14 @@ class TradingBot:
                     razon = "TAKE PROFIT" if current_price >= tp else "STOP LOSS"
                     print(f"[*] ¡OBJETIVO ALCANZADO ({razon})! Cerrando posición...")
                     if self.execute_sell(current_price): 
-                        self.db.update_plan_status(op_id, "CLOSED", exit_price=current_price)
+                        self.db.update_plan_status(op_id, "CLOSED", exit_price=current_price, run_script_id=self.run_script_id)
                 
                 # 2. Salida por Cojín de Seguridad (Emergencia IA)
                 elif current_price < safety['min_price_alert'] or current_price > safety['max_price_alert']:
                     print(f"\n[!!!] EMERGENCIA IA: Precio ({current_price}) fuera de rango seguro [{safety['min_price_alert']} - {safety['max_price_alert']}].")
                     print(f"[!] Motivo: Violación de estructura técnica definida por la IA. Abortando posición.")
                     if self.execute_sell(current_price): 
-                        self.db.update_plan_status(op_id, "CANCELLED", exit_price=current_price)
+                        self.db.update_plan_status(op_id, "CANCELLED", exit_price=current_price, run_script_id=self.run_script_id)
 
         except Exception as e: print(f"[!] Error en ciclo de ejecución: {e}")
 
@@ -383,7 +473,7 @@ class TradingBot:
             print(f"[*] Bot en marcha. Monitoreando cada 60 segundos...")
             while self.is_running:
                 # Actualizar latido para control de downtime
-                self.db.save_heartbeat(bot_id)
+                self.db.save_heartbeat(bot_id, self.run_script_id)
                 
                 self.execute_logic()
                 for _ in range(60):

@@ -19,7 +19,8 @@ class MarketScanner:
     Su objetivo es generar un ranking de rentabilidad para que el TradingBot sepa dónde operar.
     """
 
-    def __init__(self, provider="gemini", quote="USDT", capital=100.0, mode="volume", symbol=None, market_type="spot", num_top=15):
+    def __init__(self, provider="gemini", quote="USDT", capital=100.0, mode="volume", symbol=None, market_type="spot",
+                 num_top=15, run_script_id=None):
         """
         Inicializa el escáner con los parámetros de búsqueda.
         
@@ -30,6 +31,7 @@ class MarketScanner:
         :param symbol: Opcional, forzar el análisis de un solo símbolo específico.
         :param market_type: Tipo de mercado: 'spot', 'future' o 'both'.
         :param num_top: Cuántas monedas del ranking inicial enviar a la IA (limita el coste de tokens).
+        :param run_script_id: ID de la sesión de ejecución actual.
         """
         self.db = get_db_manager()
         self.predictor = get_predictor(provider)
@@ -37,10 +39,11 @@ class MarketScanner:
         self.capital = capital
         self.mode = mode.lower()
         self.symbol = symbol.upper() if symbol else None
-        
+        self.run_script_id = run_script_id
+
         # Determinar los tipos de mercado a escanear
         self.market_types = ["spot", "future"] if market_type.lower() == "both" else [market_type.lower()]
-        
+
         # Cliente CCXT para comunicación con Binance (solo lectura de datos públicos)
         self.exchange = ccxt.binance({'enableRateLimit': True})
         self.num_top = num_top
@@ -57,10 +60,10 @@ class MarketScanner:
             self.exchange.symbols = []
             self.exchange.options['defaultType'] = market_type
             self.exchange.load_markets(True)
-            
+
             # Traducir market_type a los tipos internos de la librería CCXT
             target_types = ['spot'] if market_type == 'spot' else ['swap', 'future']
-            
+
             if self.symbol:
                 # Caso en que el usuario quiere analizar una moneda específica
                 if self.symbol not in self.exchange.markets:
@@ -70,10 +73,10 @@ class MarketScanner:
             else:
                 # 1. Filtrar solo mercados activos que usen el par correcto (ej. BTC/USDT)
                 markets = [
-                    m for m in self.exchange.markets.values() 
+                    m for m in self.exchange.markets.values()
                     if m['quote'] == self.quote and m['active'] and m.get('type') in target_types
                 ]
-                
+
                 # 2. Obtener tickers (precios y volúmenes) de los primeros 100 candidatos
                 symbols_to_fetch = [m['symbol'] for m in markets[:100]]
                 try:
@@ -82,22 +85,19 @@ class MarketScanner:
                 except Exception as e:
                     # Si falla la descarga en lote, intentamos descargar de uno en uno (más lento pero seguro)
                     tickers = []
-                    for s in symbols_to_fetch[:50]: 
+                    for s in symbols_to_fetch[:50]:
                         try:
                             tickers.append(self.exchange.fetch_ticker(s))
-                        except Exception: continue
+                        except Exception:
+                            continue
 
                 # 3. Ordenar la lista según el modo elegido por el usuario
                 if self.mode == "volatility":
                     # Ordenar por el valor absoluto del cambio porcentual (volatilidad)
-                    top_tickers = sorted(tickers,
-                                         key=lambda x: abs(x['percentage']) if x['percentage'] is not None else 0,
-                                         reverse=True)[:self.num_top]
+                    top_tickers = sorted(tickers, key=lambda x: abs(x['percentage']) if x['percentage'] is not None else 0, reverse=True)[:self.num_top]
                 else:
                     # Ordenar por volumen de transacciones en la moneda base (USDT)
-                    top_tickers = sorted(tickers,
-                                         key=lambda x: x['quoteVolume'] if x['quoteVolume'] else 0,
-                                         reverse=True)[:self.num_top]
+                    top_tickers = sorted(tickers, key=lambda x: x['quoteVolume'] if x['quoteVolume'] else 0, reverse=True)[:self.num_top]
 
             # 4. Enriquecer cada activo con datos históricos (velas de 1 hora)
             all_data = []
@@ -158,7 +158,7 @@ class MarketScanner:
             for item in rankings:
                 # Sincronizar la recomendación de la IA con los datos técnicos actuales
                 original_data = next((d for d in market_snapshot if d['symbol'] == item['symbol']), {})
-                
+
                 item['price'] = original_data.get('price')
                 item['change_24h_pct'] = original_data.get('change_24h_pct')
                 item['volume_24h'] = original_data.get('volume_24h')
@@ -166,7 +166,8 @@ class MarketScanner:
                 item['scan_id'] = scan_id
 
                 # Imprimir ficha técnica de la recomendación
-                print(f"#{item['rank']} | {item['symbol']} | Precio: {item['price']} | Cambio: {item['change_24h_pct']}%")
+                print(
+                    f"#{item['rank']} | {item['symbol']} | Precio: {item['price']} | Cambio: {item['change_24h_pct']}%")
                 print(f"   - Estrategia: {item['recommended_strategy']}")
                 print(f"   - Rentabilidad: +{item['expected_profit_pct']}% | Riesgo: -{item['expected_loss_pct']}%")
                 print(f"   - Timeframe: {item['recommended_timeframe']} | Volatilidad: {item['volatility']}")
@@ -174,6 +175,6 @@ class MarketScanner:
                 print("-" * 80)
 
                 # Persistencia: Guardar el escaneo para que el TradingBot lo procese
-                self.db.save_market_scan(item)
+                self.db.save_market_scan(item, run_script_id=self.run_script_id)
 
         print(f"[*] Escaneo {scan_id} completado. Resultados guardados en la base de datos.")
