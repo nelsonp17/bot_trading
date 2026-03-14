@@ -1,0 +1,278 @@
+{
+  "BTC/USDT": {
+    "primary": {
+      "timeframe": "1h",
+      "history": 48,
+      "reasoning": "El timeframe de 1h muestra tendencia ALCISTA (EMA_9 > EMA_21), volatilidad moderada (0.678), RSI neutro (46.19) y volumen significativo (126.97). Proporciona equilibrio entre ruido reducido y se\u00f1ales oportunas, ideal para operaciones swing."
+    },
+    "secondary": [
+      {
+        "timeframe": "15m",
+        "history": 100,
+        "reasoning": "Volatilidad media (0.425) y RSI en zona de sobreventa (25.08) permiten identificar entradas precisas. Tendencia BAJISTA en corto plazo ayuda a confirmar correcciones dentro de la tendencia alcista principal."
+      },
+      {
+        "timeframe": "4h",
+        "history": 30,
+        "reasoning": "Tendencia ALCISTA clara (EMA_9 > EMA_21), RSI saludable (63.18) y alto volumen (4351.02) confirman direcci\u00f3n del mercado. Volatilidad controlada (0.824) reduce falsas se\u00f1ales."
+      }
+    ],
+    "analysis": {
+      "recommended_strategy": "Swing",
+      "risk_level": "Medio",
+      "volatility_assessment": "Volatilidad aumenta progresivamente con timeframes mayores (1m: 0.077 \u2192 1d: 2.905). El timeframe de 1h ofrece volatilidad \u00f3ptima (0.678) para operaciones swing con riesgo controlado. Timeframes menores (1m, 5m) muestran alta volatilidad y RSI extremos, aumentando riesgo de whipsaws."
+    },
+    "all_timeframes_summary": {
+      "1m": {
+        "timeframe": "1m",
+        "price": 70985.6,
+        "change_1h": -0.04892963777283553,
+        "volume": 6.08134,
+        "rsi": 41.68110084680584,
+        "volatility": 0.07725235878671664,
+        "trend": "BAJISTA",
+        "ema_9": 71030.2082863726,
+        "ema_21": 71083.7765268186
+      },
+      "5m": {
+        "timeframe": "5m",
+        "price": 70985.6,
+        "change_1h": -0.073664871710067,
+        "volume": 6.08218,
+        "rsi": 17.265937120027786,
+        "volatility": 0.15937722522388018,
+        "trend": "BAJISTA",
+        "ema_9": 71203.20531027977,
+        "ema_21": 71492.9586721103
+      },
+      "15m": {
+        "timeframe": "15m",
+        "price": 70985.6,
+        "change_1h": -0.9408619781629386,
+        "volume": 126.97119,
+        "rsi": 25.076507788035443,
+        "volatility": 0.42499084442542445,
+        "trend": "BAJISTA",
+        "ema_9": 71528.77815457815,
+        "ema_21": 71916.1886258581
+      },
+      "1h": {
+        "timeframe": "1h",
+        "price": 70985.6,
+        "change_1h": -1.177562032012158,
+        "volume": 126.97119,
+        "rsi": 46.18674615536903,
+        "volatility": 0.6782082283644754,
+        "trend": "ALCISTA",
+        "ema_9": 71731.80199673475,
+        "ema_21": 71569.25157402335
+      },
+      "4h": {
+        "timeframe": "4h",
+        "price": 70985.6,
+        "change_1h": -0.875018258057068,
+        "volume": 4351.01803,
+        "rsi": 63.18154845015359,
+        "volatility": 0.8240919423729774,
+        "trend": "ALCISTA",
+        "ema_9": 71121.56347581289,
+        "ema_21": 70479.72380037788
+      },
+      "1d": {
+        "timeframe": "1d",
+        "price": 70985.6,
+        "change_1h": 1.4824736381541728,
+        "volume": 31697.33967,
+        "rsi": 61.68407949058465,
+        "volatility": 2.9051237111351873,
+        "trend": "ALCISTA",
+        "ema_9": 69502.86828568485,
+        "ema_21": 69204.73342634291
+      }
+    }
+  },
+  "ETH/USDT": {
+    "primary": {
+      "timeframe": "1h",
+      "history": 48,
+      "reasoning": "El timeframe de 1h muestra una tendencia ALCISTA clara con EMA9 > EMA21, volatilidad moderada (0.96%) que permite operaciones con buen riesgo-recompensa, volumen significativo y RSI neutral (47.34) que no indica sobrecompra/sobreventa. Proporciona equilibrio entre ruido del mercado y se\u00f1ales confiables."
+    },
+    "secondary": [
+      {
+        "timeframe": "4h",
+        "history": 30,
+        "reasoning": "Confirma la tendencia alcista primaria con EMA9 > EMA21, RSI saludable (64.34) y alto volumen. La volatilidad (1.14%) permite identificar niveles clave de soporte/resistencia para operaciones de swing."
+      },
+      {
+        "timeframe": "15m",
+        "history": 100,
+        "reasoning": "Proporciona entradas precisas con RSI muy bajo (20.94) que sugiere posible rebote, aunque la tendencia bajista en este timeframe requiere confirmaci\u00f3n del timeframe primario. Volatilidad moderada (0.47%) y buen volumen."
+      }
+    ],
+    "analysis": {
+      "recommended_strategy": "Swing",
+      "risk_level": "Medio",
+      "volatility_assessment": "Volatilidad variable por timeframe: 1h (0.96%) y 4h (1.14%) ofrecen condiciones \u00f3ptimas para swing trading con stops razonables. Timeframes menores (1m-15m) muestran alta volatilidad relativa y RSI extremos que aumentan riesgo."
+    },
+    "all_timeframes_summary": {
+      "1m": {
+        "timeframe": "1m",
+        "price": 2099.76,
+        "change_1h": -0.13744560435640132,
+        "volume": 34.3424,
+        "rsi": 61.37096774193606,
+        "volatility": 0.11846621705850949,
+        "trend": "BAJISTA",
+        "ema_9": 2102.238274906513,
+        "ema_21": 2103.189155525752
+      },
+      "5m": {
+        "timeframe": "5m",
+        "price": 2100.3,
+        "change_1h": -0.11651408869336906,
+        "volume": 397.6777,
+        "rsi": 23.213738117142398,
+        "volatility": 0.2692220215169449,
+        "trend": "BAJISTA",
+        "ema_9": 2107.1739213136266,
+        "ema_21": 2117.634169316422
+      },
+      "15m": {
+        "timeframe": "15m",
+        "price": 2100.3,
+        "change_1h": -0.9806232615152387,
+        "volume": 4868.1286,
+        "rsi": 20.9361163820367,
+        "volatility": 0.46810149799299955,
+        "trend": "BAJISTA",
+        "ema_9": 2119.5288836170494,
+        "ema_21": 2131.107808366754
+      },
+      "1h": {
+        "timeframe": "1h",
+        "price": 2100.3,
+        "change_1h": -1.3021555349833898,
+        "volume": 4868.1286,
+        "rsi": 47.341618389086214,
+        "volatility": 0.9595012194097953,
+        "trend": "ALCISTA",
+        "ema_9": 2122.0760206173372,
+        "ema_21": 2112.7095872347495
+      },
+      "4h": {
+        "timeframe": "4h",
+        "price": 2100.3,
+        "change_1h": 0.04382246186969833,
+        "volume": 61317.4424,
+        "rsi": 64.33785192909289,
+        "volatility": 1.1404227874498514,
+        "trend": "ALCISTA",
+        "ema_9": 2094.756448205921,
+        "ema_21": 2068.7734815700746
+      },
+      "1d": {
+        "timeframe": "1d",
+        "price": 2100.29,
+        "change_1h": 3.131828471257198,
+        "volume": 534648.6536,
+        "rsi": 62.36022682774724,
+        "volatility": 3.085977612361234,
+        "trend": "ALCISTA",
+        "ema_9": 2038.277558846079,
+        "ema_21": 2035.5519384222735
+      }
+    }
+  },
+  "SOL/USDT": {
+    "primary": {
+      "timeframe": "1h",
+      "history": 48,
+      "reasoning": "El timeframe de 1h muestra una tendencia ALCISTA con volatilidad moderada (0.758) y volumen significativo (34,615.71), proporcionando un equilibrio entre ruido reducido y se\u00f1ales oportunas. El RSI de 45.04 sugiere espacio para movimiento alcista sin sobrecompra, y la EMA_9 por encima de EMA_21 confirma la tendencia alcista a corto plazo."
+    },
+    "secondary": [
+      {
+        "timeframe": "15m",
+        "history": 100,
+        "reasoning": "Ofrece alta volatilidad (0.445) para identificar puntos de entrada precisos, aunque con tendencia bajista. El RSI extremadamente bajo (19.65) sugiere posible rebote t\u00e9cnico. Es \u00fatil para confirmar se\u00f1ales de entrada en el primario con mayor granularidad."
+      },
+      {
+        "timeframe": "4h",
+        "history": 30,
+        "reasoning": "Proporciona contexto de tendencia alcista a medio plazo con RSI saludable (63.78) y alta volatilidad (1.467). El volumen masivo (397,799.605) valida la fortaleza de la tendencia. Sirve para filtrar se\u00f1ales contrarias a la tendencia principal."
+      }
+    ],
+    "analysis": {
+      "recommended_strategy": "Swing",
+      "risk_level": "Medio",
+      "volatility_assessment": "La volatilidad var\u00eda significativamente entre timeframes (0.084 en 1m hasta 2.695 en 1d). El timeframe primario (1h) tiene volatilidad moderada (0.758), adecuada para operaciones swing. Los timeframes secundarios proporcionan confirmaci\u00f3n: 15m para entradas precisas y 4h para contexto de tendencia. El alto volumen en timeframes mayores (4h, 1d) sugiere liquidez adecuada."
+    },
+    "all_timeframes_summary": {
+      "1m": {
+        "timeframe": "1m",
+        "price": 88.56,
+        "change_1h": -0.09025270758122551,
+        "volume": 127.393,
+        "rsi": 42.16867469879585,
+        "volatility": 0.0835820010438328,
+        "trend": "BAJISTA",
+        "ema_9": 88.64542533995436,
+        "ema_21": 88.742979849218
+      },
+      "5m": {
+        "timeframe": "5m",
+        "price": 88.56,
+        "change_1h": -0.34882412512659194,
+        "volume": 1086.709,
+        "rsi": 29.460580912863264,
+        "volatility": 0.21816158397802457,
+        "trend": "BAJISTA",
+        "ema_9": 88.89309837712534,
+        "ema_21": 89.25746326140397
+      },
+      "15m": {
+        "timeframe": "15m",
+        "price": 88.56,
+        "change_1h": -0.8619724616590126,
+        "volume": 34557.288,
+        "rsi": 19.6531791907516,
+        "volatility": 0.445470336323309,
+        "trend": "BAJISTA",
+        "ema_9": 89.31812702903962,
+        "ema_21": 89.82450355905773
+      },
+      "1h": {
+        "timeframe": "1h",
+        "price": 88.56,
+        "change_1h": -1.0392222594703238,
+        "volume": 34615.71,
+        "rsi": 45.04391468005023,
+        "volatility": 0.7583589010693212,
+        "trend": "ALCISTA",
+        "ema_9": 89.53253685239478,
+        "ema_21": 89.14825380672691
+      },
+      "4h": {
+        "timeframe": "4h",
+        "price": 88.56,
+        "change_1h": -0.1353179972936452,
+        "volume": 397799.605,
+        "rsi": 63.78006872852236,
+        "volatility": 1.4671374318082597,
+        "trend": "ALCISTA",
+        "ema_9": 88.3233831866037,
+        "ema_21": 87.21813151944227
+      },
+      "1d": {
+        "timeframe": "1d",
+        "price": 88.56,
+        "change_1h": 3.120633442012118,
+        "volume": 4346684.047,
+        "rsi": 62.551440329218124,
+        "volatility": 2.695392315190129,
+        "trend": "BAJISTA",
+        "ema_9": 86.22824048964527,
+        "ema_21": 86.41590927259816
+      }
+    }
+  }
+}
