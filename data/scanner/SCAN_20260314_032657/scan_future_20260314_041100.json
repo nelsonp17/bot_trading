@@ -1,0 +1,1731 @@
+{
+  "scan_id": "SCAN_20260314_032657",
+  "timestamp": "2026-03-14T04:11:00.162557",
+  "market_type": "future",
+  "parameters": {
+    "quote": "USDT",
+    "capital": 500.0,
+    "mode": "volume",
+    "num_top": 50,
+    "provider": "DeepSeekPredictor"
+  },
+  "market_snapshot": [
+    {
+      "symbol": "BTC/USDT:USDT",
+      "market_type": "future",
+      "timeframe_used": "1h",
+      "candles_limit": 12,
+      "price": 71043.3,
+      "change_24h_pct": -0.231,
+      "volume_24h": 19508256611.44,
+      "recent_candles": [
+        {
+          "c": 70895.5,
+          "v": 4557.721
+        },
+        {
+          "c": 70600.0,
+          "v": 5679.351
+        },
+        {
+          "c": 70790.3,
+          "v": 5009.742
+        },
+        {
+          "c": 70749.2,
+          "v": 2354.624
+        },
+        {
+          "c": 71043.3,
+          "v": 4578.838
+        }
+      ]
+    },
+    {
+      "symbol": "ETH/USDT:USDT",
+      "market_type": "future",
+      "timeframe_used": "1h",
+      "candles_limit": 12,
+      "price": 2099.76,
+      "change_24h_pct": -0.529,
+      "volume_24h": 14486740039.93,
+      "recent_candles": [
+        {
+          "c": 2091.01,
+          "v": 69184.7
+        },
+        {
+          "c": 2084.36,
+          "v": 94149.371
+        },
+        {
+          "c": 2091.57,
+          "v": 111732.796
+        },
+        {
+          "c": 2091.44,
+          "v": 63047.781
+        },
+        {
+          "c": 2099.76,
+          "v": 106154.706
+        }
+      ]
+    },
+    {
+      "symbol": "SOL/USDT:USDT",
+      "market_type": "future",
+      "timeframe_used": "1h",
+      "candles_limit": 12,
+      "price": 88.36,
+      "change_24h_pct": -1.185,
+      "volume_24h": 2502357935.8187,
+      "recent_candles": [
+        {
+          "c": 88.12,
+          "v": 385291.1
+        },
+        {
+          "c": 87.89,
+          "v": 489478.88
+        },
+        {
+          "c": 88.19,
+          "v": 439669.85
+        },
+        {
+          "c": 88.18,
+          "v": 236784.34
+        },
+        {
+          "c": 88.36,
+          "v": 415132.5
+        }
+      ]
+    },
+    {
+      "symbol": "XRP/USDT:USDT",
+      "market_type": "future",
+      "timeframe_used": "1h",
+      "candles_limit": 12,
+      "price": 1.3998,
+      "change_24h_pct": -0.512,
+      "volume_24h": 934962031.2373,
+      "recent_candles": [
+        {
+          "c": 1.3979,
+          "v": 12736768.4
+        },
+        {
+          "c": 1.3934,
+          "v": 13211851.9
+        },
+        {
+          "c": 1.3993,
+          "v": 11206263.9
+        },
+        {
+          "c": 1.3976,
+          "v": 8424826.2
+        },
+        {
+          "c": 1.3998,
+          "v": 10010774.8
+        }
+      ]
+    },
+    {
+      "symbol": "DOGE/USDT:USDT",
+      "market_type": "future",
+      "timeframe_used": "1h",
+      "candles_limit": 12,
+      "price": 0.09597,
+      "change_24h_pct": -0.166,
+      "volume_24h": 855318457.37748,
+      "recent_candles": [
+        {
+          "c": 0.09591,
+          "v": 106089781.0
+        },
+        {
+          "c": 0.09536,
+          "v": 234264080.0
+        },
+        {
+          "c": 0.09566,
+          "v": 203492683.0
+        },
+        {
+          "c": 0.09577,
+          "v": 107940224.0
+        },
+        {
+          "c": 0.09597,
+          "v": 178576137.0
+        }
+      ]
+    },
+    {
+      "symbol": "BNB/USDT:USDT",
+      "market_type": "future",
+      "timeframe_used": "4h",
+      "candles_limit": 12,
+      "price": 656.84,
+      "change_24h_pct": -0.423,
+      "volume_24h": 537447080.6,
+      "recent_candles": [
+        {
+          "c": 666.76,
+          "v": 153655.51
+        },
+        {
+          "c": 662.39,
+          "v": 278655.25
+        },
+        {
+          "c": 657.34,
+          "v": 176959.21
+        },
+        {
+          "c": 655.75,
+          "v": 63090.25
+        },
+        {
+          "c": 656.84,
+          "v": 50190.22
+        }
+      ]
+    },
+    {
+      "symbol": "ZEC/USDT:USDT",
+      "market_type": "future",
+      "timeframe_used": "1h",
+      "candles_limit": 12,
+      "price": 210.68,
+      "change_24h_pct": -1.057,
+      "volume_24h": 394123717.28,
+      "recent_candles": [
+        {
+          "c": 208.11,
+          "v": 32525.74
+        },
+        {
+          "c": 206.12,
+          "v": 50213.346
+        },
+        {
+          "c": 206.8,
+          "v": 40647.687
+        },
+        {
+          "c": 208.17,
+          "v": 35349.813
+        },
+        {
+          "c": 210.68,
+          "v": 51428.729
+        }
+      ]
+    },
+    {
+      "symbol": "ADA/USDT:USDT",
+      "market_type": "future",
+      "timeframe_used": "1h",
+      "candles_limit": 12,
+      "price": 0.2651,
+      "change_24h_pct": -1.778,
+      "volume_24h": 198952658.3456,
+      "recent_candles": [
+        {
+          "c": 0.2654,
+          "v": 14012944.0
+        },
+        {
+          "c": 0.2638,
+          "v": 23554974.0
+        },
+        {
+          "c": 0.2647,
+          "v": 20391161.0
+        },
+        {
+          "c": 0.2645,
+          "v": 27134792.0
+        },
+        {
+          "c": 0.2651,
+          "v": 8478784.0
+        }
+      ]
+    },
+    {
+      "symbol": "AVAX/USDT:USDT",
+      "market_type": "future",
+      "timeframe_used": "1h",
+      "candles_limit": 12,
+      "price": 9.728,
+      "change_24h_pct": -1.518,
+      "volume_24h": 175054805.776,
+      "recent_candles": [
+        {
+          "c": 9.715,
+          "v": 183724.0
+        },
+        {
+          "c": 9.661,
+          "v": 429048.0
+        },
+        {
+          "c": 9.697,
+          "v": 419277.0
+        },
+        {
+          "c": 9.705,
+          "v": 243382.0
+        },
+        {
+          "c": 9.728,
+          "v": 253568.0
+        }
+      ]
+    },
+    {
+      "symbol": "LINK/USDT:USDT",
+      "market_type": "future",
+      "timeframe_used": "1h",
+      "candles_limit": 12,
+      "price": 9.113,
+      "change_24h_pct": -1.332,
+      "volume_24h": 146788374.378,
+      "recent_candles": [
+        {
+          "c": 9.081,
+          "v": 331856.29
+        },
+        {
+          "c": 9.05,
+          "v": 436043.45
+        },
+        {
+          "c": 9.076,
+          "v": 402264.28
+        },
+        {
+          "c": 9.076,
+          "v": 265160.41
+        },
+        {
+          "c": 9.113,
+          "v": 380255.63
+        }
+      ]
+    },
+    {
+      "symbol": "NEAR/USDT:USDT",
+      "market_type": "future",
+      "timeframe_used": "1h",
+      "candles_limit": 12,
+      "price": 1.33,
+      "change_24h_pct": -3.546,
+      "volume_24h": 132390853.916,
+      "recent_candles": [
+        {
+          "c": 1.334,
+          "v": 2680924.0
+        },
+        {
+          "c": 1.319,
+          "v": 5157390.0
+        },
+        {
+          "c": 1.333,
+          "v": 3131469.0
+        },
+        {
+          "c": 1.328,
+          "v": 2019278.0
+        },
+        {
+          "c": 1.33,
+          "v": 2140378.0
+        }
+      ]
+    },
+    {
+      "symbol": "DOT/USDT:USDT",
+      "market_type": "future",
+      "timeframe_used": "1h",
+      "candles_limit": 12,
+      "price": 1.447,
+      "change_24h_pct": -4.918,
+      "volume_24h": 114697590.282,
+      "recent_candles": [
+        {
+          "c": 1.461,
+          "v": 2154460.8
+        },
+        {
+          "c": 1.448,
+          "v": 2331870.5
+        },
+        {
+          "c": 1.447,
+          "v": 2785398.3
+        },
+        {
+          "c": 1.444,
+          "v": 1837381.8
+        },
+        {
+          "c": 1.447,
+          "v": 1488689.6
+        }
+      ]
+    },
+    {
+      "symbol": "FIL/USDT:USDT",
+      "market_type": "future",
+      "timeframe_used": "1h",
+      "candles_limit": 12,
+      "price": 0.875,
+      "change_24h_pct": -1.35,
+      "volume_24h": 107527794.606,
+      "recent_candles": [
+        {
+          "c": 0.868,
+          "v": 2100472.6
+        },
+        {
+          "c": 0.864,
+          "v": 2472025.8
+        },
+        {
+          "c": 0.87,
+          "v": 2555383.9
+        },
+        {
+          "c": 0.87,
+          "v": 1984069.5
+        },
+        {
+          "c": 0.875,
+          "v": 2136974.1
+        }
+      ]
+    },
+    {
+      "symbol": "BCH/USDT:USDT",
+      "market_type": "future",
+      "timeframe_used": "1h",
+      "candles_limit": 12,
+      "price": 460.6,
+      "change_24h_pct": -1.399,
+      "volume_24h": 106481379.2,
+      "recent_candles": [
+        {
+          "c": 460.62,
+          "v": 6378.617
+        },
+        {
+          "c": 459.41,
+          "v": 8050.627
+        },
+        {
+          "c": 459.54,
+          "v": 5894.271
+        },
+        {
+          "c": 458.37,
+          "v": 7884.909
+        },
+        {
+          "c": 460.6,
+          "v": 7156.483
+        }
+      ]
+    },
+    {
+      "symbol": "LTC/USDT:USDT",
+      "market_type": "future",
+      "timeframe_used": "1h",
+      "candles_limit": 12,
+      "price": 55.65,
+      "change_24h_pct": 1.034,
+      "volume_24h": 79002547.24,
+      "recent_candles": [
+        {
+          "c": 55.28,
+          "v": 24442.031
+        },
+        {
+          "c": 55.11,
+          "v": 47273.207
+        },
+        {
+          "c": 55.4,
+          "v": 44385.206
+        },
+        {
+          "c": 55.54,
+          "v": 38776.261
+        },
+        {
+          "c": 55.65,
+          "v": 33358.097
+        }
+      ]
+    },
+    {
+      "symbol": "AAVE/USDT:USDT",
+      "market_type": "future",
+      "timeframe_used": "1h",
+      "candles_limit": 12,
+      "price": 112.6,
+      "change_24h_pct": -2.044,
+      "volume_24h": 77408396.36,
+      "recent_candles": [
+        {
+          "c": 112.24,
+          "v": 14994.1
+        },
+        {
+          "c": 111.71,
+          "v": 18821.5
+        },
+        {
+          "c": 112.16,
+          "v": 17859.5
+        },
+        {
+          "c": 112.5,
+          "v": 15577.6
+        },
+        {
+          "c": 112.6,
+          "v": 13721.8
+        }
+      ]
+    },
+    {
+      "symbol": "UNI/USDT:USDT",
+      "market_type": "future",
+      "timeframe_used": "1h",
+      "candles_limit": 12,
+      "price": 4.007,
+      "change_24h_pct": -0.025,
+      "volume_24h": 74813467.028,
+      "recent_candles": [
+        {
+          "c": 4.001,
+          "v": 367732.0
+        },
+        {
+          "c": 3.977,
+          "v": 452768.0
+        },
+        {
+          "c": 3.994,
+          "v": 553206.0
+        },
+        {
+          "c": 3.994,
+          "v": 231819.0
+        },
+        {
+          "c": 4.007,
+          "v": 331587.0
+        }
+      ]
+    },
+    {
+      "symbol": "1000SHIB/USDT:USDT",
+      "market_type": "future",
+      "timeframe_used": "1h",
+      "candles_limit": 12,
+      "price": 0.005942,
+      "change_24h_pct": -0.218,
+      "volume_24h": 59137905.112139,
+      "recent_candles": [
+        {
+          "c": 0.005934,
+          "v": 173075871.0
+        },
+        {
+          "c": 0.005907,
+          "v": 354032444.0
+        },
+        {
+          "c": 0.005923,
+          "v": 280774856.0
+        },
+        {
+          "c": 0.005943,
+          "v": 210254278.0
+        },
+        {
+          "c": 0.005942,
+          "v": 106566105.0
+        }
+      ]
+    },
+    {
+      "symbol": "TRX/USDT:USDT",
+      "market_type": "future",
+      "timeframe_used": "1h",
+      "candles_limit": 12,
+      "price": 0.29397,
+      "change_24h_pct": 1.436,
+      "volume_24h": 55109162.74653,
+      "recent_candles": [
+        {
+          "c": 0.2933,
+          "v": 9061610.0
+        },
+        {
+          "c": 0.29316,
+          "v": 13007846.0
+        },
+        {
+          "c": 0.29324,
+          "v": 9421619.0
+        },
+        {
+          "c": 0.29351,
+          "v": 2590225.0
+        },
+        {
+          "c": 0.29397,
+          "v": 5259066.0
+        }
+      ]
+    },
+    {
+      "symbol": "GALA/USDT:USDT",
+      "market_type": "future",
+      "timeframe_used": "1h",
+      "candles_limit": 12,
+      "price": 0.00353,
+      "change_24h_pct": 2.017,
+      "volume_24h": 50646906.8979,
+      "recent_candles": [
+        {
+          "c": 0.00353,
+          "v": 327157939.0
+        },
+        {
+          "c": 0.00349,
+          "v": 421328245.0
+        },
+        {
+          "c": 0.00351,
+          "v": 298715960.0
+        },
+        {
+          "c": 0.00351,
+          "v": 203688980.0
+        },
+        {
+          "c": 0.00353,
+          "v": 221642884.0
+        }
+      ]
+    },
+    {
+      "symbol": "XLM/USDT:USDT",
+      "market_type": "future",
+      "timeframe_used": "1h",
+      "candles_limit": 12,
+      "price": 0.16459,
+      "change_24h_pct": 1.781,
+      "volume_24h": 43402025.84816,
+      "recent_candles": [
+        {
+          "c": 0.16388,
+          "v": 11179826.0
+        },
+        {
+          "c": 0.16417,
+          "v": 18971045.0
+        },
+        {
+          "c": 0.16474,
+          "v": 7118293.0
+        },
+        {
+          "c": 0.16433,
+          "v": 5434702.0
+        },
+        {
+          "c": 0.16459,
+          "v": 5891695.0
+        }
+      ]
+    },
+    {
+      "symbol": "HBAR/USDT:USDT",
+      "market_type": "future",
+      "timeframe_used": "1h",
+      "candles_limit": 12,
+      "price": 0.09486,
+      "change_24h_pct": -1.556,
+      "volume_24h": 40845555.07313,
+      "recent_candles": [
+        {
+          "c": 0.09502,
+          "v": 5490274.0
+        },
+        {
+          "c": 0.09462,
+          "v": 9672845.0
+        },
+        {
+          "c": 0.09475,
+          "v": 7214741.0
+        },
+        {
+          "c": 0.09468,
+          "v": 7652665.0
+        },
+        {
+          "c": 0.09486,
+          "v": 7084469.0
+        }
+      ]
+    },
+    {
+      "symbol": "ETC/USDT:USDT",
+      "market_type": "future",
+      "timeframe_used": "1h",
+      "candles_limit": 12,
+      "price": 8.465,
+      "change_24h_pct": 0.929,
+      "volume_24h": 36738122.578,
+      "recent_candles": [
+        {
+          "c": 8.476,
+          "v": 73125.98
+        },
+        {
+          "c": 8.411,
+          "v": 200096.08
+        },
+        {
+          "c": 8.462,
+          "v": 98725.97
+        },
+        {
+          "c": 8.477,
+          "v": 66040.52
+        },
+        {
+          "c": 8.465,
+          "v": 108778.99
+        }
+      ]
+    },
+    {
+      "symbol": "CRV/USDT:USDT",
+      "market_type": "future",
+      "timeframe_used": "1h",
+      "candles_limit": 12,
+      "price": 0.232,
+      "change_24h_pct": -4.938,
+      "volume_24h": 34589991.254,
+      "recent_candles": [
+        {
+          "c": 0.235,
+          "v": 1142941.5
+        },
+        {
+          "c": 0.232,
+          "v": 5378076.9
+        },
+        {
+          "c": 0.231,
+          "v": 4761895.6
+        },
+        {
+          "c": 0.23,
+          "v": 3667040.2
+        },
+        {
+          "c": 0.232,
+          "v": 5038604.7
+        }
+      ]
+    },
+    {
+      "symbol": "FLOW/USDT:USDT",
+      "market_type": "future",
+      "timeframe_used": "1h",
+      "candles_limit": 12,
+      "price": 0.0469,
+      "change_24h_pct": -11.794,
+      "volume_24h": 33408190.351971,
+      "recent_candles": [
+        {
+          "c": 0.05009,
+          "v": 23823665.1
+        },
+        {
+          "c": 0.04885,
+          "v": 71298357.3
+        },
+        {
+          "c": 0.04784,
+          "v": 48443885.9
+        },
+        {
+          "c": 0.04692,
+          "v": 40769383.3
+        },
+        {
+          "c": 0.0469,
+          "v": 35576713.7
+        }
+      ]
+    },
+    {
+      "symbol": "AXS/USDT:USDT",
+      "market_type": "future",
+      "timeframe_used": "1h",
+      "candles_limit": 12,
+      "price": 1.206,
+      "change_24h_pct": 5.259,
+      "volume_24h": 28741480.667,
+      "recent_candles": [
+        {
+          "c": 1.155,
+          "v": 574442.0
+        },
+        {
+          "c": 1.15,
+          "v": 879956.0
+        },
+        {
+          "c": 1.166,
+          "v": 648383.0
+        },
+        {
+          "c": 1.184,
+          "v": 1899415.0
+        },
+        {
+          "c": 1.206,
+          "v": 8911335.0
+        }
+      ]
+    },
+    {
+      "symbol": "XMR/USDT:USDT",
+      "market_type": "future",
+      "timeframe_used": "1h",
+      "candles_limit": 12,
+      "price": 363.45,
+      "change_24h_pct": 1.238,
+      "volume_24h": 28304140.27,
+      "recent_candles": [
+        {
+          "c": 356.5,
+          "v": 2871.356
+        },
+        {
+          "c": 360.59,
+          "v": 4512.519
+        },
+        {
+          "c": 361.67,
+          "v": 2183.895
+        },
+        {
+          "c": 362.14,
+          "v": 4475.276
+        },
+        {
+          "c": 363.45,
+          "v": 4267.242
+        }
+      ]
+    },
+    {
+      "symbol": "OGN/USDT:USDT",
+      "market_type": "future",
+      "timeframe_used": "1h",
+      "candles_limit": 12,
+      "price": 0.0263,
+      "change_24h_pct": -1.866,
+      "volume_24h": 26987882.124,
+      "recent_candles": [
+        {
+          "c": 0.0255,
+          "v": 10306373.0
+        },
+        {
+          "c": 0.0253,
+          "v": 12531240.0
+        },
+        {
+          "c": 0.0257,
+          "v": 20925906.0
+        },
+        {
+          "c": 0.026,
+          "v": 17546737.0
+        },
+        {
+          "c": 0.0263,
+          "v": 33291720.0
+        }
+      ]
+    },
+    {
+      "symbol": "DASH/USDT:USDT",
+      "market_type": "future",
+      "timeframe_used": "1h",
+      "candles_limit": 12,
+      "price": 32.84,
+      "change_24h_pct": -2.119,
+      "volume_24h": 23565771.07,
+      "recent_candles": [
+        {
+          "c": 32.22,
+          "v": 18235.119
+        },
+        {
+          "c": 32.5,
+          "v": 20522.24
+        },
+        {
+          "c": 32.52,
+          "v": 14721.553
+        },
+        {
+          "c": 32.83,
+          "v": 15395.295
+        },
+        {
+          "c": 32.84,
+          "v": 93.629
+        }
+      ]
+    },
+    {
+      "symbol": "ALGO/USDT:USDT",
+      "market_type": "future",
+      "timeframe_used": "1h",
+      "candles_limit": 12,
+      "price": 0.0933,
+      "change_24h_pct": 2.525,
+      "volume_24h": 21518710.8279,
+      "recent_candles": [
+        {
+          "c": 0.0929,
+          "v": 11298895.8
+        },
+        {
+          "c": 0.0932,
+          "v": 4259207.3
+        },
+        {
+          "c": 0.093,
+          "v": 3925622.2
+        },
+        {
+          "c": 0.0934,
+          "v": 2929005.9
+        },
+        {
+          "c": 0.0933,
+          "v": 182222.0
+        }
+      ]
+    },
+    {
+      "symbol": "ATOM/USDT:USDT",
+      "market_type": "future",
+      "timeframe_used": "1h",
+      "candles_limit": 12,
+      "price": 1.88,
+      "change_24h_pct": 1.948,
+      "volume_24h": 18272000.586,
+      "recent_candles": [
+        {
+          "c": 1.85,
+          "v": 251454.81
+        },
+        {
+          "c": 1.862,
+          "v": 203304.42
+        },
+        {
+          "c": 1.873,
+          "v": 275127.28
+        },
+        {
+          "c": 1.882,
+          "v": 276635.76
+        },
+        {
+          "c": 1.88,
+          "v": 4161.14
+        }
+      ]
+    },
+    {
+      "symbol": "SAND/USDT:USDT",
+      "market_type": "future",
+      "timeframe_used": "1h",
+      "candles_limit": 12,
+      "price": 0.08464,
+      "change_24h_pct": 0.499,
+      "volume_24h": 14181239.41013,
+      "recent_candles": [
+        {
+          "c": 0.08352,
+          "v": 4662321.0
+        },
+        {
+          "c": 0.084,
+          "v": 6573653.0
+        },
+        {
+          "c": 0.08411,
+          "v": 3007923.0
+        },
+        {
+          "c": 0.08471,
+          "v": 5407263.0
+        },
+        {
+          "c": 0.08464,
+          "v": 68486.0
+        }
+      ]
+    },
+    {
+      "symbol": "ALICE/USDT:USDT",
+      "market_type": "future",
+      "timeframe_used": "1h",
+      "candles_limit": 12,
+      "price": 0.123,
+      "change_24h_pct": 2.5,
+      "volume_24h": 14033661.45,
+      "recent_candles": [
+        {
+          "c": 0.121,
+          "v": 7699137.5
+        },
+        {
+          "c": 0.123,
+          "v": 3198551.9
+        },
+        {
+          "c": 0.122,
+          "v": 3943126.4
+        },
+        {
+          "c": 0.123,
+          "v": 3287005.7
+        },
+        {
+          "c": 0.123,
+          "v": 23972.7
+        }
+      ]
+    },
+    {
+      "symbol": "COMP/USDT:USDT",
+      "market_type": "future",
+      "timeframe_used": "1h",
+      "candles_limit": 12,
+      "price": 18.6,
+      "change_24h_pct": 0.811,
+      "volume_24h": 13244620.38,
+      "recent_candles": [
+        {
+          "c": 18.4,
+          "v": 10763.901
+        },
+        {
+          "c": 18.57,
+          "v": 14644.588
+        },
+        {
+          "c": 18.55,
+          "v": 7594.644
+        },
+        {
+          "c": 18.62,
+          "v": 23749.128
+        },
+        {
+          "c": 18.6,
+          "v": 378.891
+        }
+      ]
+    },
+    {
+      "symbol": "CHZ/USDT:USDT",
+      "market_type": "future",
+      "timeframe_used": "1h",
+      "candles_limit": 12,
+      "price": 0.03778,
+      "change_24h_pct": 0.532,
+      "volume_24h": 12781568.71094,
+      "recent_candles": [
+        {
+          "c": 0.03749,
+          "v": 23070866.0
+        },
+        {
+          "c": 0.03772,
+          "v": 12277105.0
+        },
+        {
+          "c": 0.03794,
+          "v": 12344232.0
+        },
+        {
+          "c": 0.03782,
+          "v": 8826773.0
+        },
+        {
+          "c": 0.03778,
+          "v": 374717.0
+        }
+      ]
+    },
+    {
+      "symbol": "AR/USDT:USDT",
+      "market_type": "future",
+      "timeframe_used": "1h",
+      "candles_limit": 12,
+      "price": 1.849,
+      "change_24h_pct": -1.756,
+      "volume_24h": 12315403.446,
+      "recent_candles": [
+        {
+          "c": 1.805,
+          "v": 161437.7
+        },
+        {
+          "c": 1.835,
+          "v": 162516.4
+        },
+        {
+          "c": 1.834,
+          "v": 86835.4
+        },
+        {
+          "c": 1.847,
+          "v": 136189.2
+        },
+        {
+          "c": 1.849,
+          "v": 4043.6
+        }
+      ]
+    },
+    {
+      "symbol": "GRT/USDT:USDT",
+      "market_type": "future",
+      "timeframe_used": "1h",
+      "candles_limit": 12,
+      "price": 0.02689,
+      "change_24h_pct": -3.72,
+      "volume_24h": 11247609.62217,
+      "recent_candles": [
+        {
+          "c": 0.02652,
+          "v": 13908361.0
+        },
+        {
+          "c": 0.02676,
+          "v": 10488499.0
+        },
+        {
+          "c": 0.02683,
+          "v": 4270539.0
+        },
+        {
+          "c": 0.02691,
+          "v": 7512060.0
+        },
+        {
+          "c": 0.02689,
+          "v": 642967.0
+        }
+      ]
+    },
+    {
+      "symbol": "ZEN/USDT:USDT",
+      "market_type": "future",
+      "timeframe_used": "1h",
+      "candles_limit": 12,
+      "price": 5.678,
+      "change_24h_pct": -0.412,
+      "volume_24h": 10183822.319,
+      "recent_candles": [
+        {
+          "c": 5.517,
+          "v": 38734.9
+        },
+        {
+          "c": 5.578,
+          "v": 83767.5
+        },
+        {
+          "c": 5.558,
+          "v": 36370.4
+        },
+        {
+          "c": 5.678,
+          "v": 177526.6
+        },
+        {
+          "c": 5.678,
+          "v": 21038.6
+        }
+      ]
+    },
+    {
+      "symbol": "DENT/USDT:USDT",
+      "market_type": "future",
+      "timeframe_used": "1h",
+      "candles_limit": 12,
+      "price": 0.000232,
+      "change_24h_pct": -1.724,
+      "volume_24h": 10089747.439477,
+      "recent_candles": [
+        {
+          "c": 0.000224,
+          "v": 2372674300.0
+        },
+        {
+          "c": 0.000224,
+          "v": 4087955145.0
+        },
+        {
+          "c": 0.000226,
+          "v": 1757669499.0
+        },
+        {
+          "c": 0.000229,
+          "v": 1273957276.0
+        },
+        {
+          "c": 0.000232,
+          "v": 1012851811.0
+        }
+      ]
+    },
+    {
+      "symbol": "TRB/USDT:USDT",
+      "market_type": "future",
+      "timeframe_used": "1h",
+      "candles_limit": 12,
+      "price": 16.34,
+      "change_24h_pct": -1.116,
+      "volume_24h": 9217181.404,
+      "recent_candles": [
+        {
+          "c": 16.106,
+          "v": 12674.8
+        },
+        {
+          "c": 16.298,
+          "v": 16124.1
+        },
+        {
+          "c": 16.264,
+          "v": 14167.5
+        },
+        {
+          "c": 16.328,
+          "v": 11859.2
+        },
+        {
+          "c": 16.34,
+          "v": 635.5
+        }
+      ]
+    },
+    {
+      "symbol": "APE/USDT:USDT",
+      "market_type": "future",
+      "timeframe_used": "4h",
+      "candles_limit": 12,
+      "price": 0.0976,
+      "change_24h_pct": -2.8,
+      "volume_24h": 9210300.1232,
+      "recent_candles": [
+        {
+          "c": 0.1002,
+          "v": 24684592.0
+        },
+        {
+          "c": 0.0976,
+          "v": 17361604.0
+        },
+        {
+          "c": 0.0968,
+          "v": 13678806.0
+        },
+        {
+          "c": 0.0973,
+          "v": 11996718.0
+        },
+        {
+          "c": 0.0976,
+          "v": 214463.0
+        }
+      ]
+    },
+    {
+      "symbol": "ROSE/USDT:USDT",
+      "market_type": "future",
+      "timeframe_used": "1h",
+      "candles_limit": 12,
+      "price": 0.01247,
+      "change_24h_pct": -1.423,
+      "volume_24h": 8991915.41095,
+      "recent_candles": [
+        {
+          "c": 0.01243,
+          "v": 30496403.0
+        },
+        {
+          "c": 0.01263,
+          "v": 22253044.0
+        },
+        {
+          "c": 0.01254,
+          "v": 17649159.0
+        },
+        {
+          "c": 0.01248,
+          "v": 18128553.0
+        },
+        {
+          "c": 0.01247,
+          "v": 4408345.0
+        }
+      ]
+    },
+    {
+      "symbol": "SNX/USDT:USDT",
+      "market_type": "future",
+      "timeframe_used": "1h",
+      "candles_limit": 12,
+      "price": 0.313,
+      "change_24h_pct": -3.406,
+      "volume_24h": 8532901.748,
+      "recent_candles": [
+        {
+          "c": 0.311,
+          "v": 896513.6
+        },
+        {
+          "c": 0.313,
+          "v": 778614.2
+        },
+        {
+          "c": 0.313,
+          "v": 545619.5
+        },
+        {
+          "c": 0.312,
+          "v": 65934.3
+        },
+        {
+          "c": 0.313,
+          "v": 203739.4
+        }
+      ]
+    },
+    {
+      "symbol": "XTZ/USDT:USDT",
+      "market_type": "future",
+      "timeframe_used": "1h",
+      "candles_limit": 12,
+      "price": 0.377,
+      "change_24h_pct": 1.081,
+      "volume_24h": 8526780.324,
+      "recent_candles": [
+        {
+          "c": 0.371,
+          "v": 653506.0
+        },
+        {
+          "c": 0.373,
+          "v": 387589.6
+        },
+        {
+          "c": 0.375,
+          "v": 564566.2
+        },
+        {
+          "c": 0.376,
+          "v": 370025.5
+        },
+        {
+          "c": 0.377,
+          "v": 31041.0
+        }
+      ]
+    },
+    {
+      "symbol": "DUSK/USDT:USDT",
+      "market_type": "future",
+      "timeframe_used": "1h",
+      "candles_limit": 12,
+      "price": 0.09055,
+      "change_24h_pct": -1.918,
+      "volume_24h": 7616391.3437,
+      "recent_candles": [
+        {
+          "c": 0.09068,
+          "v": 2859232.0
+        },
+        {
+          "c": 0.08926,
+          "v": 5415345.0
+        },
+        {
+          "c": 0.09011,
+          "v": 3679052.0
+        },
+        {
+          "c": 0.09024,
+          "v": 1800336.0
+        },
+        {
+          "c": 0.09055,
+          "v": 523681.0
+        }
+      ]
+    },
+    {
+      "symbol": "VET/USDT:USDT",
+      "market_type": "future",
+      "timeframe_used": "1h",
+      "candles_limit": 12,
+      "price": 0.007233,
+      "change_24h_pct": -1.338,
+      "volume_24h": 7555759.145266,
+      "recent_candles": [
+        {
+          "c": 0.007172,
+          "v": 25379842.0
+        },
+        {
+          "c": 0.007209,
+          "v": 19191713.0
+        },
+        {
+          "c": 0.0072,
+          "v": 17875319.0
+        },
+        {
+          "c": 0.007234,
+          "v": 27384038.0
+        },
+        {
+          "c": 0.007233,
+          "v": 7460398.0
+        }
+      ]
+    },
+    {
+      "symbol": "PEOPLE/USDT:USDT",
+      "market_type": "future",
+      "timeframe_used": "1h",
+      "candles_limit": 12,
+      "price": 0.00727,
+      "change_24h_pct": -4.849,
+      "volume_24h": 6785482.38094,
+      "recent_candles": [
+        {
+          "c": 0.00736,
+          "v": 20472531.0
+        },
+        {
+          "c": 0.00736,
+          "v": 19399668.0
+        },
+        {
+          "c": 0.00731,
+          "v": 30916148.0
+        },
+        {
+          "c": 0.00727,
+          "v": 31834947.0
+        },
+        {
+          "c": 0.00727,
+          "v": 2953295.0
+        }
+      ]
+    },
+    {
+      "symbol": "ENS/USDT:USDT",
+      "market_type": "future",
+      "timeframe_used": "1h",
+      "candles_limit": 12,
+      "price": 6.098,
+      "change_24h_pct": -1.844,
+      "volume_24h": 6738504.86,
+      "recent_candles": [
+        {
+          "c": 6.006,
+          "v": 30876.1
+        },
+        {
+          "c": 6.042,
+          "v": 34003.0
+        },
+        {
+          "c": 6.044,
+          "v": 14293.1
+        },
+        {
+          "c": 6.078,
+          "v": 16431.2
+        },
+        {
+          "c": 6.098,
+          "v": 4945.6
+        }
+      ]
+    },
+    {
+      "symbol": "DYDX/USDT:USDT",
+      "market_type": "future",
+      "timeframe_used": "1h",
+      "candles_limit": 12,
+      "price": 0.09,
+      "change_24h_pct": -1.111,
+      "volume_24h": 6642505.527,
+      "recent_candles": [
+        {
+          "c": 0.088,
+          "v": 4746278.5
+        },
+        {
+          "c": 0.088,
+          "v": 5142120.6
+        },
+        {
+          "c": 0.088,
+          "v": 1210845.0
+        },
+        {
+          "c": 0.089,
+          "v": 278527.5
+        },
+        {
+          "c": 0.09,
+          "v": 1314457.4
+        }
+      ]
+    },
+    {
+      "symbol": "RUNE/USDT:USDT",
+      "market_type": "future",
+      "timeframe_used": "1h",
+      "candles_limit": 12,
+      "price": 0.4547,
+      "change_24h_pct": 2.596,
+      "volume_24h": 6118562.0489,
+      "recent_candles": [
+        {
+          "c": 0.4503,
+          "v": 608020.0
+        },
+        {
+          "c": 0.4524,
+          "v": 312228.0
+        },
+        {
+          "c": 0.4522,
+          "v": 241949.0
+        },
+        {
+          "c": 0.4547,
+          "v": 257766.0
+        },
+        {
+          "c": 0.4547,
+          "v": 130757.0
+        }
+      ]
+    }
+  ],
+  "rankings": [
+    {
+      "symbol": "BTC/USDT:USDT",
+      "rank": 1,
+      "expected_profit_pct": 1.8,
+      "expected_loss_pct": 1.2,
+      "volatility": "Media",
+      "recommended_strategy": "Swing Trading",
+      "recommended_timeframe": "4h",
+      "gas_fee_estimate": 0.06,
+      "reasoning": "BTC muestra la mayor liquidez (19.5B volumen) y estabilidad relativa (-0.23% cambio 24h), con velas recientes mostrando consolidaci\u00f3n entre 70,600-71,043. En futuros, su profundidad de mercado reduce riesgos de liquidaci\u00f3n. Estrategia swing aprovecha movimientos de 1-3% con stop loss ajustado al 1.2% para manejar apalancamiento."
+    },
+    {
+      "symbol": "ETH/USDT:USDT",
+      "rank": 2,
+      "expected_profit_pct": 2.2,
+      "expected_loss_pct": 1.5,
+      "volatility": "Media",
+      "recommended_strategy": "Swing Trading",
+      "recommended_timeframe": "4h",
+      "gas_fee_estimate": 0.05,
+      "reasoning": "Segunda mayor liquidez (14.5B volumen) con ca\u00edda moderada (-0.53%). Velas muestran soporte en 2,084-2,099. En futuros, ETH tiene spreads estrechos y alta correlaci\u00f3n con BTC, permitiendo estrategias de pares. Stop loss del 1.5% protege contra volatilidad en apalancamiento."
+    },
+    {
+      "symbol": "BNB/USDT:USDT",
+      "rank": 3,
+      "expected_profit_pct": 2.5,
+      "expected_loss_pct": 1.8,
+      "volatility": "Media",
+      "recommended_strategy": "Breakout",
+      "recommended_timeframe": "4h",
+      "gas_fee_estimate": 0.04,
+      "reasoning": "BNB usa timeframe 4h (indicando an\u00e1lisis m\u00e1s estructural). Precio 656.84 con ca\u00edda -0.42% y volumen s\u00f3lido (537M). En futuros, BNB tiene menor liquidez que BTC/ETH pero movimientos m\u00e1s definidos. Estrategia breakout aprovecha ruptura de rango 655-666 con stop loss del 1.8%."
+    },
+    {
+      "symbol": "SOL/USDT:USDT",
+      "rank": 4,
+      "expected_profit_pct": 3.0,
+      "expected_loss_pct": 2.2,
+      "volatility": "Alta",
+      "recommended_strategy": "Scalping",
+      "recommended_timeframe": "15m",
+      "gas_fee_estimate": 0.05,
+      "reasoning": "SOL tiene alta volatilidad (-1.18% cambio) y volumen significativo (2.5B). En futuros, su volatilidad permite scalping en timeframe corto (15m) para capturar movimientos r\u00e1pidos de 0.5-1%. Stop loss del 2.2% necesario por riesgo de liquidaci\u00f3n en apalancamiento."
+    },
+    {
+      "symbol": "LTC/USDT:USDT",
+      "rank": 5,
+      "expected_profit_pct": 2.8,
+      "expected_loss_pct": 2.0,
+      "volatility": "Media",
+      "recommended_strategy": "Swing Trading",
+      "recommended_timeframe": "1h",
+      "gas_fee_estimate": 0.04,
+      "reasoning": "\u00danico activo con ganancia 24h (+1.03%), mostrando fortaleza relativa. Volumen moderado (79M) pero tendencia alcista en velas recientes (55.11-55.65). En futuros, LTC tiene movimientos predecibles. Estrategia swing con stop loss del 2% para proteger ganancias."
+    },
+    {
+      "symbol": "XRP/USDT:USDT",
+      "rank": 6,
+      "expected_profit_pct": 2.0,
+      "expected_loss_pct": 1.5,
+      "volatility": "Baja",
+      "recommended_strategy": "Range Trading",
+      "recommended_timeframe": "1h",
+      "gas_fee_estimate": 0.03,
+      "reasoning": "XRP muestra baja volatilidad (-0.51%) y rango estrecho (1.393-1.399). En futuros, su baja volatilidad reduce riesgos de liquidaci\u00f3n pero limita ganancias. Estrategia range trading entre soportes/resistencias con stop loss ajustado al 1.5%."
+    },
+    {
+      "symbol": "DOGE/USDT:USDT",
+      "rank": 7,
+      "expected_profit_pct": 3.5,
+      "expected_loss_pct": 2.8,
+      "volatility": "Alta",
+      "recommended_strategy": "Scalping",
+      "recommended_timeframe": "15m",
+      "gas_fee_estimate": 0.03,
+      "reasoning": "DOGE tiene alta volatilidad y volumen masivo (855M). En futuros, su naturaleza meme coin crea movimientos bruscos ideales para scalping. Stop loss del 2.8% esencial por riesgo de liquidaci\u00f3n r\u00e1pida en apalancamiento."
+    },
+    {
+      "symbol": "ZEC/USDT:USDT",
+      "rank": 8,
+      "expected_profit_pct": 4.0,
+      "expected_loss_pct": 3.2,
+      "volatility": "Alta",
+      "recommended_strategy": "Breakout",
+      "recommended_timeframe": "1h",
+      "gas_fee_estimate": 0.05,
+      "reasoning": "ZEC muestra ca\u00edda significativa (-1.06%) pero recuperaci\u00f3n en \u00faltima vela (210.68). En futuros, su baja liquidez (394M volumen) aumenta riesgo pero ofrece oportunidades de breakout. Stop loss del 3.2% necesario por volatilidad."
+    },
+    {
+      "symbol": "BCH/USDT:USDT",
+      "rank": 9,
+      "expected_profit_pct": 3.2,
+      "expected_loss_pct": 2.5,
+      "volatility": "Media",
+      "recommended_strategy": "Swing Trading",
+      "recommended_timeframe": "1h",
+      "gas_fee_estimate": 0.05,
+      "reasoning": "BCH con ca\u00edda -1.4% y volumen limitado (106M). En futuros, tiene correlaci\u00f3n moderada con BTC. Estrategia swing aprovecha movimientos de 2-4% con stop loss del 2.5% para manejar apalancamiento seguro."
+    },
+    {
+      "symbol": "AVAX/USDT:USDT",
+      "rank": 10,
+      "expected_profit_pct": 3.8,
+      "expected_loss_pct": 3.0,
+      "volatility": "Alta",
+      "recommended_strategy": "Breakout",
+      "recommended_timeframe": "1h",
+      "gas_fee_estimate": 0.04,
+      "reasoning": "AVAX muestra ca\u00edda -1.52% y volatilidad significativa. En futuros, su baja liquidez (175M) aumenta riesgo de slippage. Estrategia breakout con stop loss del 3% para proteger contra movimientos bruscos en apalancamiento."
+    },
+    {
+      "symbol": "LINK/USDT:USDT",
+      "rank": 11,
+      "expected_profit_pct": 3.5,
+      "expected_loss_pct": 2.8,
+      "volatility": "Alta",
+      "recommended_strategy": "Scalping",
+      "recommended_timeframe": "15m",
+      "gas_fee_estimate": 0.04,
+      "reasoning": "LINK con ca\u00edda -1.33% y volumen moderado (147M). En futuros, su volatilidad permite scalping en timeframe corto. Stop loss del 2.8% necesario por riesgo de liquidaci\u00f3n en movimientos r\u00e1pidos."
+    },
+    {
+      "symbol": "ADA/USDT:USDT",
+      "rank": 12,
+      "expected_profit_pct": 4.2,
+      "expected_loss_pct": 3.5,
+      "volatility": "Alta",
+      "recommended_strategy": "Breakout",
+      "recommended_timeframe": "1h",
+      "gas_fee_estimate": 0.03,
+      "reasoning": "ADA tiene la mayor ca\u00edda (-1.78%) entre principales, indicando debilidad. En futuros, esto crea oportunidades de rebote pero alto riesgo. Stop loss del 3.5% esencial por volatilidad extrema en apalancamiento."
+    },
+    {
+      "symbol": "FIL/USDT:USDT",
+      "rank": 13,
+      "expected_profit_pct": 4.0,
+      "expected_loss_pct": 3.2,
+      "volatility": "Alta",
+      "recommended_strategy": "Breakout",
+      "recommended_timeframe": "1h",
+      "gas_fee_estimate": 0.04,
+      "reasoning": "FIL con ca\u00edda -1.35% y volumen limitado (107M). En futuros, su baja liquidez aumenta riesgos de liquidaci\u00f3n. Estrategia breakout con stop loss amplio del 3.2% para manejar volatilidad."
+    },
+    {
+      "symbol": "NEAR/USDT:USDT",
+      "rank": 14,
+      "expected_profit_pct": 5.0,
+      "expected_loss_pct": 4.2,
+      "volatility": "Extrema",
+      "recommended_strategy": "Scalping",
+      "recommended_timeframe": "15m",
+      "gas_fee_estimate": 0.03,
+      "reasoning": "NEAR muestra ca\u00edda extrema (-3.55%) y alta volatilidad. En futuros, esto representa alto riesgo de liquidaci\u00f3n. Solo recomendado para scalping experto con stop loss del 4.2% y apalancamiento conservador."
+    },
+    {
+      "symbol": "DOT/USDT:USDT",
+      "rank": 15,
+      "expected_profit_pct": 5.5,
+      "expected_loss_pct": 4.8,
+      "volatility": "Extrema",
+      "recommended_strategy": "Scalping",
+      "recommended_timeframe": "15m",
+      "gas_fee_estimate": 0.03,
+      "reasoning": "DOT tiene la peor performance (-4.92%) y volatilidad extrema. En futuros, riesgo muy alto de liquidaci\u00f3n. Solo para traders experimentados con scalping agresivo y stop loss del 4.8%. No recomendado para principiantes en futuros."
+    }
+  ]
+}

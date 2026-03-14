@@ -3,12 +3,14 @@ import sys
 import json
 import ccxt
 import pandas as pd
-import argparse
 from datetime import datetime
 
 from app.database import get_db_manager
 from app.bot.ia.predictor import get_predictor
 from dotenv import load_dotenv
+
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", ".."))
+from scripts.analyze_timeframes import analyze_single_symbol, save_config
 
 # Cargar variables de entorno (API Keys, URLs de DB, etc.)
 load_dotenv()
@@ -72,44 +74,81 @@ class MarketScanner:
     def _load_timeframes_config(self):
         """Carga la configuración de timeframes desde el archivo JSON."""
         config_path = os.path.join("data", "timeframes", "timeframes_config.json")
+        base_dir = os.path.dirname(os.path.dirname(os.path.dirname(__file__)))
+
         if not os.path.exists(config_path):
-            # Intentar ruta relativa a este archivo
-            base_dir = os.path.dirname(os.path.dirname(os.path.dirname(__file__)))
             config_path = os.path.join(
                 base_dir, "data", "timeframes", "timeframes_config.json"
             )
 
-        if os.path.exists(config_path):
-            try:
-                with open(config_path, "r") as f:
-                    config = json.load(f)
+        if not os.path.exists(config_path):
+            os.makedirs(os.path.dirname(config_path), exist_ok=True)
+            with open(config_path, "w") as f:
+                json.dump({}, f)
+            print(f"[*] Archivo de configuración creado: {config_path}")
+            return {}
+
+        try:
+            with open(config_path, "r") as f:
+                content = f.read().strip()
+                if content:
+                    config = json.loads(content)
                     print(
                         f"[*] Configuración de timeframes cargada desde {config_path}"
                     )
                     return config
-            except Exception as e:
-                print(f"[!] Error cargando configuración de timeframes: {e}")
-        else:
-            print(f"[*] No se encontró archivo de configuración de timeframes.")
-        return None
+                else:
+                    print(f"[*] Archivo de configuración vacío, iniciando vacío")
+                    return {}
+        except json.JSONDecodeError as e:
+            print(f"[!] Archivo JSON corrupto, creando nuevo: {e}")
+            with open(config_path, "w") as f:
+                json.dump({}, f)
+            return {}
+        except Exception as e:
+            print(f"[!] Error cargando configuración de timeframes: {e}")
+            return {}
 
     def _setup_output_directory(self):
         """Crea el directorio de salida para los resultados del scanner."""
-        # Si no hay run_script_id, generar uno basado en timestamp
         if not self.run_script_id:
             self.run_script_id = f"SCAN_{datetime.utcnow().strftime('%Y%m%d_%H%M%S')}"
 
         output_dir = os.path.join("data", "scanner", self.run_script_id)
         os.makedirs(output_dir, exist_ok=True)
         print(f"[*] Directorio de salida creado: {output_dir}")
+
+        self.db.save_run_script(
+            {
+                "id": self.run_script_id,
+                "start_time": datetime.utcnow(),
+                "name_script": f"Market Scanner ({self.quote})",
+                "initial_capital": self.capital,
+                "params": {
+                    "quote": self.quote,
+                    "capital": self.capital,
+                    "mode": self.mode,
+                    "num_top": self.num_top,
+                    "provider": self.predictor.__class__.__name__,
+                    "market_types": self.market_types,
+                },
+            }
+        )
+
         return output_dir
 
     def _get_symbol_timeframe_config(self, symbol):
         """Obtiene la configuración de timeframe para un símbolo específico."""
-        if not self.timeframes_config:
-            return None, 12  # Default: 1h con 12 velas
+        config = self.timeframes_config or {}
 
-        symbol_config = self.timeframes_config.get(symbol)
+        if symbol not in config:
+            print(
+                f"[*] Símbolo {symbol} no encontrado en configuración, generando análisis..."
+            )
+            self._analyze_symbol_timeframe(symbol)
+            config = self.timeframes_config or {}
+
+        symbol_config = config.get(symbol)
         if not symbol_config:
             return None, 12
 
@@ -118,6 +157,38 @@ class MarketScanner:
         history = primary.get("history", 12)
 
         return timeframe, history
+
+    def _analyze_symbol_timeframe(self, symbol):
+        """Ejecuta el análisis de timeframe para un símbolo y lo agrega al config."""
+        try:
+            base_dir = os.path.dirname(os.path.dirname(os.path.dirname(__file__)))
+            output_path = os.path.join(
+                base_dir, "data", "timeframes", "timeframes_config.json"
+            )
+
+            provider_name = self.predictor.__class__.__name__.lower().replace(
+                "predictor", ""
+            )
+
+            exchange = ccxt.binance({"enableRateLimit": True})
+
+            print(f"[*] Analizando timeframe para {symbol}...")
+            result = analyze_single_symbol(
+                symbol, provider_name, exchange, self.timeframes_config
+            )
+
+            if result:
+                self.timeframes_config = result
+                save_config(result, output_path)
+                print(f"[✓] Análisis de timeframe completado para {symbol}")
+                return True
+            else:
+                print(f"[!] No se pudo completar el análisis para {symbol}")
+                return False
+
+        except Exception as e:
+            print(f"[!] Error en _analyze_symbol_timeframe: {e}")
+            return False
 
     def _save_scan_results(self, market_type, market_snapshot, rankings):
         """Guarda los resultados del escaneo en archivos JSON."""

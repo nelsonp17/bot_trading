@@ -1,0 +1,100 @@
+{
+  "scan_id": "SCAN_20260314_032330",
+  "timestamp": "2026-03-14T03:26:20.333517",
+  "market_type": "future",
+  "parameters": {
+    "quote": "USDT",
+    "capital": 500.0,
+    "mode": "volume",
+    "num_top": 2,
+    "provider": "DeepSeekPredictor"
+  },
+  "market_snapshot": [
+    {
+      "symbol": "BTC/USDT:USDT",
+      "market_type": "future",
+      "timeframe_used": "1h",
+      "candles_limit": 12,
+      "price": 71003.8,
+      "change_24h_pct": -0.34,
+      "volume_24h": 19536243377.22,
+      "recent_candles": [
+        {
+          "c": 70895.5,
+          "v": 4557.721
+        },
+        {
+          "c": 70600.0,
+          "v": 5679.351
+        },
+        {
+          "c": 70790.3,
+          "v": 5009.742
+        },
+        {
+          "c": 70749.2,
+          "v": 2354.624
+        },
+        {
+          "c": 71003.8,
+          "v": 2915.911
+        }
+      ]
+    },
+    {
+      "symbol": "ETH/USDT:USDT",
+      "market_type": "future",
+      "timeframe_used": "1h",
+      "candles_limit": 12,
+      "price": 2097.1,
+      "change_24h_pct": -0.674,
+      "volume_24h": 14467213727.04,
+      "recent_candles": [
+        {
+          "c": 2091.01,
+          "v": 69184.7
+        },
+        {
+          "c": 2084.36,
+          "v": 94149.371
+        },
+        {
+          "c": 2091.57,
+          "v": 111732.796
+        },
+        {
+          "c": 2091.44,
+          "v": 63047.781
+        },
+        {
+          "c": 2097.1,
+          "v": 52252.221
+        }
+      ]
+    }
+  ],
+  "rankings": [
+    {
+      "symbol": "ETH/USDT:USDT",
+      "rank": 1,
+      "expected_profit_pct": 2.5,
+      "expected_loss_pct": 1.8,
+      "volatility": "Alta",
+      "recommended_strategy": "Swing Trading con Apalancamiento Moderado",
+      "recommended_timeframe": "1h",
+      "gas_fee_estimate": 0.06,
+      "reasoning": "ETH muestra mayor volumen relativo en velas recientes (promedio ~78,000 vs ~4,100 de BTC), indicando mejor liquidez para futuros. El cambio negativo de -0.67% en 24h presenta oportunidad de rebote t\u00e9cnico. Las velas de 1h muestran consolidaci\u00f3n entre 2084-2097 con volumen creciente en la \u00faltima vela alcista, sugiriendo acumulaci\u00f3n. En futuros, la mayor liquidez reduce riesgo de slippage y permite mejor gesti\u00f3n de apalancamiento. Stop loss sugerido en 2060 (1.8% bajo precio actual) protege contra ruptura bajista. Estrategia de swing aprovecha movimientos intraday con apalancamiento 3-5x."
+    },
+    {
+      "symbol": "BTC/USDT:USDT",
+      "rank": 2,
+      "expected_profit_pct": 1.8,
+      "expected_loss_pct": 2.2,
+      "volatility": "Alta",
+      "recommended_strategy": "Scalping de Rango",
+      "recommended_timeframe": "15m",
+      "gas_fee_estimate": 0.08,
+      "reasoning": "BTC tiene volumen 24h mayor pero volumen en velas recientes muy bajo (promedio ~4,100), indicando posible iliquidez en timeframe corto para futuros, aumentando riesgo. Precio en consolidaci\u00f3n estrecha (70600-71000) con cambio negativo de -0.34%. En futuros, la baja liquidez intra-hora puede causar slippage significativo y dificultar entradas/salidas. Estrategia de scalping en 15m busca capturar movimientos peque\u00f1os dentro del rango, con stop loss m\u00e1s amplio (2.2%) por volatilidad inherente. Mayor fee estimado por necesidad de operaciones m\u00e1s frecuentes. Riesgo elevado para posici\u00f3n de 500 USDT dada posible amplificaci\u00f3n de p\u00e9rdidas por apalancamiento en condiciones de baja liquidez."
+    }
+  ]
+}

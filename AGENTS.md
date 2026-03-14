@@ -118,6 +118,20 @@ available_budget = self.total_budget - invested_capital
 4. El capital disponible = initial_capital - inversión_actual (del plan)
 5. La IA decide cómo usar ese capital (todo de golpe o fracciones)
 
+### 7. MarketScannerBot - Análisis Dinámico de Timeframes
+
+```python
+# En market_scanner_bot.py:
+# - Al analizar un símbolo que NO está en timeframes_config.json
+# - Ejecutar analyze_timeframes.py automáticamente para generarlo
+# - Agregar al JSON existente (no sobreescribir)
+
+# Método _analyze_symbol_timeframe():
+# - Busca scripts/analyze_timeframes.py
+# - Ejecuta: python analyze_timeframes.py --symbol X --provider deepseek
+# - Recarga la configuración actualizada
+```
+
 ---
 
 ## ❌ PROHIBICIONES
@@ -182,3 +196,19 @@ python scripts/reset_coin.py --symbol FET/USDT --market_type future --network te
 ---
 
 *Última actualización: 2026-03-13*
+
+---
+
+## 📋 NUEVA INTEGRACIÓN IMPLEMENTADA
+
+### MarketScannerBot - Análisis Dinámico de Timeframes
+
+El MarketScannerBot ahora analiza automáticamente timeframes para símbolos no configurados:
+
+1. Al procesar un símbolo que NO existe en `data/timeframes/timeframes_config.json`
+2. Ejecuta automáticamente `scripts/analyze_timeframes.py` para ese símbolo
+3. Usa el mismo provider configurado (deepseek/gemini)
+4. Agrega el resultado al JSON existente (no sobreescribe)
+5. Recarga la configuración y usa los timeframes óptimos
+
+Esto permite que el scanner sea completamente dinámico - puede analizar cualquier símbolo que aparezca en el top de volumen/volatility sin configuración previa.

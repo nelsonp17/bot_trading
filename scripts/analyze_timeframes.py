@@ -44,9 +44,9 @@ def fetch_multi_timeframe_data(symbol, timeframes, exchange):
             )
             df["timestamp"] = pd.to_datetime(df["timestamp"], unit="ms")
             data[tf] = df
-            print(f"    ✓ {tf}: {len(df)} velas descargadas")
+            print(f"    OK {tf}: {len(df)} velas descargadas")
         except Exception as e:
-            print(f"    ✗ {tf}: Error - {e}")
+            print(f"    XX {tf}: Error - {e}")
 
     return data
 
@@ -163,6 +163,53 @@ RESPONDE EN JSON:
         return None
 
 
+def analyze_single_symbol(symbol, provider, exchange, config):
+    """Analiza un solo símbolo y lo agrega a la configuración."""
+    timeframes = DEFAULT_TIMEFRAMES
+
+    print(f"[*] Descargando datos para {symbol}...")
+    data = fetch_multi_timeframe_data(symbol, timeframes, exchange)
+
+    if not data:
+        print(f"[!] No se pudieron obtener datos para {symbol}")
+        return None
+
+    summary = {}
+    for tf, df in data.items():
+        summary[tf] = calculate_indicators_summary(df, tf)
+
+    print(f"[*] Consultando a {provider}...")
+    result = analyze_with_ia(symbol, summary, provider)
+
+    if result:
+        print(f"\n[✓] RESULTADO PARA {symbol}:")
+        print(f"    Primary: {result.get('primary', {}).get('timeframe', 'N/A')}")
+        print(
+            f"    Secondary: {[s.get('timeframe') for s in result.get('secondary', [])]}"
+        )
+        print(
+            f"    Estrategia: {result.get('analysis', {}).get('recommended_strategy', 'N/A')}"
+        )
+
+        config[symbol] = {
+            "primary": result.get("primary", {}),
+            "secondary": result.get("secondary", []),
+            "analysis": result.get("analysis", {}),
+            "all_timeframes_summary": summary,
+        }
+        return config
+    else:
+        print(f"[!] No se pudo completar el análisis para {symbol}")
+        return None
+
+
+def save_config(config, output_path):
+    """Guarda la configuración en el archivo."""
+    with open(output_path, "w") as f:
+        json.dump(config, f, indent=2)
+    print(f"\n[OK] Configuración guardada en {output_path}")
+
+
 def main():
     parser = argparse.ArgumentParser(
         description="Analiza timeframes óptimos para símbolos usando IA"
@@ -170,7 +217,7 @@ def main():
     parser.add_argument(
         "--symbol",
         type=str,
-        nargs="+",  # Permite múltiples argumentos
+        nargs="+",
         required=True,
         help="Símbolo(s) a analizar (ej. BTC/USDT) o 'ALL' para análisis general",
     )
@@ -203,7 +250,6 @@ def main():
 
     args = parser.parse_args()
 
-    # Determinar símbolos a analizar
     if args.symbol[0].upper() == "ALL":
         symbols = [
             "BTC/USDT",
@@ -214,70 +260,45 @@ def main():
             "ADA/USDT",
         ]
     else:
-        symbols = args.symbol  # Ya es una lista
+        symbols = args.symbol
 
-    timeframes = [t.strip() for t in args.timeframes.split(",")]
+    output_path = args.output
+    if not os.path.isabs(output_path):
+        base_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
+        output_path = os.path.join(base_dir, output_path)
 
-    # Inicializar exchange
+    output_dir = os.path.dirname(output_path)
+    if output_dir and not os.path.exists(output_dir):
+        os.makedirs(output_dir, exist_ok=True)
+        print(f"[*] Directorio creado: {output_dir}")
+
     use_testnet = args.network in ["sandbox", "testnet"]
     exchange = ccxt.binance({"enableRateLimit": True})
     if use_testnet:
         exchange.set_sandbox_mode(True)
 
-    # Cargar timeframes existentes si existen
     config = {}
-    if os.path.exists(args.output):
-        with open(args.output, "r") as f:
-            config = json.load(f)
+    if os.path.exists(output_path):
+        try:
+            with open(output_path, "r") as f:
+                content = f.read().strip()
+                if content:
+                    config = json.loads(content)
+        except (json.JSONDecodeError, Exception) as e:
+            print(f"[*] Archivo de config vacío o corrupto, creando nuevo: {e}")
+            config = {}
 
     print("=" * 60)
     print(f"  ANÁLISIS DE TIMEFRAMES - {args.provider.upper()}")
     print("=" * 60)
 
     for symbol in symbols:
-        print(f"\n[*] Analizando {symbol}...")
-
-        # Descargar datos
-        data = fetch_multi_timeframe_data(symbol, timeframes, exchange)
-
-        if not data:
-            print(f"[!] No se pudieron obtener datos para {symbol}")
-            continue
-
-        # Calcular resumen de indicadores
-        summary = {}
-        for tf, df in data.items():
-            summary[tf] = calculate_indicators_summary(df, tf)
-
-        # Analizar con IA
-        print(f"[*] Consultando a {args.provider}...")
-        result = analyze_with_ia(symbol, summary, args.provider)
-
+        result = analyze_single_symbol(symbol, args.provider, exchange, config)
         if result:
-            print(f"\n[✓] RESULTADO PARA {symbol}:")
-            print(f"    Primary: {result.get('primary', {}).get('timeframe', 'N/A')}")
-            print(
-                f"    Secondary: {[s.get('timeframe') for s in result.get('secondary', [])]}"
-            )
-            print(
-                f"    Estrategia: {result.get('analysis', {}).get('recommended_strategy', 'N/A')}"
-            )
+            config = result
 
-            # Guardar en configuración
-            config[symbol] = {
-                "primary": result.get("primary", {}),
-                "secondary": result.get("secondary", []),
-                "analysis": result.get("analysis", {}),
-                "all_timeframes_summary": summary,
-            }
-        else:
-            print(f"[!] No se pudo completar el análisis para {symbol}")
+    save_config(config, output_path)
 
-    # Guardar configuración
-    with open(args.output, "w") as f:
-        json.dump(config, f, indent=2)
-
-    print(f"\n[✓] Configuración guardada en {args.output}")
     print("\nUso en el bot:")
     print(f"  python scripts/run_trading_bot.py --symbol {symbols[0]} --budget 100")
 

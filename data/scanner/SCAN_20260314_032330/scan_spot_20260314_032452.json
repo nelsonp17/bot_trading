@@ -1,0 +1,100 @@
+{
+  "scan_id": "SCAN_20260314_032330",
+  "timestamp": "2026-03-14T03:24:52.191946",
+  "market_type": "spot",
+  "parameters": {
+    "quote": "USDT",
+    "capital": 500.0,
+    "mode": "volume",
+    "num_top": 2,
+    "provider": "DeepSeekPredictor"
+  },
+  "market_snapshot": [
+    {
+      "symbol": "BTC/USDT",
+      "market_type": "spot",
+      "timeframe_used": "1h",
+      "candles_limit": 12,
+      "price": 70991.75,
+      "change_24h_pct": -0.372,
+      "volume_24h": 2452897461.7336664,
+      "recent_candles": [
+        {
+          "c": 70930.0,
+          "v": 1113.02703
+        },
+        {
+          "c": 70631.97,
+          "v": 763.50434
+        },
+        {
+          "c": 70831.7,
+          "v": 791.55133
+        },
+        {
+          "c": 70783.27,
+          "v": 1013.67533
+        },
+        {
+          "c": 70991.75,
+          "v": 615.50655
+        }
+      ]
+    },
+    {
+      "symbol": "USDC/USDT",
+      "market_type": "spot",
+      "timeframe_used": "4h",
+      "candles_limit": 12,
+      "price": 0.9998,
+      "change_24h_pct": -0.02,
+      "volume_24h": 1252685845.5561,
+      "recent_candles": [
+        {
+          "c": 0.9999,
+          "v": 279673506.0
+        },
+        {
+          "c": 0.9998,
+          "v": 566587066.0
+        },
+        {
+          "c": 0.9998,
+          "v": 158535652.0
+        },
+        {
+          "c": 0.9999,
+          "v": 59016615.0
+        },
+        {
+          "c": 0.9998,
+          "v": 77150201.0
+        }
+      ]
+    }
+  ],
+  "rankings": [
+    {
+      "symbol": "BTC/USDT",
+      "rank": 1,
+      "expected_profit_pct": 2.5,
+      "expected_loss_pct": 3.0,
+      "volatility": "Alta",
+      "recommended_strategy": "Swing Trading",
+      "recommended_timeframe": "4h",
+      "gas_fee_estimate": 0.1,
+      "reasoning": "BTC muestra volatilidad moderada en spot con precio de 70,991.75 USDT y cambio 24h de -0.37%. El volumen de 2.45B USDT indica liquidez s\u00f3lida. Las velas recientes muestran consolidaci\u00f3n entre 70,631-70,991 con volumen decreciente, sugiriendo posible acumulaci\u00f3n. En spot, el riesgo es limitado al capital invertido. Estrategia swing aprovecha movimientos de 2-5% con stop loss en 68,862 (3% bajo soporte actual). Timeframe 4h reduce ruido vs 1h. Comisiones t\u00edpicas 0.1% en exchanges spot."
+    },
+    {
+      "symbol": "USDC/USDT",
+      "rank": 2,
+      "expected_profit_pct": 0.02,
+      "expected_loss_pct": 0.05,
+      "volatility": "Baja",
+      "recommended_strategy": "Arbitraje",
+      "recommended_timeframe": "15m",
+      "gas_fee_estimate": 0.02,
+      "reasoning": "USDC/USDT es un par estable con precio 0.9998 y cambio 24h de -0.02%. Volumen alto de 1.25B USDT pero baja volatilidad extrema (<0.1%). En spot, no es para crecimiento de capital sino para preservaci\u00f3n o arbitraje de peque\u00f1as desviaciones. Estrategia de arbitraje busca ganancias de 0.01-0.02% aprovechando desviaciones m\u00ednimas del peg 1:1. Timeframe 15m para capturar oportunidades r\u00e1pidas. Riesgo m\u00ednimo pero rentabilidad muy baja para inversi\u00f3n de 500 USDT. Comisiones bajas (0.02%) pero ganancias netas marginales."
+    }
+  ]
+}
